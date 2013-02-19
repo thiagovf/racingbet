@@ -1,0 +1,24 @@
+
+=========
+Estagio 3
+=========
+Casos de Uso
+============================================
+- Caso de Uso - Aluno
+============================================
+- Manter Palpite - Marco Antonio
+- Consultar Palpite - Eugenio
+- Manter Resultado do Grande Premio - Thiago
+- Manter Grande Premio - Jardel
+- Manter Categoria - Priscila
+- Manter Equipe - Isabel
+- Manter Piloto - Paulo
+- Liberar e Fechar Palpite - Priscila
+- Gerar Pontuacao dos Usuarios - Pedro
+- Consultar Grande Premio - Bruno
+- Consultar Ranking - David Levi
+
+
+
+
+ 
