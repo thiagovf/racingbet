@@ -16,7 +16,7 @@ Casos de Uso
 - Liberar e Fechar Palpite - Priscila
 - Gerar Pontuacao dos Usuarios - Pedro
 - Consultar Grande Premio - Bruno
-- Consultar Ranking - David Levi
+- Consultar Ranking - Pedro
 
 
 
