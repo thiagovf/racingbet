@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+<title>RacingBet.com</title>
+
+<link rel="stylesheet" type="text/css"
+      href="../estilos/estilos.css"/>
+</h:head>
+<h:body>
+	<div id="site">
+        <div id="cabecalho">
+        	<ui:insert name="painelCabecalho">
+	            <div id="logo">
+	                <a href="#" id="link-cabecalho" class="opacidade">
+	                    <img src="../imagens/bandeirada.jpg" width="180" height="100" />
+	                    <h1 class="opacidade">RacingBet.com</h1>
+	                </a>
+	            </div>
+            <div id="contato">
+            </div>
+         <!--     <div id="busca">
+                <input type="text" class="busca" value="Buscar" onfocus="if (this.value == 'Buscar') {this.value=''}" onblur="if (this.value == '') {this.value='Buscar'}" /><input type="button" value="Buscar" class="busca" />
+            </div> --> 
+            </ui:insert>
+        </div>
+        <div id="corpo">
+            <div id="barra_esquerda">
+                <div id="menu_principal">
+                    <ui:insert name="painelEsquerdo">
+                        <ui:include src="../paginas/menu.xhtml"></ui:include>
+					</ui:insert>
+                </div>
+            </div>
+            <div id="barra_centro">
+	            <ui:insert name="painelCentral">
+					Painel central padrão
+				</ui:insert>
+            </div>
+        </div>
+        <div id="rodape">
+	        <ui:insert name="painelRodape">
+	            <div id="contato-image">
+	                <img src="../imagens/logo_fa7.jpg" width="70" height="60" />
+	            </div>
+	            <div id="contato-desc">
+	                <p>Faculdade 7 de Setembro</p>
+	                <p>Disciplina de Estágio Supervisionado 3</p>
+	                <p>Laboratório 31 - Noite</p>
+	                <p>Semestre 2013.1</p>
+	            </div>
+	          </ui:insert>  
+        </div>
+    </div>
+
+</h:body>
+</html>
