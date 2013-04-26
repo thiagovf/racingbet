@@ -54,7 +54,56 @@
 
 		<p></p>
 
+		<div style="text-align: center">
+			<h1>#{msg['manterGrandePremio.label.listaDeGrandesPremios']}</h1>
+
+			<h:outputText
+				value="#{msg['manterGrandePremio.mensagem.naoHaGrandesPremios']}"
+				rendered="#{!manterGrandePremioMB.temGrandesPremios}" />
+		</div>
+
+		<h:form>
+			<table align="center">
+				<tbody>
+					<ui:repeat var="gpremio" value="#{manterGrandePremioMB.grandesPremios}"
+						varStatus="#{manterGrandePremioMB.temGrandesPremios}">
+						<tr>
+							<td><h:outputLabel
+									value="#{msg['manterGrandePremio.label.nome']}" /> <h:outputText
+									value="#{gpremio.nome}" />
+							</td>
+						</tr>
+						<tr>
+							<td><h:outputLabel
+									value="#{msg['manterGrandePremio.label.data']}" /> <h:outputText
+									value="#{gpremio.data}">
+									<f:convertDateTime pattern="dd/MM/yyyy HH:mm" type="both" />
+								</h:outputText>
+							</td>
+						</tr>
+						
+						<tr>
+							<td align="center"><h:commandButton value="Editar"
+									action="#{manterGrandePremioMB.editar}" image="../imagens/editar.gif">
+									<f:setPropertyActionListener
+										target="#{manterGrandePremioMB.idGrandePremio}" value="#{gpremio.id}" />
+								</h:commandButton> <h:commandButton value="Excluir"
+									action="#{manterGrandePremioMB.excluir}"
+									image="../imagens/excluir.gif">
+									<f:setPropertyActionListener
+										target="#{manterGrandePremioMB.idGrandePremio}" value="#{gpremio.id}" />
+								</h:commandButton></td>
+						</tr>
+			
+						<tr>
+							<td><h:outputText value=" " />
+							</td>
+						</tr>
+					</ui:repeat>
+				</tbody>
+			</table>
 		</h:form>
+
 	</ui:define>
 
 </ui:composition>
