@@ -1,7 +1,7 @@
 package br.com.racingbet.controle;
 
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.text.ParseException;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -11,23 +11,28 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import br.com.racingbet.entidade.GrandePremio;
+import br.com.racingbet.servico.GrandePremioServico;
+import br.com.racingbet.util.ConversacaoUtil;
 
 @Named("manterGrandePremioMB")
 @SessionScoped
 public class ManterGrandePremioMB implements Serializable {
-	
+
 	@Inject
-    private Conversation conversacao;
-	
+	private Conversation conversacao;
+
 	@Inject
 	private GrandePremio grandePremio;
-	
+
 	private List<GrandePremio> grandesPremios;
-	
+
 	private Boolean temGrandesPremios;
-	
+
 	private Long idGrandePremio;
 	
+	@Inject
+	private GrandePremioServico grandePremioServico;
+
 	public Conversation getConversacao() {
 		return conversacao;
 	}
@@ -53,12 +58,12 @@ public class ManterGrandePremioMB implements Serializable {
 	}
 
 	public Boolean getTemGrandesPremios() {
-		
+
 		if ((grandesPremios == null) || (grandesPremios.size() == 0))
 			temGrandesPremios = false;
 		else
 			temGrandesPremios = true;
-		
+
 		return temGrandesPremios;
 	}
 
@@ -74,18 +79,79 @@ public class ManterGrandePremioMB implements Serializable {
 		this.idGrandePremio = idGrandePremio;
 	}
 
+	public GrandePremioServico getGrandePremioServico() {
+		return grandePremioServico;
+	}
+
+	public void setGrandePremioServico(GrandePremioServico grandePremioServico) {
+		this.grandePremioServico = grandePremioServico;
+	}
+
 	public ManterGrandePremioMB() {
 		grandePremio = new GrandePremio();
 	}
-	
+
 	@PostConstruct
 	public void init() {
 		grandePremio = new GrandePremio();
-		grandesPremios = new ArrayList<GrandePremio>();
+		grandesPremios = grandePremioServico.recuperarTodos();
 	}
 	
-	public String salvar() {
-		System.out.println("Estou no salvar");
+	private void limparGrandePremio() {
+		grandePremio = new GrandePremio();
+	}
+	
+	public String iniciar() {
+		
+		limparGrandePremio();
+		
+		grandesPremios = grandePremioServico.recuperarTodos();
+		System.out.println("passei no iniciar");
+		
+		return "manterAgenda";
+	}
+
+	public String salvar() throws ParseException {
+		
+		if (grandePremio.getId() == null) {
+			grandePremioServico.incluir(grandePremio);
+		} else {
+			grandePremioServico.alterar(grandePremio);
+		}
+		
+		grandesPremios = grandePremioServico.recuperarTodos();
+		
+		limparGrandePremio();
+		
+		ConversacaoUtil.terminar(conversacao);
+		
+		System.out.println("passei no salvar");
+		
+		return "manterAgenda";
+	}
+
+	public String editar() {
+
+		ConversacaoUtil.iniciar(conversacao);
+
+		grandePremio = grandePremioServico.recuperarPorId(getIdGrandePremio());
+		grandesPremios = grandePremioServico.recuperarTodos();
+
+		System.out.println("passei no editar");
+		return "manterGrandePremio";
+	}
+
+	public String excluir() {
+
+		GrandePremio gpremio = new GrandePremio();
+		gpremio.setId(idGrandePremio);
+		grandePremioServico.remover(gpremio);
+
+		grandesPremios = grandePremioServico.recuperarTodos();
+		limparGrandePremio();
+
+		System.out.println("passei no excluir");
+
 		return "manterGrandePremio";
 	}
 
