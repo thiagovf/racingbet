@@ -6,6 +6,7 @@
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
 		<jta-data-source>java:/MYSQLDS</jta-data-source>
 		<class>br.com.racingbet.entidade.GrandePremio</class>
+		<class>br.com.racingbet.entidade.Piloto</class>
 		
 		<exclude-unlisted-classes>true</exclude-unlisted-classes>
 		<properties>
