@@ -21,14 +21,14 @@ public class ManterCategoriaMB implements Serializable {
 	@Inject
 	private Conversation conversacao;
 
-	@Inject
-	//private Categoria categoria;
+//	@Inject
+//	private Categoria categoria;
+//
+//	private List<Categoria> categorias;
 
-	//private List<Categoria> categorias;
-
-	private Boolean categotia;
-
-	private Long idcategoria;
+//	private Boolean categotia;
+//
+//	private Long idcategoria;
 
 	/*@Inject
 	private CategoriaServico categoriaServico;
