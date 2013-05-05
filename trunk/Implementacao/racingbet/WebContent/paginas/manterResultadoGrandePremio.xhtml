@@ -1,0 +1,144 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="../templates/template.xhtml">
+
+	<ui:define name="painelCentral">
+		<h:form>
+			<table align="center">
+				<tr>
+					<td align="center">
+						<h:panelGrid columns="3">
+							<h:outputLabel for="nomeGrandePremio"
+								value="#{msg['manterResultadoGrandePremio.label.nomeGrandePremio']}" />
+							<h:selectOneListbox id="nomeGrandePremio"
+								value="#{manterResultadoGrandePremioMB.resultadoGrandePremio.nomeGrandePremio}" required="true"
+								requiredMessage="#{msg['manterResultadoGrandePremio.mensagem.nomeGrandePremioObrigatorio']}"
+								size="1">
+									<f:selectItem itemValue="Australia" itemLabel="Australia" />
+								   	<f:selectItem itemValue="Malaysia" itemLabel="Malaysia" />
+								   	<f:selectItem itemValue="China" itemLabel="China" />
+								   	<f:selectItem itemValue="Bahrain" itemLabel="Bahrain" />
+								   	<f:selectItem itemValue="Spain" itemLabel="Spain" />
+								   	<f:selectItem itemValue="Monaco" itemLabel="Monaco" />
+								   	<f:selectItem itemValue="Canada" itemLabel="Canada" />
+								   	<f:selectItem itemValue="Great Britain" itemLabel="Great Britain" />
+								   	<f:selectItem itemValue="Germany" itemLabel="Germany" />
+								   	<f:selectItem itemValue="Hungary" itemLabel="Hungary" />
+								   	<f:selectItem itemValue="Belgium" itemLabel="Belgium" />
+								   	<f:selectItem itemValue="Italy" itemLabel="Italy" />
+								   	<f:selectItem itemValue="Singapore" itemLabel="Singapore" />
+								   	<f:selectItem itemValue="Korea" itemLabel="Korea" />
+								   	<f:selectItem itemValue="Japan" itemLabel="Japan" />
+								   	<f:selectItem itemValue="India" itemLabel="India" />
+								   	<f:selectItem itemValue="Abu Dhabi" itemLabel="Abu Dhabi" />
+								   	<f:selectItem itemValue="United States" itemLabel="United States" />
+								   	<f:selectItem itemValue="Brazil" itemLabel="Brazil" />
+							</h:selectOneListbox>
+							<h:message for="nomeGrandePremio" class="mensagemDeErro" />
+							
+							<h:outputLabel for="repostaPerguntaPole"
+								value="#{msg['manterResultadoGrandePremio.label.repostaPerguntaPole']}" />
+							<h:selectOneListbox id="repostaPerguntaPole"
+								value="#{manterResultadoGrandePremioMB.resultadoGrandePremio.repostaPerguntaPole}" required="true"
+								requiredMessage="#{msg['manterResultadoGrandePremio.mensagem.repostaPerguntaPoleObrigatorio']}"
+								size="1">
+									<f:selectItem itemValue="Sebastian Vettel" itemLabel="Sebastian Vettel" />
+								   	<f:selectItem itemValue="Kimi Räikkönen" itemLabel="Kimi Räikkönen" />
+								   	<f:selectItem itemValue="Lewis Hamilton" itemLabel="Lewis Hamilton" />
+								   	<f:selectItem itemValue="Fernando Alonso" itemLabel="Fernando Alonso" />
+								   	<f:selectItem itemValue="Mark Webber" itemLabel="Mark Webber" />
+							</h:selectOneListbox>
+							<h:message for="repostaPerguntaPole" class="mensagemDeErro" />
+							
+							<h:outputLabel for="repostaPerguntaPrimeiro"
+								value="#{msg['manterResultadoGrandePremio.label.repostaPerguntaPrimeiro']}" />
+							<h:selectOneListbox id="repostaPerguntaPrimeiro"
+								value="#{manterResultadoGrandePremioMB.resultadoGrandePremio.repostaPerguntaPrimeiro}" required="true"
+								requiredMessage="#{msg['manterResultadoGrandePremio.mensagem.repostaPerguntaPrimeiroObrigatorio']}"
+								size="1">
+									<f:selectItem itemValue="Sebastian Vettel" itemLabel="Sebastian Vettel" />
+								   	<f:selectItem itemValue="Kimi Räikkönen" itemLabel="Kimi Räikkönen" />
+								   	<f:selectItem itemValue="Lewis Hamilton" itemLabel="Lewis Hamilton" />
+								   	<f:selectItem itemValue="Fernando Alonso" itemLabel="Fernando Alonso" />
+								   	<f:selectItem itemValue="Mark Webber" itemLabel="Mark Webber" />
+							</h:selectOneListbox>
+							<h:message for="repostaPerguntaPrimeiro" class="mensagemDeErro" />
+	                  	</h:panelGrid> <br />
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<table align="center">
+							<tr>
+								<td><h:commandButton value="Salvar"
+										action="#{manterResultadoGrandePremioMB.salvar}"
+										image="../imagens/salvar.gif" /></td>
+								<td><h:commandButton value="Cancelar" action="manterResultadoGrandePremio"
+										immediate="true" image="../imagens/cancelar.gif" /></td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+			</table>
+		</h:form>
+		
+		<div style="text-align: center">
+			<h1>#{msg['manterResultadoGrandePremio.label.listaDeResultadosGrandesPremios']}</h1>
+
+			<h:outputText
+				value="#{msg['manterResultadoGrandePremio.mensagem.naoHaResultadosGrandesPremios']}"
+				rendered="#{!manterResultadoGrandePremioMB.temResultadosGrandesPremios}" />
+		</div>
+		
+		<h:form>
+			<table align="center">
+				<tbody>
+					<ui:repeat var="resultadoGP" value="#{manterResultadoGrandePremioMB.resultadosGrandesPremios}"
+						varStatus="#{manterResultadoGrandePremioMB.temResultadosGrandesPremios}">
+						<tr>
+							<td><h:outputLabel
+									value="#{msg['manterResultadoGrandePremio.label.nomeGrandePremio']}" /> <h:outputText
+									value="#{resultadoGP.nomeGrandePremio}" />
+							</td>
+						</tr>
+						<tr>
+							<td><h:outputLabel
+									value="#{msg['manterResultadoGrandePremio.label.repostaPerguntaPole']}" /> <h:outputText
+									value="#{resultadoGP.repostaPerguntaPole}" />
+							</td>
+							<td><h:outputLabel
+									value="#{msg['manterResultadoGrandePremio.label.repostaPerguntaPrimeiro']}" /> <h:outputText
+									value="#{resultadoGP.repostaPerguntaPrimeiro}" />
+							</td>
+						</tr>
+						
+						<tr>
+							<td align="center"><h:commandButton value="Editar"
+									action="#{manterResultadoGrandePremioMB.editar}" image="../imagens/editar.gif">
+									<f:setPropertyActionListener
+										target="#{manterResultadoGrandePremioMB.idResultadoGrandePremio}" value="#{resultadoGP.id}" />
+								</h:commandButton> <h:commandButton value="Excluir"
+									action="#{manterResultadoGrandePremioMB.excluir}"
+									image="../imagens/excluir.gif">
+									<f:setPropertyActionListener
+										target="#{manterResultadoGrandePremioMB.idGrandePremio}" value="#{resultadoGP.id}" />
+								</h:commandButton></td>
+						</tr>
+			
+						<tr>
+							<td><h:outputText value=" " />
+							</td>
+						</tr>
+					</ui:repeat>
+				</tbody>
+			</table>
+		</h:form>
+		
+	</ui:define>
+
+</ui:composition>
