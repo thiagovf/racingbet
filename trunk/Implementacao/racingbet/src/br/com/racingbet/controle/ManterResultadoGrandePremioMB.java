@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.text.ParseException;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.enterprise.context.Conversation;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
@@ -59,6 +60,10 @@ public class ManterResultadoGrandePremioMB implements Serializable {
 	}
 
 	public Boolean getTemResultadosGrandesPremios() {
+		if ((resultadosGrandesPremios == null) || (resultadosGrandesPremios.size() == 0))
+			temResultadosGrandesPremios = false;
+		else
+			temResultadosGrandesPremios = true;
 		return temResultadosGrandesPremios;
 	}
 
@@ -83,6 +88,7 @@ public class ManterResultadoGrandePremioMB implements Serializable {
 		this.resultadoGrandePremioServico = resultadoGrandePremioServico;
 	}
 
+	@PostConstruct
 	public void init() {
 		resultadoGrandePremio = new ResultadoGrandePremio();
 		resultadosGrandesPremios = resultadoGrandePremioServico.recuperarTodos();

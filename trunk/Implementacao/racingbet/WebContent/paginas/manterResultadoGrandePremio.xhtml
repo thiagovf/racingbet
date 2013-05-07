@@ -86,7 +86,7 @@
 				</tr>
 			</table>
 		</h:form>
-		
+		<p></p>
 		<div style="text-align: center">
 			<h1>#{msg['manterResultadoGrandePremio.label.listaDeResultadosGrandesPremios']}</h1>
 
@@ -111,6 +111,8 @@
 									value="#{msg['manterResultadoGrandePremio.label.repostaPerguntaPole']}" /> <h:outputText
 									value="#{resultadoGP.repostaPerguntaPole}" />
 							</td>
+						</tr>
+						<tr>
 							<td><h:outputLabel
 									value="#{msg['manterResultadoGrandePremio.label.repostaPerguntaPrimeiro']}" /> <h:outputText
 									value="#{resultadoGP.repostaPerguntaPrimeiro}" />
@@ -126,7 +128,7 @@
 									action="#{manterResultadoGrandePremioMB.excluir}"
 									image="../imagens/excluir.gif">
 									<f:setPropertyActionListener
-										target="#{manterResultadoGrandePremioMB.idGrandePremio}" value="#{resultadoGP.id}" />
+										target="#{manterResultadoGrandePremioMB.idResultadoGrandePremio}" value="#{resultadoGP.id}" />
 								</h:commandButton></td>
 						</tr>
 			
