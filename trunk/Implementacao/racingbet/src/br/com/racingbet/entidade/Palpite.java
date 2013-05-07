@@ -30,6 +30,9 @@ public class Palpite implements Serializable {
 	@Column(nullable = false, length = 50)
 	private String autorPergunta;
 	
+	@Column(nullable = false, length = 50)
+	private String grandePremio;
+	
 	@Column(nullable = false)
 	@Temporal(TemporalType.DATE)
 	private Date data;
@@ -72,6 +75,14 @@ public class Palpite implements Serializable {
 
 	public void setData(Date data) {
 		this.data = data;
+	}
+
+	public String getGrandePremio() {
+		return grandePremio;
+	}
+
+	public void setGrandePremio(String grandePremio) {
+		this.grandePremio = grandePremio;
 	}
 
 }
