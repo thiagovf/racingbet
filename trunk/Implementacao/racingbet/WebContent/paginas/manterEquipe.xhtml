@@ -27,14 +27,14 @@
 							<h:outputLabel for="data_fundacao"
 								value="#{msg['manterEquipe.label.data_fundacao']}" />
 							<rich:calendar
-								value="#{manterEquipeMB.equipe.data}"
+								value="#{manterEquipeMB.equipe.data_fundacao}"
 								id="data_fundacao" popup="true" datePattern="dd/MM/yyyy"
 								locale="pt_BR" showApplyButton="true" cellWidth="24px"
 								cellHeight="22px" style="width:200px" disabled="false"
 								required="true"
 								requiredMessage="#{msg['manterEquipe.mensagem.dataObrigatoria']}">
 							</rich:calendar>
-							<h:message for="data" class="mensagemDeErro" />
+							<h:message for="data_fundacao" class="mensagemDeErro" />
                    </h:panelGrid> <br />
 					</td>
 				</tr>
