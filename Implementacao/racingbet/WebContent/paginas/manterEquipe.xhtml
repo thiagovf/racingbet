@@ -9,6 +9,37 @@
 
 	<ui:define name="painelCentral">
 	<h:form>
+	
+	<table align="center">
+	
+	<tr>
+					<td align="center"><h:panelGrid columns="3">
+							<h:outputLabel for="nome"
+								value="#{msg['manterEquipe.label.nome']}" />
+							<h:inputText id="nome"
+								value="#{manterEquipeMB.equipe.nome}" required="true"
+								requiredMessage="#{msg['manterEquipe.mensagem.nomeObrigatorio']}"
+								size="100" maxlength="100">
+								<f:validateLength minimum="3" maximum="100" />
+							</h:inputText>
+							<h:message for="nome" class="mensagemDeErro" />
+
+							<h:outputLabel for="data_fundacao"
+								value="#{msg['manterEquipe.label.data_fundacao']}" />
+							<rich:calendar
+								value="#{manterEquipeMB.equipe.data}"
+								id="data_fundacao" popup="true" datePattern="dd/MM/yyyy"
+								locale="pt_BR" showApplyButton="true" cellWidth="24px"
+								cellHeight="22px" style="width:200px" disabled="false"
+								required="true"
+								requiredMessage="#{msg['manterEquipe.mensagem.dataObrigatoria']}">
+							</rich:calendar>
+							<h:message for="data" class="mensagemDeErro" />
+                   </h:panelGrid> <br />
+					</td>
+				</tr>
+	
+	</table>
 			
 		</h:form>
 	
