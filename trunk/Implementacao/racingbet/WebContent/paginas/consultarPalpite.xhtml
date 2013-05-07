@@ -1,0 +1,31 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="../templates/template.xhtml">
+
+	<ui:define name="painelCentral">
+		<h:form>
+			<rich:dataGrid var="palpite" value="#{consultarPalpiteMB.palpites}">
+				<f:facet name="header">
+                    <h:outputText value="#{msg['consultarPalpites.label.consultarPalpites']}"></h:outputText>
+                </f:facet>
+				<h:panelGrid columns="2">
+					<h:outputText value="#{msg['consultarPalpites.label.data']}" styleClass="label"></h:outputText>
+					<h:outputText value="#{palpite.data}" />
+					<h:outputText value="#{msg['consultarPalpites.label.autor']}" styleClass="label"></h:outputText>
+					<h:outputText value="#{palpite.autorPergunta}" />
+					<h:outputText value="#{msg['consultarPalpites.label.respostaPrimeiro']}" styleClass="label"></h:outputText>
+					<h:outputText value="#{palpite.respostaPrimeiro}" />
+					<h:outputText value="#{msg['consultarPalpites.label.respostaPole']}" styleClass="label"></h:outputText>
+					<h:outputText value="#{palpite.respostaPole}" />
+				</h:panelGrid>
+			</rich:dataGrid>
+		</h:form>
+
+	</ui:define>
+
+</ui:composition>
