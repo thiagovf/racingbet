@@ -1,0 +1,62 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="../templates/template.xhtml">
+
+	<ui:define name="painelCentral">
+		<h:form>
+			<rich:dataGrid var="consultarGrandePremio" value="#{consultarGrandePremioMB.grandesPremios}">
+				<f:facet name="header">
+                    <h:outputText value="#{msg['consultarGrandePremio.label.categoria']}"></h:outputText>
+                </f:facet>
+				<h:panelGrid columns="3">
+				<h:selectOneListbox id="nomeCategoria"
+								value="#{manterCategoria.label.categoria}" required="true"
+								requiredMessage="#{msg['manterCategoria.mensagem.nomeCategoriaObrigatorio']}"
+								size="1">
+									<f:selectItem itemValue="A1 Grand Prix‎" itemLabel="A1 Grand Prix‎" />
+								   	<f:selectItem itemValue="Champ Car" itemLabel="Champ Car" />
+								   	<f:selectItem itemValue="Fórmula 1‎" itemLabel="Fórmula 1‎" />
+								   	<f:selectItem itemValue="Fórmula 2 FIA‎" itemLabel="Fórmula 2 FIA‎" />
+								   	<f:selectItem itemValue="Fórmula 3 Europeia‎" itemLabel="Fórmula 3 Europeia‎" />
+								   	<f:selectItem itemValue="Fórmula 3 Sul-americana" itemLabel="Fórmula 3 Sul-americana" />
+								   	<f:selectItem itemValue="Fórmula 3000‎" itemLabel="Fórmula 3000‎" />
+								   	<f:selectItem itemValue="GP2 Series‎" itemLabel="GP2 Series‎" />
+								   	<f:selectItem itemValue="GP3 Series‎" itemLabel="GP3 Series‎" />
+								   	<f:selectItem itemValue="Intercontinental Rally Challenge‎" itemLabel="Intercontinental Rally Challenge‎" />
+								   	<f:selectItem itemValue="Kart" itemLabel="Kart" />
+								   	<f:selectItem itemValue="Le Mans Series‎" itemLabel="Le Mans Series‎" />
+								   	<f:selectItem itemValue="Superleague Fórmula‎" itemLabel="Superleague Fórmula‎" />
+								   	<f:selectItem itemValue="World Series by Renault" itemLabel="World Series by Renault" />								  					  
+							</h:selectOneListbox>						
+				</h:panelGrid>
+			</rich:dataGrid>
+			
+			<rich:dataGrid var="manterGrandePremioMB" value="#{manterGrandePremioMB}">
+				<f:facet name="header">
+					<h:outputText value="#{msg['manterGrandePremio.label.listaDeGrandesPremios']}"></h:outputText>
+                </f:facet>
+				<h:panelGrid columns="2">
+					<h:outputText value="#{msg['consultarGrandePremio.label.categoria']}" styleClass="label"></h:outputText>
+					<h:outputText value="#{grandePremio.categoria}" />
+					<h:outputText value="#{msg['consultarGrandePremio.label.nome']}" styleClass="label"></h:outputText>
+					<h:outputText value="#{grandePremio.nome}" />
+					<h:outputText value="#{msg['consultarGrandePremio.label.pais']}" styleClass="label"></h:outputText>
+					<h:outputText value="#{grandePremio.pais}" />
+					<h:outputText value="#{msg['consultarPalpites.label.data']}" styleClass="label"></h:outputText>
+					<h:outputText value="#{grandePremio.data}" />
+					<h:outputText value="#{msg['consultarGrandePremio.label.cidade']}" styleClass="label"></h:outputText>
+					<h:outputText value="#{grandePremio.cidade}" />
+					<h:outputText value="#{msg['consultarGrandePremio.label.autodromo']}" styleClass="label"></h:outputText>
+					<h:outputText value="#{grandePremio.autodromo}" />					
+				</h:panelGrid>
+			</rich:dataGrid>
+		</h:form>
+
+	</ui:define>
+
+</ui:composition>
