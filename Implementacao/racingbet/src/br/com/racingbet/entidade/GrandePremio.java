@@ -24,9 +24,19 @@ public class GrandePremio implements Serializable {
 	@Column(nullable=false, length=50)
 	private String nome;
 	
+	@Column(nullable=false, length=50)
+	private String pais;
+	
+	@Column(nullable=false, length=50)
+	private String cidade;
+
+	@Column(nullable=false, length=50)
+	private String autodromo;
+
 	@Column(nullable=false)
 	@Temporal(TemporalType.DATE)
 	private Date data;
+	
 	
 	public Long getId() {
 		return id;
@@ -39,15 +49,34 @@ public class GrandePremio implements Serializable {
 	public String getNome() {
 		return nome;
 	}
-
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+
+	public String getPais() {
+		return pais;
+	}
+	public void setPais(String pais) {
+		this.pais = pais;
+	}
+	
+	public String getCidade() {
+		return cidade;
+	}
+	public void setCidade(String cidade) {
+		this.cidade = cidade;
+	}
+
+	public String getAutodromo() {
+		return autodromo;
+	}
+	public void setAutodromo(String autodromo) {
+		this.autodromo = autodromo;
 	}
 
 	public Date getData() {
 		return data;
 	}
-
 	public void setData(Date data) {
 		this.data = data;
 	}
