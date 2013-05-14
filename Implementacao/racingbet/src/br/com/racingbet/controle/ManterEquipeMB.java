@@ -28,6 +28,8 @@ public class ManterEquipeMB implements Serializable {
 	private Equipe equipe;
 	
 	private List<Equipe> equipes;
+	
+	private Boolean temEquipes;
 
 	private Long idEquipe;
 	
@@ -56,6 +58,18 @@ public class ManterEquipeMB implements Serializable {
 
 	public void setEquipes(List<Equipe> equipes) {
 		this.equipes = equipes;
+	}
+	
+	public Boolean getTemEquipes() {
+		if ((equipes == null) || (equipes.size() == 0))
+			temEquipes = false;
+		else
+			temEquipes = true;
+		return temEquipes;
+	}
+
+	public void setTemEquipes(Boolean temEquipes) {
+		this.temEquipes = temEquipes;
 	}
 
 	public Long getIdEquipe() {
@@ -93,7 +107,7 @@ public class ManterEquipeMB implements Serializable {
 		limparEquipe();
 		
 		equipes = equipeServico.recuperarTodos();
-		System.out.println("passei no iniciar");
+		/*System.out.println("passei no iniciar");*/
 		
 		return "manterEquipe";
 	}
@@ -112,7 +126,7 @@ public class ManterEquipeMB implements Serializable {
 		
 		ConversacaoUtil.terminar(conversacao);
 		
-		System.out.println("passei no salvar");
+		/*System.out.println("passei no salvar");*/
 		
 		return "manterEquipe";
 	}
@@ -124,7 +138,7 @@ public class ManterEquipeMB implements Serializable {
 		equipe = equipeServico.recuperarPorId(getIdEquipe());
 		equipes= equipeServico.recuperarTodos();
 
-		System.out.println("passei no editar");
+		
 		return "manterEquipe";
 	}
 
@@ -137,7 +151,7 @@ public class ManterEquipeMB implements Serializable {
 		equipes = equipeServico.recuperarTodos();
 		limparEquipe();
 
-		System.out.println("passei no excluir");
+		
 
 		return "manterEquipe";
 	}

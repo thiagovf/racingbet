@@ -29,9 +29,20 @@ public class Equipe implements Serializable {
 	@Column(nullable=false)
 	@Temporal(TemporalType.DATE)
 	private Date data_fundacao;
+	
+	@Column(nullable=false, length=50)
+	private String nacionalidade;
 
 	public Long getId() {
 		return id;
+	}
+
+	public String getNacionalidade() {
+		return nacionalidade;
+	}
+
+	public void setNacionalidade(String nacionalidade) {
+		this.nacionalidade = nacionalidade;
 	}
 
 	public void setId(Long id) {
