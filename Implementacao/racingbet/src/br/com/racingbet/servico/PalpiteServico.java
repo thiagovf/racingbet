@@ -29,4 +29,9 @@ public class PalpiteServico implements Serializable {
 	public void setDao(PalpiteDAO dao) {
 		this.dao = dao;
 	}
+
+	public void salvar(Palpite palpite) {
+		System.out.println("AQUI###"+palpite.getAutorPergunta());
+		dao.incluir(palpite);
+	}
 }

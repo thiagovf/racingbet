@@ -1,0 +1,85 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="../templates/template.xhtml">
+
+	<ui:define name="painelCentral">
+	<h:form>
+			<table align="center">
+					<tr>
+						<td align="center"><h:panelGrid columns="3">
+								<h:outputLabel for="respostaPrimeiro"
+									value="#{msg['manterPalpite.label.respostaPrimeiro']}" />
+								<h:inputText id="respostaPrimeiro"
+									value="#{manterPalpiteMB.palpite.respostaPrimeiro}" required="true"
+									requiredMessage="#{msg['manterPalpite.mensagem.respostaPrimeiroObrigatorio']}"
+									size="100" maxlength="100">
+									<f:validateLength minimum="3" maximum="100" />
+								</h:inputText>
+								<h:message for="respostaPrimeiro" class="mensagemDeErro" />
+								
+								<h:outputLabel for="respostaPole"
+									value="#{msg['manterPalpite.label.respostaPole']}" />
+								<h:inputText id="respostaPole"
+									value="#{manterPalpiteMB.palpite.respostaPole}" required="true"
+									requiredMessage="#{msg['manterPalpite.mensagem.respostaPoleObrigatorio']}"
+									size="100" maxlength="100">
+									<f:validateLength minimum="3" maximum="100" />
+								</h:inputText>
+								<h:message for="respostaPole" class="mensagemDeErro" />
+								
+								<h:outputLabel for="autorPergunta"
+									value="#{msg['manterPalpite.label.autorPergunta']}" />
+								<h:inputText id="autorPergunta"
+									value="#{manterPalpiteMB.palpite.autorPergunta}" required="true"
+									requiredMessage="#{msg['manterPalpite.mensagem.autorPerguntaObrigatorio']}"
+									size="100" maxlength="100">
+									<f:validateLength minimum="3" maximum="100" />
+								</h:inputText>
+								<h:message for="respostaPole" class="mensagemDeErro" />
+								
+								<h:outputLabel for="grandePremio"
+									value="#{msg['manterPalpite.label.grandePremio']}" />
+								<h:inputText id="grandePremio"
+									value="#{manterPalpiteMB.palpite.grandePremio}" required="true"
+									requiredMessage="#{msg['manterPalpite.mensagem.grandePremioObrigatorio']}"
+									size="100" maxlength="100">
+									<f:validateLength minimum="3" maximum="100" />
+								</h:inputText>
+								<h:message for="grandePremio" class="mensagemDeErro" />
+	
+								<h:outputLabel for="data"
+									value="#{msg['manterPalpite.label.data']}" />
+								<rich:calendar
+									value="#{manterPalpiteMB.palpite.data}"
+									id="data_fundacao" popup="true" datePattern="dd/MM/yyyy"
+									locale="pt_BR" showApplyButton="true" cellWidth="24px"
+									cellHeight="22px" style="width:200px" disabled="false"
+									required="true"
+									requiredMessage="#{msg['manterPalpite.mensagem.dataObrigatoria']}">
+								</rich:calendar>
+								<h:message for="data" class="mensagemDeErro" />
+	                   </h:panelGrid> <br />
+						</td>
+					</tr>
+					<tr>
+					<td>
+						<table align="center">
+							<tr>
+								<td><h:commandButton value="Salvar"
+										action="#{manterPalpiteMB.salvar}"
+										image="../imagens/salvar.gif" /></td>
+								<td><h:commandButton value="Cancelar" action="manterPalpite"
+										immediate="true" image="../imagens/cancelar.gif" /></td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				</table>
+		</h:form>
+</ui:define>
+</ui:composition>	
