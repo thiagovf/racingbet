@@ -31,7 +31,6 @@ public class PalpiteServico implements Serializable {
 	}
 
 	public void salvar(Palpite palpite) {
-		System.out.println("AQUI###"+palpite.getAutorPergunta());
 		dao.incluir(palpite);
 	}
 }
