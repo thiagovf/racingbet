@@ -9,7 +9,10 @@
 
 	<ui:define name="painelCentral">
 		<h:form>
-			<table align="center">
+		<style type="text/css">
+			.mensagemDeErro{color: red; font-size: 12px; }
+		</style>
+			<table style="">
 				<tr>
 					<td align="center"><h:panelGrid columns="3">
 							<h:outputLabel for="nome"
@@ -17,10 +20,40 @@
 							<h:inputText id="nome"
 								value="#{manterGrandePremioMB.grandePremio.nome}" required="true"
 								requiredMessage="#{msg['manterGrandePremio.mensagem.nomeObrigatorio']}"
-								size="100" maxlength="100">
-								<f:validateLength minimum="3" maximum="100" />
+								size="20" maxlength="20">
+								<f:validateLength minimum="3" maximum="20" />
 							</h:inputText>
 							<h:message for="nome" class="mensagemDeErro" />
+
+							<h:outputLabel for="pais"
+								value="#{msg['manterGrandePremio.label.pais']}" />
+							<h:inputText id="pais"
+								value="#{manterGrandePremioMB.grandePremio.pais}" required="true"
+								requiredMessage="#{msg['manterGrandePremio.mensagem.paisObrigatorio']}"
+								size="20" maxlength="20">
+								<f:validateLength minimum="3" maximum="20" />
+							</h:inputText>
+							<h:message for="pais" class="mensagemDeErro" />
+
+							<h:outputLabel for="cidade"
+								value="#{msg['manterGrandePremio.label.cidade']}" />
+							<h:inputText id="cidade"
+								value="#{manterGrandePremioMB.grandePremio.cidade}" required="true"
+								requiredMessage="#{msg['manterGrandePremio.mensagem.cidadeObrigatorio']}"
+								size="20" maxlength="20">
+								<f:validateLength minimum="3" maximum="20" />
+							</h:inputText>
+							<h:message for="cidade" class="mensagemDeErro" />
+
+							<h:outputLabel for="autodromo"
+								value="#{msg['manterGrandePremio.label.autodromo']}" />
+							<h:inputText id="autodromo"
+								value="#{manterGrandePremioMB.grandePremio.autodromo}" required="true"
+								requiredMessage="#{msg['manterGrandePremio.mensagem.autodromoObrigatorio']}"
+								size="20" maxlength="20">
+								<f:validateLength minimum="3" maximum="20" />
+							</h:inputText>
+							<h:message for="autodromo" class="mensagemDeErro" />
 
 							<h:outputLabel for="data"
 								value="#{msg['manterGrandePremio.label.data']}" />
@@ -63,45 +96,65 @@
 		</div>
 
 		<h:form>
-			<table align="center">
-				<tbody>
-					<ui:repeat var="gpremio" value="#{manterGrandePremioMB.grandesPremios}"
-						varStatus="#{manterGrandePremioMB.temGrandesPremios}">
+			<div style="width:565px; height:200px; border: 1px solid #111; overflow: scroll;">
+				<table style="font-size: 12px; color: blue" cellpadding="2px" cellspacing="5px">
+					<tbody>
 						<tr>
-							<td><h:outputLabel
-									value="#{msg['manterGrandePremio.label.nome']}" /> <h:outputText
-									value="#{gpremio.nome}" />
-							</td>
+							<td>Nome</td>
+							<td>Pais</td>
+							<td>Cidade</td>
+							<td>Autodromo</td>
+							<td>Data</td>
 						</tr>
-						<tr>
-							<td><h:outputLabel
-									value="#{msg['manterGrandePremio.label.data']}" /> <h:outputText
-									value="#{gpremio.data}">
-									<f:convertDateTime pattern="dd/MM/yyyy HH:mm" type="both" />
-								</h:outputText>
-							</td>
-						</tr>
-						
-						<tr>
-							<td align="center"><h:commandButton value="Editar"
-									action="#{manterGrandePremioMB.editar}" image="../imagens/editar.gif">
-									<f:setPropertyActionListener
-										target="#{manterGrandePremioMB.idGrandePremio}" value="#{gpremio.id}" />
-								</h:commandButton> <h:commandButton value="Excluir"
-									action="#{manterGrandePremioMB.excluir}"
-									image="../imagens/excluir.gif">
-									<f:setPropertyActionListener
-										target="#{manterGrandePremioMB.idGrandePremio}" value="#{gpremio.id}" />
-								</h:commandButton></td>
-						</tr>
-			
-						<tr>
-							<td><h:outputText value=" " />
-							</td>
-						</tr>
-					</ui:repeat>
-				</tbody>
-			</table>
+						<ui:repeat var="gpremio" value="#{manterGrandePremioMB.grandesPremios}"
+							varStatus="#{manterGrandePremioMB.temGrandesPremios}">
+							<tr style="color: green">
+								<td>
+									<h:outputText value="#{gpremio.nome}" />
+								</td>
+								<td>
+									<h:outputText value="#{gpremio.pais}" />
+								</td>
+								<td>
+									<h:outputText value="#{gpremio.cidade}" />
+								</td>
+								<td>
+									<h:outputText value="#{gpremio.autodromo}" />
+								</td>
+								<td>
+									<h:outputText value="#{gpremio.data}">
+										<f:convertDateTime pattern="dd/MM/yyyy" type="both" />
+									</h:outputText>
+								</td>
+								<td>
+									<h:commandButton value="Editar"
+											action="#{manterGrandePremioMB.editar}" image="../imagens/editar.gif">
+											<f:setPropertyActionListener
+												target="#{manterGrandePremioMB.idGrandePremio}" value="#{gpremio.id}" />
+									</h:commandButton>
+								</td>
+								<td>
+									<h:commandButton value="Excluir"
+										action="#{manterGrandePremioMB.excluir}"
+										image="../imagens/excluir.gif">
+										<f:setPropertyActionListener
+											target="#{manterGrandePremioMB.idGrandePremio}" value="#{gpremio.id}" />
+									</h:commandButton>	
+								</td>
+							</tr>
+							
+							<tr>
+								<td align="center"> </td>
+							</tr>
+				
+							<tr>
+								<td><h:outputText value=" " />
+								</td>
+							</tr>
+						</ui:repeat>
+					</tbody>
+				</table>
+			</div>
 		</h:form>
 
 	</ui:define>
