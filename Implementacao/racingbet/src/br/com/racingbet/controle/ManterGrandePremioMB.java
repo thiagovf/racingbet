@@ -108,7 +108,7 @@ public class ManterGrandePremioMB implements Serializable {
 		grandesPremios = grandePremioServico.recuperarTodos();
 		System.out.println("passei no iniciar");
 		
-		return "manterAgenda";
+		return "manterGrandePremio";
 	}
 
 	public String salvar() throws ParseException {
@@ -127,7 +127,7 @@ public class ManterGrandePremioMB implements Serializable {
 		
 		System.out.println("passei no salvar");
 		
-		return "manterAgenda";
+		return "manterGrandePremio";
 	}
 
 	public String editar() {
