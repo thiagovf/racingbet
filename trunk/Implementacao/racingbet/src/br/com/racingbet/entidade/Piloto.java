@@ -21,10 +21,10 @@ public class Piloto implements Serializable {
 	@Column(nullable=false, length=50)
 	private String nome;
 	
-	@Column(nullable=false, length=25)
+	@Column(nullable=true, length=25)
 	private String nacionalidade;
 	
-	@Column(nullable=false, length=2)
+	@Column(nullable=true, length=2)
 	private String numeroDoCarro;
 	
 	public Long getId() {

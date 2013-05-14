@@ -15,15 +15,30 @@
 							<h:outputLabel for="nome"
 								value="#{msg['manterPiloto.label.nome']}" />
 							<h:inputText id="nome"
-								value="#{manterGrandePremioMB.grandePremio.nome}" required="true"
+								value="#{manterPilotoMB.piloto.nome}" required="true"
 								requiredMessage="#{msg['manterPiloto.mensagem.nomeObrigatorio']}"
 								size="100" maxlength="100">
 								<f:validateLength minimum="3" maximum="100" />
 							</h:inputText>
+							
+<!-- 							<h:inputText id="nacionalidade" -->
+<!-- 								value="#{manterPilotoMB.piloto.nacionalidade}" required="true" -->
+<!-- 								requiredMessage="#{msg['manterPiloto.mensagem.nomeObrigatorio']}" -->
+<!-- 								size="100" maxlength="100"> -->
+<!-- 								<f:validateLength minimum="3" maximum="100" /> -->
+<!-- 							</h:inputText> -->
+							
+<!-- 							<h:inputText id="numeroDoCarro" -->
+<!-- 								value="#{manterPilotoMB.piloto.numeroDoCarro}" required="true" -->
+<!-- 								requiredMessage="#{msg['manterPiloto.mensagem.nomeObrigatorio']}" -->
+<!-- 								size="100" maxlength="100"> -->
+<!-- 								<f:validateLength minimum="3" maximum="100" /> -->
+<!-- 							</h:inputText> -->
+							
 							<h:message for="nome" class="mensagemDeErro" />
 
-							<h:outputLabel for="data"
-								value="#{msg['manterGrandePremio.label.data']}" />
+<!-- 							<h:outputLabel for="data" -->
+<!-- 								value="#{msg['manterGrandePremio.label.data']}" /> -->
 <!-- 							<rich:calendar -->
 <!-- 								value="#{manterGrandePremioMB.grandePremio.data}" -->
 <!-- 								id="data" popup="true" datePattern="dd/MM/yyyy" -->
@@ -32,7 +47,7 @@
 <!-- 								required="true" -->
 <!-- 								requiredMessage="#{msg['manterGrandePremio.mensagem.dataObrigatoria']}"> -->
 <!-- 							</rich:calendar> -->
-							<h:message for="data" class="mensagemDeErro" />
+<!-- 							<h:message for="data" class="mensagemDeErro" /> -->
                    </h:panelGrid> <br />
 					</td>
 				</tr>
@@ -41,7 +56,7 @@
 						<table align="center">
 							<tr>
 								<td><h:commandButton value="Salvar"
-										action="#{manterGrandePremioMB.salvar}"
+										action="#{manterPilotoMB.salvar}"
 										image="../imagens/salvar.gif" /></td>
 								<td><h:commandButton value="Cancelar" action="manterPiloto"
 										immediate="true" image="../imagens/cancelar.gif" /></td>
@@ -55,43 +70,48 @@
 		<p></p>
 
 		<div style="text-align: center">
-			<h1>#{msg['manterGrandePremio.label.listaDeGrandesPremios']}</h1>
+			<h1>#{msg['manterPiloto.label.listaDePilotos']}</h1>
 
 			<h:outputText
-				value="#{msg['manterGrandePremio.mensagem.naoHaGrandesPremios']}"
-				rendered="#{!manterGrandePremioMB.temGrandesPremios}" />
+				value="#{msg['manterPiloto.mensagem.naoHaPilotos']}"
+				rendered="#{!manterPilotoMB.temPiloto}" />
 		</div>
 
 		<h:form>
 			<table align="center">
 				<tbody>
-					<ui:repeat var="gpremio" value="#{manterGrandePremioMB.grandesPremios}"
-						varStatus="#{manterGrandePremioMB.temGrandesPremios}">
+					<ui:repeat var="pilot" value="#{manterPilotoMB.pilotos}"
+						varStatus="#{manterPilotoMB.temPiloto}">
 						<tr>
 							<td><h:outputLabel
-									value="#{msg['manterGrandePremio.label.nome']}" /> <h:outputText
-									value="#{gpremio.nome}" />
+									value="#{msg['manterPiloto.label.nome']}" /> <h:outputText
+									value="#{pilot.nome}" />
 							</td>
 						</tr>
-						<tr>
-							<td><h:outputLabel
-									value="#{msg['manterGrandePremio.label.data']}" /> <h:outputText
-									value="#{gpremio.data}">
-									<f:convertDateTime pattern="dd/MM/yyyy HH:mm" type="both" />
-								</h:outputText>
-							</td>
-						</tr>
+<!-- 						<tr> -->
+<!-- 							<td><h:outputLabel -->
+<!-- 									value="#{msg['manterPiloto.label.nacionalidade']}" /> <h:outputText -->
+<!-- 									value="#{pilot.nacionalidade}" /> -->
+<!-- 							</td> -->
+<!-- 						</tr> -->
+<!-- 						<tr> -->
+<!-- 							<td><h:outputLabel -->
+<!-- 									value="#{msg['manterPiloto.label.numeroDoCarro']}" /> <h:outputText -->
+<!-- 									value="#{pilot.numeroDoCarro}" /> -->
+<!-- 							</td> -->
+<!-- 						</tr> -->
+			
 						
 						<tr>
 							<td align="center"><h:commandButton value="Editar"
-									action="#{manterGrandePremioMB.editar}" image="../imagens/editar.gif">
+									action="#{manterPilotoMB.editar}" image="../imagens/editar.gif">
 									<f:setPropertyActionListener
-										target="#{manterGrandePremioMB.idGrandePremio}" value="#{gpremio.id}" />
+										target="#{manterPilotoMB.idPiloto}" value="#{pilot.id}" />
 								</h:commandButton> <h:commandButton value="Excluir"
-									action="#{manterGrandePremioMB.excluir}"
+									action="#{manterPilotoMB.excluir}"
 									image="../imagens/excluir.gif">
 									<f:setPropertyActionListener
-										target="#{manterGrandePremioMB.idGrandePremio}" value="#{gpremio.id}" />
+										target="#{manterPilotoMB.idPiloto}" value="#{pilot.id}" />
 								</h:commandButton></td>
 						</tr>
 			
