@@ -10,9 +10,7 @@ import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import br.com.racingbet.entidade.GrandePremio;
 import br.com.racingbet.entidade.Piloto;
-import br.com.racingbet.servico.GrandePremioServico;
 import br.com.racingbet.servico.PilotoServico;
 import br.com.racingbet.util.ConversacaoUtil;
 
