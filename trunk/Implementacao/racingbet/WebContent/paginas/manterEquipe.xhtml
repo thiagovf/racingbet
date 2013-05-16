@@ -19,8 +19,8 @@
 							<h:inputText id="nome"
 								value="#{manterEquipeMB.equipe.nome}" required="true"
 								requiredMessage="#{msg['manterEquipe.mensagem.nomeObrigatorio']}"
-								size="100" maxlength="100">
-								<f:validateLength minimum="3" maximum="100" />
+								size="50" maxlength="50">
+								<f:validateLength minimum="3" maximum="50" />
 							</h:inputText>
 							<h:message for="nome" class="mensagemDeErro" />
 							
@@ -82,51 +82,60 @@
 
 		<div style="text-align: center">
 			<h1>#{msg['manterEquipe.label.listaDeEquipes']}</h1>
-
-			<h:outputText
-				value="#{msg['manterEquipe.mensagem.naoHaEquipes']}"
-				rendered="#{!manterEquipeMB.temEquipes}" />
+		
 		</div>
 		
 		<h:form>
-			<table align="center">
+			<div style="width:565px; height:200px; border: 1px solid #111; overflow: scroll;">
+				<table style="font-size: 12px; color: blue" cellpadding="2px" cellspacing="5px">
 				<tbody>
+				
+				<h:outputText
+				value="#{msg['manterEquipe.mensagem.naoHaEquipes']}"
+				rendered="#{!manterEquipeMB.temEquipes}" />	
+				
+						
+						
+					
+								
 					<ui:repeat var="eequipe" value="#{manterEquipeMB.equipes}"
 						varStatus="#{manterEquipeMB.temEquipes}">
-						<tr>
-							<td><h:outputLabel
-									value="#{msg['manterEquipe.label.nome']}" /> <h:outputText
-									value="#{eequipe.nome}" />
-							</td>
-						</tr>
-						<tr>
-							<td><h:outputLabel
-									value="#{msg['manterEquipe.label.data_fundacao']}" /> <h:outputText
-									value="#{eequipe.data_fundacao}">
-									<f:convertDateTime pattern="dd/MM/yyyy HH:mm" type="both" />
-								</h:outputText>
-							</td>
-						</tr>
 						
 						<tr>
-							<td><h:outputLabel
-									value="#{msg['manterEquipe.label.nacionalidade']}" /> <h:outputText
-									value="#{eequipe.nacionalidade}" />
-							</td>
-						</tr>
+							<td>Nome     </td>
+							<td>Data de Fundacao    </td>
+							<td>Nacionalidade    </td>
+							
+						</tr>		
+							<td>
+									<h:outputText value="#{eequipe.nome}" />
+								</td>
+								
+								<td>
+									<h:outputText value="#{eequipe.data_fundacao}">
+										<f:convertDateTime pattern="dd/MM/yyyy" type="both" />
+									</h:outputText>
+								</td>
+											
+							
+								<td>
+									<h:outputText value="#{eequipe.nacionalidade}" />
+								</td>
+															
 						
-						<tr>
-							<td align="center"><h:commandButton value="Editar"
+							<td align="center">
+								<h:commandButton value="Editar"
 									action="#{manterEquipeMB.editar}" image="../imagens/editar.gif">
 									<f:setPropertyActionListener
 										target="#{manterEquipeMB.idEquipe}" value="#{eequipe.id}" />
-								</h:commandButton> <h:commandButton value="Excluir"
-									action="#{manterEquipe.excluir}"
-									image="../imagens/excluir.gif">
+								</h:commandButton> 
+								
+								<h:commandButton value="Excluir"
+									action="#{manterEquipeMB.excluir}" image="../imagens/excluir.gif">
 									<f:setPropertyActionListener
-										target="#{manterEquipe.idEquipe}" value="#{eequipe.id}" />
+										target="#{manterEquipeMB.idEquipe}" value="#{eequipe.id}" />
 								</h:commandButton></td>
-						</tr>
+						
 			
 						<tr>
 							<td><h:outputText value=" " />
@@ -135,6 +144,7 @@
 					</ui:repeat>
 				</tbody>
 			</table>
+			</div>
 		</h:form>
 		
 	
