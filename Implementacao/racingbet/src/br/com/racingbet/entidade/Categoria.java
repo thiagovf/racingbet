@@ -1,17 +1,14 @@
 package br.com.racingbet.entidade;
 
-import java.io.Serializable;
-import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
-/*@Entity
+import org.apache.xpath.operations.String;
+
+@Entity
 public class Categoria implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -27,9 +24,9 @@ public class Categoria implements Serializable {
 	@Column(nullable = false, length = 100)
 	private String descricao;
 
-	@Column(nullable = false, length = 50)
+	@Column(length = 50)
 	private String tipoveiculo;
-
+	
 	public Long getId() {
 		return id;
 	}
@@ -68,4 +65,9 @@ public class Categoria implements Serializable {
 		tipoveiculo = null;
 	}
 
-}*/
+	public int size() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+}

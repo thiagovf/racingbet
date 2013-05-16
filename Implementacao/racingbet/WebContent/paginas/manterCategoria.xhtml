@@ -1,0 +1,69 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="../templates/template.xhtml">
+
+	<ui:define name="painelCentral">
+		<h:form>
+			<table align="center">
+				<tr>
+					<td align="center">
+						<h:panelGrid columns="3">
+								
+								<h:outputLabel for="nome"
+									value="#{msg['manterCategoria.label.nome']}" />
+								<h:inputText id="nome"
+									value="#{manterCategoriaMB.categoria.nome}" required="true"
+									requiredMessage="#{msg['manterCategoria.mensagem.campoObrigatorio']}"
+									size="100" maxlength="100">
+									<f:validateLength minimum="3" maximum="100" />
+								</h:inputText>
+								<h:message for="nome" class="mensagemDeErro" />
+								
+								<h:outputLabel for="descricao"
+									value="#{msg['manterCategoria.label.descricao']}" />
+								<h:inputText id="descricao"
+									value="#{manterCategoriaMB.categoria.descricao}" required="true"
+									requiredMessage="#{msg['manterCategoria.mensagem.campoObrigatorio']}"
+									size="100" maxlength="100">
+									<f:validateLength minimum="3" maximum="100" />
+								</h:inputText>
+								<h:message for="descricao" class="mensagemDeErro" />
+	
+								
+								<h:outputLabel for="tipoveiculo"
+									value="#{msg['manterCategoria.label.tipoveiculo']}" />
+								<h:inputText id="tipoveiculo"
+									value="#{manterCategoriaMB.categoria.tipoveiculo}" required="true"
+									requiredMessage="#{msg['manterCategoria.mensagem.campoObrigatorio']}"
+									size="100" maxlength="100">
+									<f:validateLength minimum="3" maximum="100" />
+								</h:inputText>
+								<h:message for="tipoveiculo" class="mensagemDeErro" />
+	
+								
+	                   </h:panelGrid>
+	                   <br />
+				   </td>
+				</tr>
+				<tr>
+					<td>
+						<table align="center">
+							<tr>
+								<td><h:commandButton value="Salvar"
+										action="#{manterCategoriaMB.salvar}"
+										image="../imagens/salvar.gif" /></td>
+								<td><h:commandButton value="Cancelar" action="manterCategoria"
+										immediate="true" image="../imagens/cancelar.gif" /></td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+			</table>
+		</h:form>
+	</ui:define>
+</ui:composition>
