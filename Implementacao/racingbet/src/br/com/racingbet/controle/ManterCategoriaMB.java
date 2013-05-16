@@ -39,23 +39,16 @@ public class ManterCategoriaMB implements Serializable {
 	}
 	
 	public CategoriaServico getCategoriaSevico(){
-		return this.categoria ;
+		return this.categoriaServico ;
 	}
 	
-	public void CategoriaServico setCategoriaServico(CategoriaServico categoriaServico){
+	public void  setCategoriaServico(CategoriaServico categoriaServico){
 		this.categoriaServico = categoriaServico;
 	}
 	
-	public Conversation getConversacao() {
-		return conversacao;
-	}
-
-	public void setConversacao(Conversation conversacao) {
-		this.conversacao = conversacao;
-	}
 	
 	public Conversation getConversacao(){
-		return this.conversacao
+		return this.conversacao;
 	}
 	
 	public void setConversacao(Conversation conversacao){
@@ -82,7 +75,7 @@ public class ManterCategoriaMB implements Serializable {
 	@PostConstruct
 	public void init() {
 		categoria = new Categoria();
-		categoria = CategoriaServico.recuperarTodos();
+		//categoria = CategoriaServico.recuperarTodos();
 	}
 
 	private void limparCategoria() {
@@ -93,7 +86,7 @@ public class ManterCategoriaMB implements Serializable {
 
 		limparCategoria();
 
-		categoria = (Categoria) CategoriaServico.recuperarTodos();
+		//categoria = (Categoria) CategoriaServico.recuperarTodos();
 		System.out.println("passei no iniciar");
 
 		return "manterCategoria";
@@ -107,7 +100,7 @@ public class ManterCategoriaMB implements Serializable {
 			categoriaServico.alterar(categoria);
 		}
 
-		categoria = CategoriaServico.recuperarTodos();
+		//categorias = CategoriaServico.recuperarTodos();
 
 		limparCategoria();
 
@@ -122,8 +115,8 @@ public class ManterCategoriaMB implements Serializable {
 
 		ConversacaoUtil.iniciar(conversacao);
 
-		categoria = CategoriaServico.recuperarPorId(getIdCategoria());
-		categoria = CategoriaServico.recuperarTodos();
+	//	categoria = CategoriaServico.recuperarPorId(getIdCategoria());
+		//categoria = CategoriaServico.recuperarTodos();
 
 		System.out.println("passei no editar");
 		return "manterCategoria";
@@ -132,10 +125,10 @@ public class ManterCategoriaMB implements Serializable {
 	public String excluir() {
 
 		Categoria categoria = new Categoria();
-		categoria.setId(idcategoria);
-		CategoriaServico.remover(categoria);
+	//	categoria.setId(idcategoria);
+	//	CategoriaServico.remover(categoria);
 
-		categoria = CategoriaServico.recuperarTodos();
+		//categoria = CategoriaServico.recuperarTodos();
 		limparCategoria();
 
 		System.out.println("passei no excluir");

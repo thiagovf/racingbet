@@ -10,6 +10,8 @@
 		<class>br.com.racingbet.entidade.Piloto</class>
 		<class>br.com.racingbet.entidade.Palpite</class>
 		<class>br.com.racingbet.entidade.ResultadoGrandePremio</class>
+		<class>br.com.racingbet.entidade.Categoria</class>
+		
 		
 		<exclude-unlisted-classes>true</exclude-unlisted-classes>
 		<properties>

@@ -1,12 +1,12 @@
 package br.com.racingbet.entidade;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
-import org.apache.xpath.operations.String;
 
 @Entity
 public class Categoria implements Serializable {

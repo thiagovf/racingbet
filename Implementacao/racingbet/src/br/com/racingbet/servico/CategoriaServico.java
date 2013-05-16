@@ -40,9 +40,9 @@ public class CategoriaServico implements Serializable {
 		categoriaDAO.remover(categoria.getId());
 	}
 	
-	public static List<Categoria> recuperarTodos() {
-		return categoriaDAO.recuperarTodos();
-	}
+//	public static List<Categoria> recuperarTodos() {
+//		return categoriaDAO.recuperarTodos();
+//	}
 	
 	public Categoria recuperarPorId(Long id) {
 		return categoriaDAO.recuperar(id);
