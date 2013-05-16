@@ -8,6 +8,9 @@
 	template="../templates/template.xhtml">
 
 	<ui:define name="painelCentral">
+	
+	<h1>Manter Categoria</h1>
+	
 		<h:form>
 			<table align="center">
 				<tr>
@@ -19,7 +22,7 @@
 								<h:inputText id="nome"
 									value="#{manterCategoriaMB.categoria.nome}" required="true"
 									requiredMessage="#{msg['manterCategoria.mensagem.campoObrigatorio']}"
-									size="100" maxlength="100">
+									size="50" maxlength="100">
 									<f:validateLength minimum="3" maximum="100" />
 								</h:inputText>
 								<h:message for="nome" class="mensagemDeErro" />
@@ -29,7 +32,7 @@
 								<h:inputText id="descricao"
 									value="#{manterCategoriaMB.categoria.descricao}" required="true"
 									requiredMessage="#{msg['manterCategoria.mensagem.campoObrigatorio']}"
-									size="100" maxlength="100">
+									size="50" maxlength="100">
 									<f:validateLength minimum="3" maximum="100" />
 								</h:inputText>
 								<h:message for="descricao" class="mensagemDeErro" />
@@ -40,7 +43,7 @@
 								<h:inputText id="tipoveiculo"
 									value="#{manterCategoriaMB.categoria.tipoveiculo}" required="true"
 									requiredMessage="#{msg['manterCategoria.mensagem.campoObrigatorio']}"
-									size="100" maxlength="100">
+									size="50" maxlength="100">
 									<f:validateLength minimum="3" maximum="100" />
 								</h:inputText>
 								<h:message for="tipoveiculo" class="mensagemDeErro" />
@@ -65,5 +68,57 @@
 				</tr>
 			</table>
 		</h:form>
+		<p></p>
+		
+		<div style="text-align: center">
+			<h1>#{msg['manterResultadoGrandePremio.label.listaDeResultadosGrandesPremios']}</h1>
+
+			<h:outputText
+				value="#{msg['manterResultadoGrandePremio.mensagem.naoHaResultadosGrandesPremios']}"
+				rendered="#{!manterResultadoGrandePremioMB.temResultadosGrandesPremios}" />
+		</div>
+		
+		<h:form>
+			<table align="center">
+				<tbody>
+					<ui:repeat var="_categoria" value="#{manterCategoriaMB.categorias}">
+						<tr>
+							<td>
+									<h:outputLabel
+									value="#{msg['manterCategoria.label.nome']}" /> <h:outputText
+									value="#{_categoria.nome}" />
+							</td>
+						</tr>
+						<tr>
+							<td>
+									<h:outputLabel
+									value="#{msg['manterCategoria.label.descricao']}" /> <h:outputText
+									value="#{_categoria.descricao}" />
+							</td>
+						</tr>
+												
+						<tr>
+							<td align="center"><h:commandButton value="Editar"
+									action="#{manterCategoriaMB.editar}" image="../imagens/editar.gif">
+									<f:setPropertyActionListener
+										target="#{manterCategoria.idCategoria}" value="#{_categoria.id}" />
+								</h:commandButton> <h:commandButton value="Excluir"
+									action="#{manterCategoriaMB.excluir}"
+									image="../imagens/excluir.gif">
+									<f:setPropertyActionListener
+										target="#{manterCategoriaMB.idResultadoGrandePremio}" value="#{_categoria.id}" />
+								</h:commandButton></td>
+						</tr>
+			
+						<tr>
+							<td><h:outputText value=" " />
+							</td>
+						</tr>
+					</ui:repeat>
+				</tbody>
+			</table>
+		</h:form>
+		
+		
 	</ui:define>
 </ui:composition>

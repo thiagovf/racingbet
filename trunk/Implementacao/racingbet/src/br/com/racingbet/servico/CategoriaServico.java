@@ -48,4 +48,9 @@ public class CategoriaServico implements Serializable {
 		return categoriaDAO.recuperar(id);
 	}
 
+	public List<Categoria> recuperarTodos() {
+		
+		return categoriaDAO.recuperarTodos();
+	}
+
 }

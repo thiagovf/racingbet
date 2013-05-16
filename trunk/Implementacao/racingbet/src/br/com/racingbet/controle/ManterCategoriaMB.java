@@ -27,6 +27,8 @@ public class ManterCategoriaMB implements Serializable {
 
 	@Inject
 	private CategoriaServico categoriaServico;
+	
+	private List<Categoria> categorias;
 
 	private Boolean temCategoria;
 	
@@ -75,7 +77,7 @@ public class ManterCategoriaMB implements Serializable {
 	@PostConstruct
 	public void init() {
 		categoria = new Categoria();
-		//categoria = CategoriaServico.recuperarTodos();
+		categorias = categoriaServico.recuperarTodos();
 	}
 
 	private void limparCategoria() {
@@ -103,10 +105,8 @@ public class ManterCategoriaMB implements Serializable {
 		//categorias = CategoriaServico.recuperarTodos();
 
 		limparCategoria();
-
+		this.categorias = categoriaServico.recuperarTodos();
 		ConversacaoUtil.terminar(conversacao);
-
-		System.out.println("passei no salvar");
 
 		return "manterCategoria";
 	}
@@ -134,6 +134,25 @@ public class ManterCategoriaMB implements Serializable {
 		System.out.println("passei no excluir");
 
 		return "manterCategoria";
+	}
+
+	public List<Categoria> getCategorias() {
+		
+		categoriaServico.recuperarTodos();
+		
+		return categorias;
+	}
+
+	public void setCategorias(List<Categoria> categorias) {
+		this.categorias = categorias;
+	}
+
+	public Boolean getTemCategoria() {
+		return temCategoria;
+	}
+
+	public void setTemCategoria(Boolean temCategoria) {
+		this.temCategoria = temCategoria;
 	}
 
 }
