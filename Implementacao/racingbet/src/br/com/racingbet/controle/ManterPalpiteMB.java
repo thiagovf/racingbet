@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 import javax.enterprise.context.Conversation;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -24,10 +26,16 @@ public class ManterPalpiteMB implements Serializable {
 	@Inject
 	private Palpite palpite;
 	
+	private String categoria;
+	
 
 	public String salvar(){
 		
 		palpiteServico.salvar(palpite);
+		 
+		 FacesContext context = FacesContext.getCurrentInstance();
+		 FacesMessage message = new FacesMessage("Palpite adicionado com sucesso");
+		 context.addMessage("global", message);
 		
 		return "manterPalpite";
 	}
@@ -59,6 +67,14 @@ public class ManterPalpiteMB implements Serializable {
 
 	public void setPalpite(Palpite palpite) {
 		this.palpite = palpite;
+	}
+
+	public String getCategoria() {
+		return categoria;
+	}
+
+	public void setCategoria(String categoria) {
+		this.categoria = categoria;
 	}
 
 }

@@ -8,16 +8,50 @@
 	template="../templates/template.xhtml">
 
 	<ui:define name="painelCentral">
+	<h3>Manter Palpite</h3>
+	
 	<h:form>
 			<table align="center">
 					<tr>
 						<td align="center"><h:panelGrid columns="3">
+						
+								<h:outputLabel for="categoria"
+									value="#{msg['manterpalpite.label.categoria']}" />
+								<h:selectOneListbox id="categoria"
+									value="#{manterPalpiteMB.categoria}" required="true"
+									requiredMessage="#{msg['manterPalpite.mensagem.campoObrigatorio']}"
+									size="1">
+										<f:selectItem itemValue="Categoria1" itemLabel="Categoria1" />
+									   	<f:selectItem itemValue="Categoria2" itemLabel="Categoria2" />
+									   	<f:selectItem itemValue="Categoria3" itemLabel="Categoria3" />
+									   	<f:selectItem itemValue="Categoria4" itemLabel="Categoria4" />
+									   	<f:selectItem itemValue="Categoria5" itemLabel="Categoria5" />
+									   	<f:selectItem itemValue="Categoria6" itemLabel="Categoria6" />
+								</h:selectOneListbox>
+								<h:message for="categoria" class="mensagemDeErro" />
+								
+							    <h:outputLabel for="grandePremio"
+									value="#{msg['manterPalpite.label.grandePremio']}" />
+							   <h:selectOneListbox id="grandePremio"
+									value="#{manterPalpiteMB.palpite.grandePremio}" required="true"
+									requiredMessage="#{msg['manterPalpite.mensagem.campoObrigatorio']}"
+									size="1">
+										<f:selectItem itemValue="GrandePremio1" itemLabel="GrandePremio1" />
+									   	<f:selectItem itemValue="GrandePremio2" itemLabel="GrandePremio2" />
+									   	<f:selectItem itemValue="GrandePremio3" itemLabel="GrandePremio3" />
+									   	<f:selectItem itemValue="GrandePremio4" itemLabel="GrandePremio4" />
+									   	<f:selectItem itemValue="GrandePremio5" itemLabel="GrandePremio5" />
+									   	<f:selectItem itemValue="GrandePremio6" itemLabel="GrandePremio6" />
+								</h:selectOneListbox>
+								<h:message for="grandePremio" class="mensagemDeErro" />
+						
+						
 								<h:outputLabel for="respostaPrimeiro"
 									value="#{msg['manterPalpite.label.respostaPrimeiro']}" />
 								<h:inputText id="respostaPrimeiro"
 									value="#{manterPalpiteMB.palpite.respostaPrimeiro}" required="true"
 									requiredMessage="#{msg['manterPalpite.mensagem.respostaPrimeiroObrigatorio']}"
-									size="100" maxlength="100">
+									size="50" maxlength="100">
 									<f:validateLength minimum="3" maximum="100" />
 								</h:inputText>
 								<h:message for="respostaPrimeiro" class="mensagemDeErro" />
@@ -27,7 +61,7 @@
 								<h:inputText id="respostaPole"
 									value="#{manterPalpiteMB.palpite.respostaPole}" required="true"
 									requiredMessage="#{msg['manterPalpite.mensagem.respostaPoleObrigatorio']}"
-									size="100" maxlength="100">
+									size="50" maxlength="100">
 									<f:validateLength minimum="3" maximum="100" />
 								</h:inputText>
 								<h:message for="respostaPole" class="mensagemDeErro" />
@@ -37,21 +71,11 @@
 								<h:inputText id="autorPergunta"
 									value="#{manterPalpiteMB.palpite.autorPergunta}" required="true"
 									requiredMessage="#{msg['manterPalpite.mensagem.autorPerguntaObrigatorio']}"
-									size="100" maxlength="100">
+									size="50" maxlength="100">
 									<f:validateLength minimum="3" maximum="100" />
 								</h:inputText>
 								<h:message for="respostaPole" class="mensagemDeErro" />
 								
-								<h:outputLabel for="grandePremio"
-									value="#{msg['manterPalpite.label.grandePremio']}" />
-								<h:inputText id="grandePremio"
-									value="#{manterPalpiteMB.palpite.grandePremio}" required="true"
-									requiredMessage="#{msg['manterPalpite.mensagem.grandePremioObrigatorio']}"
-									size="100" maxlength="100">
-									<f:validateLength minimum="3" maximum="100" />
-								</h:inputText>
-								<h:message for="grandePremio" class="mensagemDeErro" />
-	
 								<h:outputLabel for="data"
 									value="#{msg['manterPalpite.label.data']}" />
 								<rich:calendar
@@ -75,6 +99,10 @@
 										image="../imagens/salvar.gif" /></td>
 								<td><h:commandButton value="Cancelar" action="manterPalpite"
 										immediate="true" image="../imagens/cancelar.gif" /></td>
+							</tr>
+							
+							<tr>
+								<td><h:messages for="global" style="color:red;margin:8px;" /></td>
 							</tr>
 						</table>
 					</td>
