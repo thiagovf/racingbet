@@ -33,6 +33,50 @@ public class Palpite implements Serializable {
 	@Column(nullable = false, length = 50)
 	private String grandePremio;
 	
+	@Column
+	private Long idUsuario;
+	
+	@Column
+	private Long idPilotoResp1;
+	
+	public Long getIdPilotoResp1() {
+		return idPilotoResp1;
+	}
+
+	public void setIdPilotoResp1(Long idPilotoResp1) {
+		this.idPilotoResp1 = idPilotoResp1;
+	}
+
+	public Long getIdPilotoResp2() {
+		return idPilotoResp2;
+	}
+
+	public void setIdPilotoResp2(Long idPilotoResp2) {
+		this.idPilotoResp2 = idPilotoResp2;
+	}
+
+	@Column
+	private Long idPilotoResp2;	
+	
+	public Long getIdUsuario() {
+		return idUsuario;
+	}
+
+	public void setIdUsuario(Long idUsuario) {
+		this.idUsuario = idUsuario;
+	}
+
+	public Long getIdGrandePremio() {
+		return idGrandePremio;
+	}
+
+	public void setIdGrandePremio(Long idGrandePremio) {
+		this.idGrandePremio = idGrandePremio;
+	}
+
+	@Column
+	private Long idGrandePremio;
+	
 	@Column(nullable = false)
 	@Temporal(TemporalType.DATE)
 	private Date data;
