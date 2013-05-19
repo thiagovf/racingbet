@@ -27,6 +27,17 @@ public class Piloto implements Serializable {
 	@Column(nullable=true, length=2)
 	private String numeroDoCarro;
 	
+	public Long getIdEquipe() {
+		return idEquipe;
+	}
+
+	public void setIdEquipe(Long idEquipe) {
+		this.idEquipe = idEquipe;
+	}
+
+	@Column
+	private Long idEquipe;
+	
 	public Long getId() {
 		return id;
 	}

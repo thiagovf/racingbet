@@ -21,6 +21,17 @@ public class GrandePremio implements Serializable {
 	@Column(name="id_grandepremio")
 	private Long id;
 	
+	@Column
+	private Long idCategoria;
+	
+	public Long getIdCategoria() {
+		return idCategoria;
+	}
+
+	public void setIdCategoria(Long idCategoria) {
+		this.idCategoria = idCategoria;
+	}
+
 	@Column(nullable=false, length=50)
 	private String nome;
 	
@@ -36,6 +47,8 @@ public class GrandePremio implements Serializable {
 	@Column(nullable=false)
 	@Temporal(TemporalType.DATE)
 	private Date data;
+	
+	
 	
 	
 	public Long getId() {

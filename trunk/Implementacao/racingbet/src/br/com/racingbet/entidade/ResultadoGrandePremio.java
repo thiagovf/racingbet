@@ -27,6 +27,53 @@ public class ResultadoGrandePremio implements Serializable {
 	
 	@Column(nullable=false, length=50)
 	private String repostaPerguntaPrimeiro;
+	
+	@Column
+	private Long idGrandePremio;
+	
+	@Column
+	private Long idCategoria;
+	
+	public Long getIdCategoria() {
+		return idCategoria;
+	}
+
+
+	public void setIdCategoria(Long idCategoria) {
+		this.idCategoria = idCategoria;
+	}
+
+
+	public Long getIdGrandePremio() {
+		return idGrandePremio;
+	}
+	
+	
+	public void setIdGrandePremio(Long idGrandePremio) {
+		this.idGrandePremio = idGrandePremio;
+	}
+
+	public Long getIdPilotoPergunta1() {
+		return idPilotoPergunta1;
+	}
+
+	public void setIdPilotoPergunta1(Long idPilotoPergunta1) {
+		this.idPilotoPergunta1 = idPilotoPergunta1;
+	}
+
+	public Long getIdPilotoPergunta2() {
+		return idPilotoPergunta2;
+	}
+
+	public void setIdPilotoPergunta2(Long idPilotoPergunta2) {
+		this.idPilotoPergunta2 = idPilotoPergunta2;
+	}
+
+	@Column
+	private Long idPilotoPergunta1;
+	
+	@Column
+	private Long idPilotoPergunta2;
 
 	public Long getId() {
 		return id;
