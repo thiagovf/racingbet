@@ -11,6 +11,8 @@
 		<class>br.com.racingbet.entidade.Palpite</class>
 		<class>br.com.racingbet.entidade.ResultadoGrandePremio</class>
 		<class>br.com.racingbet.entidade.Categoria</class>
+		<class>br.com.racingbet.entidade.Pontuacao</class>
+		<class>br.com.racingbet.entidade.Usuario</class>
 		
 		
 		<exclude-unlisted-classes>true</exclude-unlisted-classes>
