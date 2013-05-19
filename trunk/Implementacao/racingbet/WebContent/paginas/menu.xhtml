@@ -11,17 +11,19 @@
 			<div class="menu_opcoes">
 				<ul>
 					<li><h:commandLink class="menu_opcao" value="#{msg['menu.label.editarDados']}" /></li>
-					<li><h:commandLink class="menu_opcao" value="#{msg['menu.label.manterPalpite']}" /></li>
+					<li><h:commandLink class="menu_opcao" value="#{msg['menu.label.manterUsuario']}" action="manterUsuario"/></li>
+					<li><h:commandLink class="menu_opcao" value="#{msg['menu.label.manterPalpite']}" action="manterPalpite"/></li>
 					<li><h:commandLink class="menu_opcao" value="#{msg['menu.label.consultarPalpite']}" action="consultarPalpite" /></li>
-					<li><h:commandLink class="menu_opcao" value="#{msg['menu.label.consultarGrandePremio']}" /></li>
-					<li><h:commandLink class="menu_opcao" value="#{msg['menu.label.consultarRanking']}" /></li>
+					<li><h:commandLink class="menu_opcao" value="#{msg['menu.label.consultarGrandePremio']}" action="consultarGrandePremio"/></li>
+					<li><h:commandLink class="menu_opcao" value="#{msg['menu.label.consultarPontuacao']}" action="consultarPontuacao"/></li>
 					<li><h:commandLink class="menu_opcao" value="------------------------------------------" /></li>
 					<li><h:commandLink class="menu_opcao" value="#{msg['menu.label.manterCategoria']}" action="manterCategoria" /></li>
 					<li><h:commandLink class="menu_opcao" value="#{msg['menu.label.manterEquipe']}" action="manterEquipe"/></li>
 					<li><h:commandLink class="menu_opcao" value="#{msg['menu.label.manterPiloto']}" action="manterPiloto" /></li>
-					<li><h:commandLink class="menu_opcao" value="#{msg['menu.label.manterGrandePremio']}" /></li>
-					<li><h:commandLink class="menu_opcao" value="#{msg['menu.label.liberarFecharGrandePremio']}" /></li>
-					<li><h:commandLink class="menu_opcao" value="#{msg['menu.label.manterResultadoGrandePremio']}" action="manterResultadoGrandePremio" /></li> <br />
+					<li><h:commandLink class="menu_opcao" value="#{msg['menu.label.manterGrandePremio']}" action="manterGrandePremio"/></li>
+					<li><h:commandLink class="menu_opcao" value="#{msg['menu.label.liberarFecharGrandePremio']}" action="liberarFecharGrandePremio"/></li>
+					<li><h:commandLink class="menu_opcao" value="#{msg['menu.label.manterResultadoGrandePremio']}" action="manterResultadoGrandePremio" /></li> 
+					<li><h:commandLink class="menu_opcao" value="#{msg['menu.label.manterPontuacao']}" action="manterPontuacao" /></li><br />
 				</ul>
 			</div>
 		</h:form>

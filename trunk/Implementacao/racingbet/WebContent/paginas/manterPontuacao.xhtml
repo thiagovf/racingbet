@@ -1,0 +1,152 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="../templates/template.xhtml">
+
+	<ui:define name="painelCentral">
+	<h:form>
+	
+	<table align="center">
+	
+	<h:outputLabel for="lblGerarDadosTeste" value="#{msg['manterPontuacao.label.gerarDadosTeste']}" />
+	<h:commandButton value="GerarDadosTeste"
+									action="#{manterPontuacaoMB.gerarDadosTeste() }" image="../imagens/enviar.gif">
+<!-- 									<f:setPropertyActionListener -->
+<!-- 										target="#{manterPontuacaoMB.idPontuacao}" value="#{pontuacao.id}" /> -->
+								</h:commandButton>
+								<br></br> 
+								<h:outputLabel for="lblGerarPontuacao" value="#{msg['manterPontuacao.label.gerarPontuacao']}" />																
+								<h:commandButton value="gerarPontuacao"
+									action="#{manterPontuacaoMB.gerarPontuacao() }" image="../imagens/confirmar.gif">
+<!-- 									<f:setPropertyActionListener -->
+<!-- 										target="#{manterPontuacaoMB.idPontuacao}" value="#{pontuacao.id}" /> -->
+								</h:commandButton> 
+	
+<!-- 	<tr> -->
+<!-- 					<td align="center"><h:panelGrid columns="3"> -->
+<!-- 							<h:outputLabel for="idCategoria" -->
+<!-- 								value="#{msg['manterPontuacao.label.idCategoria']}" /> -->
+<!-- 							<h:inputText id="idCategoria" -->
+<!-- 								value="#{manterPontuacaoMB.pontuacao.idCategoria}" required="true" -->
+<!-- 								requiredMessage="#{msg['manterPontuacao.mensagem.idCategoriaObrigatorio']}" -->
+<!-- 								size="50" maxlength="50">								 -->
+<!-- 							</h:inputText>							 -->
+<!-- 							<h:message for="idCategoria" class="mensagemDeErro" /> -->
+							
+<!-- 							<h:outputLabel for="idUsuario" -->
+<!-- 								value="#{msg['manterPontuacao.label.idUsuario']}" /> -->
+<!-- 							<h:inputText id="idUsuario" -->
+<!-- 								value="#{manterPontuacaoMB.pontuacao.idUsuario}" required="true" -->
+<!-- 								requiredMessage="#{msg['manterPontuacao.mensagem.idUsuarioObrigatorio']}" -->
+<!-- 								size="50" maxlength="50">								 -->
+<!-- 							</h:inputText> -->
+<!-- 							<h:message for="idUsuario" class="mensagemDeErro" /> -->
+							
+<!-- 							<h:outputLabel for="pontos" -->
+<!-- 								value="#{msg['manterPontuacao.label.pontos']}" /> -->
+<!-- 							<h:inputText id="pontos" -->
+<!-- 								value="#{manterPontuacaoMB.pontuacao.pontos}" required="true" -->
+<!-- 								requiredMessage="#{msg['manterPontuacao.mensagem.pontosObrigatorio']}" -->
+<!-- 								size="50" maxlength="50">							 -->
+<!-- 							</h:inputText> -->
+<!-- 							<h:message for="pontos" class="mensagemDeErro" /> -->
+							
+									
+<!--                    </h:panelGrid>  -->
+<!--                    <br /> -->
+<!-- 					</td> -->
+<!-- 				</tr> -->
+				
+				<tr>
+					<td>
+						<table align="center">
+							<tr>
+								<td><h:commandButton value="Salvar"
+										action="#{manterPontuacaoMB.salvar}"
+										image="../imagens/salvar.gif" /></td>
+								<td><h:commandButton value="Cancelar" action="manterPontuacao"
+										immediate="true" image="../imagens/cancelar.gif" /></td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+	
+	</table>
+			
+</h:form>
+		
+		<p></p>
+
+		<div style="text-align: center">
+			<h1>#{msg['manterPontuacao.label.listaDePontuacoes']}</h1>
+		
+		</div>
+		
+		<h:form>
+			<div style="width:565px; height:200px; border: 1px solid #111; overflow: scroll;">
+				<table style="font-size: 12px; color: blue" cellpadding="2px" cellspacing="5px">
+				<tbody>		
+								
+				
+				<h:outputText
+				value="#{msg['manterPontuacao.mensagem.naoHaPontuacoes']}"
+				rendered="#{!manterPontuacaoMB.temPontuacoes}" />	
+				
+							
+
+						<tr>
+							<td>Categoria     </td>
+							<td>Usuario </td>
+							<td>Pontos </td>							
+							
+						</tr>					
+						
+		
+					<ui:repeat var="pontuacao" value="#{manterPontuacaoMB.pontuacoes}"
+						varStatus="#{manterPontuacaoMB.temPontuacoes}">
+						
+							<td>
+								<h:outputText value="#{pontuacao.idCategoria}" />
+							</td>
+							<td>
+								<h:outputText value="#{pontuacao.idUsuario}" />
+							</td>
+							<td>
+								<h:outputText value="#{pontuacao.pontos}" />
+							</td>								
+						
+							<td align="center">
+								<h:commandButton value="Editar"
+									action="#{manterPontuacaoMB.editar}" image="../imagens/editar.gif">
+									<f:setPropertyActionListener
+										target="#{manterPontuacaoMB.idPontuacao}" value="#{pontuacao.id}" />
+								</h:commandButton> 
+								
+								<h:commandButton value="Excluir"
+									action="#{manterPontuacaoMB.excluir}" image="../imagens/excluir.gif">
+									<f:setPropertyActionListener
+										target="#{manterPontuacaoMB.idPontuacao}" value="#{pontuacao.id}" />
+								</h:commandButton></td>
+						
+			
+						<tr>
+							<td><h:outputText value=" " />
+							</td>
+						</tr>
+					</ui:repeat>
+				</tbody>
+			</table>
+			</div>
+		</h:form>
+		
+	
+	
+	
+	
+</ui:define>
+
+</ui:composition>	
