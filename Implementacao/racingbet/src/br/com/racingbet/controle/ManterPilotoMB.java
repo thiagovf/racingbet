@@ -134,17 +134,16 @@ public class ManterPilotoMB implements Serializable {
 
 	public String excluir() {
 		
-//		Piloto p = new GrandePremio();
-//		gpremio.setId(idGrandePremio);
-//		grandePremioServico.remover(gpremio);
-//
-//		grandesPremios = grandePremioServico.recuperarTodos();
-//		limparGrandePremio();
-//
-//		System.out.println("passei no excluir");
+		Piloto piloto = new Piloto();
+		piloto.setId(idPiloto);
+		pilotoServico.remover(piloto);
 
-//		return "manterGrandePremio";
-		return null;
+		pilotos = pilotoServico.recuperarTodos();
+		limparGrandePremio();
+
+		System.out.println("passei no excluir");
+
+		return "manterPiloto";
 	}
 	
 }
