@@ -8,6 +8,8 @@
 	template="../templates/template.xhtml">
 
 	<ui:define name="painelCentral">
+	<h3>Consultar Grande Prêmio</h3>
+	<br/>
 		<h:form>
 			<rich:dataGrid var="consultarGrandePremio"
 				value="#{consultarGrandePremioMB.grandesPremios}">
@@ -15,16 +17,15 @@
 					<h:outputText
 						value="#{msg['consultarGrandePremio.label.categoria']}"></h:outputText>
 				</f:facet>
-				<h:panelGrid columns="3">
+				<h:panelGrid columns="2">
 					<h:selectOneListbox id="nomeCategoria"
 						value="#{manterCategoria.label.categoria}" required="true"
-						requiredMessage="#{msg['manterCategoria.mensagem.nomeCategoriaObrigatorio']}"
-						size="1">
+						requiredMessage="#{msg['manterCategoria.mensagem.nomeCategoriaObrigatorio']}" size="1">
 						<f:selectItem itemValue="A1 Grand Prix‎"	itemLabel="A1 Grand Prix‎" />
 						<f:selectItem itemValue="Champ Car" itemLabel="Champ Car" />
 						<f:selectItem itemValue="Fórmula 1‎" itemLabel="Fórmula 1‎" />
 						<f:selectItem itemValue="Fórmula 2 FIA‎" itemLabel="Fórmula 2 FIA‎" />
-						<f:selectItem itemValue="Fórmula 3 Europeia‎"itemLabel="Fórmula 3 Europeia‎" />
+						<f:selectItem itemValue="Fórmula 3 Europeia‎" itemLabel="Fórmula 3 Europeia‎" />
 						<f:selectItem itemValue="Fórmula 3 Sul-americana" itemLabel="Fórmula 3 Sul-americana" />
 						<f:selectItem itemValue="Fórmula 3000‎" itemLabel="Fórmula 3000‎" />
 						<f:selectItem itemValue="GP2 Series‎" itemLabel="GP2 Series‎" />
@@ -68,25 +69,6 @@
 				</table>
 			</h:form>
 
-			<!-- 			<rich:dataGrid var="manterGrandePremioMB" value="#{manterGrandePremioMB}"> -->
-			<!-- 				<f:facet name="header"> -->
-			<!-- 					<h:outputText value="#{msg['manterGrandePremio.label.listaDeGrandesPremios']}"></h:outputText> -->
-			<!--                 </f:facet> -->
-			<!-- 				<h:panelGrid columns="2"> -->
-			<!-- 					<h:outputText value="#{msg['consultarGrandePremio.label.categoria']}" styleClass="label"></h:outputText> -->
-			<!-- 					<h:outputText value="#{grandePremio.categoria}" /> -->
-			<!-- 					<h:outputText value="#{msg['consultarGrandePremio.label.nome']}" styleClass="label"></h:outputText> -->
-			<!-- 					<h:outputText value="#{grandePremio.nome}" /> -->
-			<!-- 					<h:outputText value="#{msg['consultarGrandePremio.label.pais']}" styleClass="label"></h:outputText> -->
-			<!-- 					<h:outputText value="#{grandePremio.pais}" /> -->
-			<!-- 					<h:outputText value="#{msg['consultarPalpites.label.data']}" styleClass="label"></h:outputText> -->
-			<!-- 					<h:outputText value="#{grandePremio.data}" /> -->
-			<!-- 					<h:outputText value="#{msg['consultarGrandePremio.label.cidade']}" styleClass="label"></h:outputText> -->
-			<!-- 					<h:outputText value="#{grandePremio.cidade}" /> -->
-			<!-- 					<h:outputText value="#{msg['consultarGrandePremio.label.autodromo']}" styleClass="label"></h:outputText> -->
-			<!-- 					<h:outputText value="#{grandePremio.autodromo}" />					 -->
-			<!-- 				</h:panelGrid> -->
-			<!-- 			</rich:dataGrid> -->
 		</h:form>
 
 	</ui:define>
