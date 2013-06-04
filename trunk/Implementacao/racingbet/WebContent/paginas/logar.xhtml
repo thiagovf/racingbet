@@ -1,0 +1,54 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="../templates/template.xhtml">
+
+	<ui:define name="painelEsquerdo">
+		<ui:include src="../paginas/menuInicial.xhtml"></ui:include>
+	</ui:define>
+
+
+	<ui:define name="painelCentral">
+		<h:form>
+			<table align="center">
+				<tr>
+					<td align="center"><h:panelGrid columns="3">
+							<h:outputLabel for="email" value="#{msg['logar.label.email']}" />
+							<h:inputText id="email"
+								value="#{gerenciarUsuarioMB.usuario.email}" required="true"
+								requiredMessage="#{msg['logar.mensagem.emailObrigatorio']}"
+								size="30" maxlength="100">
+								<f:validateLength minimum="3" maximum="100" />
+							</h:inputText>
+							<h:message for="email" class="mensagemDeErro" />
+						</h:panelGrid> <br /></td>
+				</tr>
+
+				<tr>
+					<td align="center"><h:panelGrid columns="3">
+							<h:outputLabel for="senha" value="#{msg['logar.label.senha']}" />
+							<h:inputText id="senha"
+								value="#{gerenciarUsuarioMB.usuario.senha}" required="true"
+								requiredMessage="#{msg['logar.mensagem.senhaObrigatoria']}"
+								size="30" maxlength="100">
+								<f:validateLength minimum="3" maximum="100" />
+							</h:inputText>
+							<h:message for="senha" class="mensagemDeErro" />
+						</h:panelGrid> <br /></td>
+				</tr>
+
+				<tr>
+					<td align="center"><h:commandButton id="logar"
+							action="#{gerenciarUsuarioMB.logar}" value="Logar" /><br/>
+					<h:outputText class="mensagemDeErro" value="#{gerenciarUsuarioMB.mensagemLogin}" rendered="#{gerenciarUsuarioMB.mensagemLogin != null and gerenciarUsuarioMB.mensagemLogin !=''}" /><br /><br/></td>
+				</tr>
+			</table>
+		</h:form>
+
+	</ui:define>
+
+</ui:composition>
