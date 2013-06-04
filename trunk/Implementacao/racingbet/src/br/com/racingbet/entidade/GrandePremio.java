@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -20,17 +22,9 @@ public class GrandePremio implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="id_grandepremio")
 	private Long id;
-	
-	@Column
-	private Long idCategoria;
-	
-	public Long getIdCategoria() {
-		return idCategoria;
-	}
 
-	public void setIdCategoria(Long idCategoria) {
-		this.idCategoria = idCategoria;
-	}
+	@Column(nullable=false)
+	private Long id_categoria;
 
 	@Column(nullable=false, length=50)
 	private String nome;
@@ -48,7 +42,9 @@ public class GrandePremio implements Serializable {
 	@Temporal(TemporalType.DATE)
 	private Date data;
 	
-	
+	@ManyToOne(optional=false)
+	@JoinColumn(name="id_categoria", nullable=false, insertable=true, updatable=true)
+	private Categoria categoria;
 	
 	
 	public Long getId() {
@@ -57,6 +53,14 @@ public class GrandePremio implements Serializable {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public Long getIdCategoria() {
+		return id_categoria;
+	}
+
+	public void setIdCategoria(Long id) {
+		this.id_categoria = id;
 	}
 
 	public String getNome() {
@@ -90,6 +94,7 @@ public class GrandePremio implements Serializable {
 	public Date getData() {
 		return data;
 	}
+	
 	public void setData(Date data) {
 		this.data = data;
 	}
@@ -98,5 +103,12 @@ public class GrandePremio implements Serializable {
 		nome = null;
 		data = null;
 	}
+	
+	public Categoria getCategoria() {
+		return categoria;
+	}
 
+	public void setCategoria(Categoria categoria) {
+		this.categoria = categoria;
+	}	
 }
