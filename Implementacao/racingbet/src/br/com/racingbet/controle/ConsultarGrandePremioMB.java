@@ -15,54 +15,48 @@ import br.com.racingbet.servico.GrandePremioServico;
 @SuppressWarnings("serial")
 @Named("consultarGrandePremioMB")
 @SessionScoped
+public class ConsultarGrandePremioMB implements Serializable {
 
-public class ConsultarGrandePremioMB implements Serializable{
-	
 	@Inject
 	private Conversation conversacao;
-	
+
 	private List<GrandePremio> grandesPremios;
-	
+
 	@Inject
 	private GrandePremioServico grandePremioServico;
-	
+
 	public Conversation getConversacao() {
 		return conversacao;
 	}
 
-	
-	public void setConversacao(Conversation conversacao){
+	public void setConversacao(Conversation conversacao) {
 		this.conversacao = conversacao;
-			
+
 	}
-	
+
 	@PostConstruct
-	public void init(){
+	public void init() {
 		grandesPremios = grandePremioServico.recuperarTodos();
 	}
-	
-	public String inciar(){
+
+	public String inciar() {
 		return "consultarGrandePremio";
 	}
-
-
-	public List<GrandePremio> getGrandesPremios() {
-		return grandesPremios;
-	}
-
-
-	public void setGrandesPremios(List<GrandePremio> grandesPremios) {
-		this.grandesPremios = grandesPremios;
-	}
-
 
 	public GrandePremioServico getGrandePremioServico() {
 		return grandePremioServico;
 	}
 
-
 	public void setGrandePremioServico(GrandePremioServico grandePremioServico) {
 		this.grandePremioServico = grandePremioServico;
 	}
-	
+
+	public List<GrandePremio> getGrandesPremios() {
+		return grandesPremios;
+	}
+
+	public void setGrandesPremios(List<GrandePremio> grandesPremios) {
+		this.grandesPremios = grandesPremios;
+	}
+
 }
