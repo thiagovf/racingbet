@@ -19,9 +19,9 @@ public class GerenciarUsuarioMB implements Serializable {
 
 	@Inject
 	private UsuarioServico usuarioServico;
-	
+
 	private String mensagemLogin;
-	
+
 	public Usuario getUsuario() {
 		return usuario;
 	}
@@ -33,12 +33,12 @@ public class GerenciarUsuarioMB implements Serializable {
 	public UsuarioServico getUsuarioServico() {
 		return usuarioServico;
 	}
-	
+
 	public void setUsuarioServico(UsuarioServico usuarioServico) {
 		this.usuarioServico = usuarioServico;
 	}
 
-    public String getMensagemLogin() {
+	public String getMensagemLogin() {
 		return mensagemLogin;
 	}
 
@@ -47,8 +47,8 @@ public class GerenciarUsuarioMB implements Serializable {
 	}
 
 	public GerenciarUsuarioMB() {
-    	
-    }
+
+	}
 
 	public String logar() {
 
@@ -62,5 +62,15 @@ public class GerenciarUsuarioMB implements Serializable {
 			return "logar";
 		}
 	}
-	
+
+	public String cadastrar() {
+		try {
+			usuarioServico.incluir(usuario);
+			return "principal";
+		} catch (Exception e) {
+			mensagemLogin = e.getMessage();
+			return "logar";
+		}
+	}
+
 }
