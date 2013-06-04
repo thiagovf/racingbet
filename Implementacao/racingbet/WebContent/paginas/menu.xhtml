@@ -10,8 +10,7 @@
 		<h:form>
 			<div class="menu_opcoes">
 				<ul>
-					<li><h:commandLink class="menu_opcao" value="#{msg['menu.label.editarDados']}" /></li>
-					<li><h:commandLink class="menu_opcao" value="#{msg['menu.label.manterUsuario']}" action="manterUsuario"/></li>
+					<li><h:commandLink class="menu_opcao" value="#{msg['menu.label.editarDados']}" action="editarUsuario"/></li>
 					<li><h:commandLink class="menu_opcao" value="#{msg['menu.label.manterPalpite']}" action="manterPalpite"/></li>
 					<li><h:commandLink class="menu_opcao" value="#{msg['menu.label.consultarPalpite']}" action="consultarPalpite" /></li>
 					<li><h:commandLink class="menu_opcao" value="#{msg['menu.label.consultarGrandePremio']}" action="consultarGrandePremio"/></li>
@@ -23,7 +22,8 @@
 					<li><h:commandLink class="menu_opcao" value="#{msg['menu.label.manterGrandePremio']}" action="manterGrandePremio"/></li>
 					<li><h:commandLink class="menu_opcao" value="#{msg['menu.label.liberarFecharGrandePremio']}" action="liberarFecharGrandePremio"/></li>
 					<li><h:commandLink class="menu_opcao" value="#{msg['menu.label.manterResultadoGrandePremio']}" action="manterResultadoGrandePremio" /></li> 
-					<li><h:commandLink class="menu_opcao" value="#{msg['menu.label.manterPontuacao']}" action="manterPontuacao" /></li><br />
+					<li><h:commandLink class="menu_opcao" value="#{msg['menu.label.manterPontuacao']}" action="manterPontuacao" /></li>
+					<li><h:commandLink class="menu_opcao" value="#{msg['menu.label.sair']}" action="gerenciarUsuarioMB.sair" /></li><br />
 				</ul>
 			</div>
 		</h:form>
