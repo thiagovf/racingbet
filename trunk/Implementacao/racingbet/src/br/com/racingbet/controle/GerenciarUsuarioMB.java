@@ -73,4 +73,19 @@ public class GerenciarUsuarioMB implements Serializable {
 		}
 	}
 
+	public String alterar() {
+		try {
+			usuarioServico.alterar(usuario);
+			return "principal";
+		} catch (Exception e) {
+			mensagemLogin = e.getMessage();
+			return "logar";
+		}
+	}
+
+	public String sair() {
+		usuario = new Usuario();
+		return "logar";
+	}
+
 }
