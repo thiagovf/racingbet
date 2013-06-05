@@ -10,6 +10,7 @@ import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import br.com.racingbet.entidade.Categoria;
 import br.com.racingbet.entidade.Equipe;
 import br.com.racingbet.entidade.GrandePremio;
 import br.com.racingbet.servico.EquipeServico;
@@ -35,6 +36,9 @@ public class ManterEquipeMB implements Serializable {
 	
 	@Inject
 	private EquipeServico equipeServico;
+	
+	@Inject
+	private ManterCategoriaMB manterCategoriaMB;
 
 	public Conversation getConversacao() {
 		return conversacao;
@@ -106,7 +110,7 @@ public class ManterEquipeMB implements Serializable {
 		
 		limparEquipe();
 		
-		equipes = equipeServico.recuperarTodos();
+		equipes = equipeServico.recuperarEquipes(manterCategoriaMB.getCategoria());
 		/*System.out.println("passei no iniciar");*/
 		
 		return "manterEquipe";
@@ -115,12 +119,12 @@ public class ManterEquipeMB implements Serializable {
 	public String salvar() throws ParseException {
 		
 		if (equipe.getId() == null) {
-			equipeServico.incluir(equipe);
+			equipeServico.incluir(manterCategoriaMB.getCategoria(), equipe);
 		} else {
 			equipeServico.alterar(equipe);
 		}
 		
-		equipes = equipeServico.recuperarTodos();
+		equipes = equipeServico.recuperarEquipes(manterCategoriaMB.getCategoria());
 		
 		limparEquipe();
 		
@@ -131,12 +135,20 @@ public class ManterEquipeMB implements Serializable {
 		return "manterEquipe";
 	}
 
+	public ManterCategoriaMB getManterCategoriaMB() {
+		return manterCategoriaMB;
+	}
+
+	public void setManterCategoriaMB(ManterCategoriaMB manterCategoriaMB) {
+		this.manterCategoriaMB = manterCategoriaMB;
+	}
+
 	public String editar() {
 
 		ConversacaoUtil.iniciar(conversacao);
 
 		equipe = equipeServico.recuperarPorId(getIdEquipe());
-		equipes= equipeServico.recuperarTodos();
+		equipes = equipeServico.recuperarEquipes(manterCategoriaMB.getCategoria());
 
 		
 		return "manterEquipe";
@@ -148,7 +160,7 @@ public class ManterEquipeMB implements Serializable {
 		eqp.setId(idEquipe);
 		equipeServico.remover(eqp);
 
-		equipes = equipeServico.recuperarTodos();
+		equipes = equipeServico.recuperarEquipes(manterCategoriaMB.getCategoria());
 		limparEquipe();
 
 		
