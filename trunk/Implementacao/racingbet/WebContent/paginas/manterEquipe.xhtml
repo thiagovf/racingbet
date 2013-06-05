@@ -14,6 +14,18 @@
 	
 	<tr>
 					<td align="center"><h:panelGrid columns="3">
+					
+							<h:outputLabel for="categoria"
+									value="#{msg['manterpalpite.label.categoria']}" />
+								<h:selectOneListbox id="categoria"
+									value="#{manterPalpiteMB.categoria}" required="true"
+									requiredMessage="#{msg['manterPalpite.mensagem.campoObrigatorio']}"
+									size="1">
+										 <f:selectItem itemValue="" itemLabel="Selecione..." />
+ 										<f:selectItems value="#{manterCategoriaMB.categorias}" />
+								</h:selectOneListbox>
+								<h:message for="categoria" class="mensagemDeErro" />
+					
 							<h:outputLabel for="nome"
 								value="#{msg['manterEquipe.label.nome']}" />
 							<h:inputText id="nome"
@@ -55,6 +67,8 @@
 								   	<f:selectItem itemValue="India" itemLabel="India" />
 							</h:selectOneListbox>
 							<h:message for="nacionalidade" class="mensagemDeErro" />
+							
+							
                    </h:panelGrid> 
                    <br />
 					</td>
@@ -96,6 +110,7 @@
 				
 						
 					<tr>
+							<td>Categoria   </td>
 							<td>Nome     </td>
 							<td>Data de Fundacao    </td>
 							<td>Nacionalidade    </td>
@@ -106,6 +121,9 @@
 					<ui:repeat var="eequipe" value="#{manterEquipeMB.equipes}"
 						varStatus="#{manterEquipeMB.temEquipes}">
 						
+							<td>
+									<h:outputText value="#{eequipe.categoria}" />
+								</td>
 								
 							<td>
 									<h:outputText value="#{eequipe.nome}" />
