@@ -4,14 +4,24 @@ package br.com.racingbet.entidade;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
+
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+
 
 @Entity
 public class Equipe implements Serializable {
@@ -32,6 +42,30 @@ public class Equipe implements Serializable {
 	
 	@Column(nullable=false, length=50)
 	private String nacionalidade;
+
+	
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "equipe", orphanRemoval = true)
+    private List<Piloto> pilotos;
+	
+	@ManyToOne(optional=false)
+	@JoinColumn(name="id_categoria", nullable=false)
+	private Categoria categoria;
+	
+	public List<Piloto> getPilotos() {
+		return pilotos;
+	}
+
+	public Categoria getCategoria() {
+		return categoria;
+	}
+
+	public void setCategoria(Categoria categoria) {
+		this.categoria = categoria;
+	}
+
+	public void setPilotos(List<Piloto> pilotos) {
+		this.pilotos = pilotos;
+	}
 
 	public Long getId() {
 		return id;
