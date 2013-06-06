@@ -7,19 +7,72 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	template="../templates/template.xhtml">
 
+	<h:outputScript name="jsf.js" library="javax.faces"/>
 	<ui:define name="painelCentral">
+	
 		<h:form>
 			<table align="center">
 				<tr>
 					<td align="center">
+	<!--   <h:form>
+ 
+	  <h:panelGrid columns="2">
+ 
+		Selected country : 
+		<h:inputText id="country" value="#{country.localeCode}" size="20" />
+ 
+		Select a country {ValueChangeListener class}: 
+		<h:selectOneMenu value="#{country.localeCode}" onchange="submit()">
+			<f:valueChangeListener type="br.com.racingbet.dynamic.CountryValueListener" />
+   			<f:selectItems value="#{country.countryInMap}" />
+   		</h:selectOneMenu>
+ 
+	  </h:panelGrid>
+ 
+	 </h:form>-->
+					</td>
+				</tr>
+				<tr>
+					<td align="center">
+						  <h:form>
+ 							  <h:panelGrid columns="2">
+					 
+							Catiguria: 
+							<h:selectOneMenu value="#{manterResultadoGrandePremioMB.categoria}" onchange="submit()">
+								<f:valueChangeListener type="br.com.racingbet.util.CategoriaResultadoGPValueListener" />
+					   			<f:selectItems value="#{manterResultadoGrandePremioMB.categoriasInMap}" />
+					   		</h:selectOneMenu>
+					   		
+					   		<h:outputLabel for="nomeGrandePremio"
+								value="#{msg['manterResultadoGrandePremio.label.nomeGrandePremio']}" />
+			   				<h:selectOneMenu value="#{manterResultadoGrandePremioMB.grandePremio}" >
+					   			<f:selectItems value="#{manterResultadoGrandePremioMB.grandePremiosInMap}" />
+					   		</h:selectOneMenu>
+
+							<h:outputLabel for="repostaPerguntaPole"
+								value="#{msg['manterResultadoGrandePremio.label.repostaPerguntaPole']}" />					   		
+					   		<h:selectOneMenu value="#{manterResultadoGrandePremioMB.piloto1}" >
+					   			<f:selectItems value="#{manterResultadoGrandePremioMB.pilotosInMap}" />
+					   		</h:selectOneMenu>
+					   		
+							<h:outputLabel for="repostaPerguntaPrimeiro"
+								value="#{msg['manterResultadoGrandePremio.label.repostaPerguntaPrimeiro']}" />
+					   		<h:selectOneMenu value="#{manterResultadoGrandePremioMB.piloto2}" >
+					   			<f:selectItems value="#{manterResultadoGrandePremioMB.pilotosInMap}" />
+					   		</h:selectOneMenu>
+					 
+						  </h:panelGrid>
+					 
+						 </h:form>
 						<h:panelGrid columns="3">
 							<h:outputLabel for="nomeGrandePremio"
 								value="#{msg['manterResultadoGrandePremio.label.nomeGrandePremio']}" />
 							<h:selectOneListbox id="nomeGrandePremio"
 								value="#{manterResultadoGrandePremioMB.resultadoGrandePremio.nomeGrandePremio}" required="true"
-								requiredMessage="#{msg['manterResultadoGrandePremio.mensagem.nomeGrandePremioObrigatorio']}" size="1">
+								requiredMessage="#{msg['manterResultadoGrandePremio.mensagem.nomeGrandePremioObrigatorio']}"
+								size="1">
 									<f:selectItem itemValue="Australia" itemLabel="Australia" />
-								   	<f:selectItem itemValue="Malaysia" itemLabel="Malaysia" />
+								   	<f:selectItem ManterResultadoGrandePremioMBitemValue="Malaysia" itemLabel="Malaysia" />
 								   	<f:selectItem itemValue="China" itemLabel="China" />
 								   	<f:selectItem itemValue="Bahrain" itemLabel="Bahrain" />
 								   	<f:selectItem itemValue="Spain" itemLabel="Spain" />
