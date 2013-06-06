@@ -9,6 +9,8 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import br.com.racingbet.entidade.Categoria;
+import br.com.racingbet.entidade.GrandePremio;
 import br.com.racingbet.entidade.Palpite;
 import br.com.racingbet.servico.PalpiteServico;
 
@@ -26,7 +28,20 @@ public class ManterPalpiteMB implements Serializable {
 	@Inject
 	private Palpite palpite;
 	
-	private String categoria;
+	@Inject
+	private Categoria categoria;
+	
+	@Inject
+	private ManterCategoriaMB manterCategoriaMB;
+	
+	@Inject 
+	private GrandePremio grandePremio;
+	
+	@Inject 
+	private ManterGrandePremioMB manterGrandePremioMB;
+	
+	@Inject 
+	private GerenciarUsuarioMB gerenciarUsuarioMB;
 	
 
 	public String salvar(){
@@ -68,13 +83,46 @@ public class ManterPalpiteMB implements Serializable {
 	public void setPalpite(Palpite palpite) {
 		this.palpite = palpite;
 	}
-
-	public String getCategoria() {
+	
+	public Categoria getCategoria() {
 		return categoria;
 	}
 
-	public void setCategoria(String categoria) {
+	public void setCategoria(Categoria categoria) {
 		this.categoria = categoria;
 	}
+
+	public ManterCategoriaMB getManterCategoriaMB() {
+		return manterCategoriaMB;
+	}
+
+	public void setManterCategoriaMB(ManterCategoriaMB manterCategoriaMB) {
+		this.manterCategoriaMB = manterCategoriaMB;
+	}
+
+	public GrandePremio getGrandePremio() {
+		return grandePremio;
+	}
+
+	public void setGrandePremio(GrandePremio grandePremio) {
+		this.grandePremio = grandePremio;
+	}
+
+	public ManterGrandePremioMB getManterGrandePremioMB() {
+		return manterGrandePremioMB;
+	}
+
+	public void setManterGrandePremioMB(ManterGrandePremioMB manterGrandePremioMB) {
+		this.manterGrandePremioMB = manterGrandePremioMB;
+	}
+
+	public GerenciarUsuarioMB getGerenciarUsuarioMB() {
+		return gerenciarUsuarioMB;
+	}
+
+	public void setGerenciarUsuarioMB(GerenciarUsuarioMB gerenciarUsuarioMB) {
+		this.gerenciarUsuarioMB = gerenciarUsuarioMB;
+	}
+
 
 }
