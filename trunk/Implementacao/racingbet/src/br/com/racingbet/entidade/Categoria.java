@@ -1,12 +1,16 @@
 package br.com.racingbet.entidade;
 
 import java.io.Serializable;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Categoria implements Serializable {
@@ -26,6 +30,12 @@ public class Categoria implements Serializable {
 
 	@Column(length = 50)
 	private String tipoveiculo;
+	
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "categoria", orphanRemoval = true)
+	private List<Equipe> equipes;
+	
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "categoria", orphanRemoval = true)
+	private List<GrandePremio> grandespremios;
 	
 	public Long getId() {
 		return id;
@@ -57,6 +67,22 @@ public class Categoria implements Serializable {
 
 	public void setTipoveiculo(String tipoveiculo) {
 		this.tipoveiculo = tipoveiculo;
+	}
+
+	public List<Equipe> getEquipes() {
+		return equipes;
+	}
+
+	public void setEquipes(List<Equipe> equipes) {
+		this.equipes = equipes;
+	}
+
+	public List<GrandePremio> getGrandespremios() {
+		return grandespremios;
+	}
+
+	public void setGrandespremios(List<GrandePremio> grandespremios) {
+		this.grandespremios = grandespremios;
 	}
 
 	public Categoria() {

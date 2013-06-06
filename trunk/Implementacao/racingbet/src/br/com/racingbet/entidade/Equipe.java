@@ -44,16 +44,16 @@ public class Equipe implements Serializable {
 	private String nacionalidade;
 
 	
-	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "equipe", orphanRemoval = true)
-    private List<Piloto> pilotos;
+//	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "equipe", orphanRemoval = true)
+//    private List<Piloto> pilotos;
 	
 	@ManyToOne(optional=false)
 	@JoinColumn(name="id_categoria", nullable=false)
 	private Categoria categoria;
 	
-	public List<Piloto> getPilotos() {
-		return pilotos;
-	}
+//	public List<Piloto> getPilotos() {
+//		return pilotos;
+//	}
 
 	public Categoria getCategoria() {
 		return categoria;
@@ -63,9 +63,9 @@ public class Equipe implements Serializable {
 		this.categoria = categoria;
 	}
 
-	public void setPilotos(List<Piloto> pilotos) {
-		this.pilotos = pilotos;
-	}
+//	public void setPilotos(List<Piloto> pilotos) {
+//		this.pilotos = pilotos;
+//	}
 
 	public Long getId() {
 		return id;

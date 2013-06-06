@@ -23,9 +23,6 @@ public class GrandePremio implements Serializable {
 	@Column(name="id_grandepremio")
 	private Long id;
 
-	@Column(nullable=false)
-	private Long id_categoria;
-
 	@Column(nullable=false, length=50)
 	private String nome;
 	
@@ -46,21 +43,12 @@ public class GrandePremio implements Serializable {
 	@JoinColumn(name="id_categoria", nullable=false, insertable=true, updatable=true)
 	private Categoria categoria;
 	
-	
 	public Long getId() {
 		return id;
 	}
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	public Long getIdCategoria() {
-		return id_categoria;
-	}
-
-	public void setIdCategoria(Long id) {
-		this.id_categoria = id;
 	}
 
 	public String getNome() {
