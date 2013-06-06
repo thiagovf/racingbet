@@ -131,7 +131,7 @@ public class PontuacaoServico implements Serializable {
 		
 		//Gerar Grande Premio
 		GrandePremio grandePremio1 = new GrandePremio();
-		grandePremio1.setIdCategoria((long) 1);
+		//grandePremio1.setIdCategoria((long) 1);
 		grandePremio1.setNome("Grande Premio do Brasil");
 		grandePremio1.setAutodromo("Interlagos");
 		grandePremio1.setCidade("Sao Paulo");
