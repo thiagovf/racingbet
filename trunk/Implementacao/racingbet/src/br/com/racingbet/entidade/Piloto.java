@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Piloto implements Serializable {
@@ -27,16 +29,9 @@ public class Piloto implements Serializable {
 	@Column(nullable=true, length=2)
 	private String numeroDoCarro;
 	
-	public Long getIdEquipe() {
-		return idEquipe;
-	}
-
-	public void setIdEquipe(Long idEquipe) {
-		this.idEquipe = idEquipe;
-	}
-
-	@Column
-	private Long idEquipe;
+	@ManyToOne(optional=false)
+	@JoinColumn(name="id_equipe", nullable=false, insertable=true, updatable=true)
+	private Equipe equipe;
 	
 	public Long getId() {
 		return id;
