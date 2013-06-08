@@ -8,38 +8,38 @@
 	template="../templates/template.xhtml">
 
 	<ui:define name="painelCentral">
-	<h:form>
-	
-	<table align="center">
-	
-	<tr>
+		<h:form>
+
+			<table align="center">
+
+				<tr>
 					<td align="center"><h:panelGrid columns="3">
-					
+
 							<h:outputLabel for="categoria"
-									value="#{msg['manterpalpite.label.categoria']}" />
-								<h:selectOneListbox id="categoria"
-									value="#{manterPalpiteMB.categoria}" required="true"
-									requiredMessage="#{msg['manterPalpite.mensagem.campoObrigatorio']}"
-									size="1">
-										 <f:selectItem itemValue="" itemLabel="Selecione..." />
- 										<f:selectItems value="#{manterCategoriaMB.categorias}" />
-								</h:selectOneListbox>
-								<h:message for="categoria" class="mensagemDeErro" />
-					
+								value="#{msg['manterpalpite.label.categoria']}" />
+							<h:selectOneListbox id="categoria"
+								value="#{manterEquipeMB.codigoCategoriaSelecionada}" required="true"
+								requiredMessage="#{msg['manterEquipe.mensagem.categoriaObrigatoria']}"
+								size="1">
+								<f:selectItem itemValue="" itemLabel="Selecione..." />
+								<f:selectItems value="#{manterEquipeMB.listaCategorias}" />
+								<f:ajax event="change" listener="#{manterEquipeMB.recuperarCategoria}"  />
+							</h:selectOneListbox>
+							<h:message for="categoria" class="mensagemDeErro" />
+
 							<h:outputLabel for="nome"
 								value="#{msg['manterEquipe.label.nome']}" />
-							<h:inputText id="nome"
-								value="#{manterEquipeMB.equipe.nome}" required="true"
+							<h:inputText id="nome" value="#{manterEquipeMB.equipe.nome}"
+								required="true"
 								requiredMessage="#{msg['manterEquipe.mensagem.nomeObrigatorio']}"
 								size="50" maxlength="50">
 								<f:validateLength minimum="3" maximum="50" />
 							</h:inputText>
 							<h:message for="nome" class="mensagemDeErro" />
-							
+
 							<h:outputLabel for="data_fundacao"
 								value="#{msg['manterEquipe.label.data_fundacao']}" />
-							<rich:calendar
-								value="#{manterEquipeMB.equipe.data_fundacao}"
+							<rich:calendar value="#{manterEquipeMB.equipe.data_fundacao}"
 								id="data_fundacao" popup="true" datePattern="dd/MM/yyyy"
 								locale="pt_BR" showApplyButton="true" cellWidth="24px"
 								cellHeight="22px" style="width:200px" disabled="false"
@@ -47,128 +47,120 @@
 								requiredMessage="#{msg['manterEquipe.mensagem.dataObrigatoria']}">
 							</rich:calendar>
 							<h:message for="data_fundacao" class="mensagemDeErro" />
-							
+
 							<h:outputLabel for="nacionalidade"
 								value="#{msg['manterEquipe.label.nacionalidade']}" />
 							<h:selectOneListbox id="nacionalidade"
 								value="#{manterEquipeMB.equipe.nacionalidade}" required="true"
 								requiredMessage="#{msg['manterEquipe.mensagem.nacionalidadeObrigatorio']}"
 								size="1">
-									<f:selectItem itemValue="Brasil" itemLabel="Brasil" />
-								   	<f:selectItem itemValue="Italia" itemLabel="Italia" />
-								   	<f:selectItem itemValue="ReinoUnido" itemLabel="Reino Unido" />
-								   	<f:selectItem itemValue="Austria" itemLabel="Austria" />
-								   	<f:selectItem itemValue="Franca" itemLabel="Franca" />
-								   	<f:selectItem itemValue="Alemanha" itemLabel="Alemanha" />
-								   	<f:selectItem itemValue="Japao" itemLabel="Japao" />
-								   	<f:selectItem itemValue="Canada" itemLabel="Canada" />
-								   	<f:selectItem itemValue="Suica" itemLabel="Suica" />
-								   	<f:selectItem itemValue="EstadosUnidos" itemLabel="Estados Unidos" />
-								   	<f:selectItem itemValue="India" itemLabel="India" />
+								<f:selectItem itemValue="Brasil" itemLabel="Brasil" />
+								<f:selectItem itemValue="Italia" itemLabel="Italia" />
+								<f:selectItem itemValue="ReinoUnido" itemLabel="Reino Unido" />
+								<f:selectItem itemValue="Austria" itemLabel="Austria" />
+								<f:selectItem itemValue="Franca" itemLabel="Franca" />
+								<f:selectItem itemValue="Alemanha" itemLabel="Alemanha" />
+								<f:selectItem itemValue="Japao" itemLabel="Japao" />
+								<f:selectItem itemValue="Canada" itemLabel="Canada" />
+								<f:selectItem itemValue="Suica" itemLabel="Suica" />
+								<f:selectItem itemValue="EstadosUnidos"
+									itemLabel="Estados Unidos" />
+								<f:selectItem itemValue="India" itemLabel="India" />
 							</h:selectOneListbox>
 							<h:message for="nacionalidade" class="mensagemDeErro" />
-							
-							
-                   </h:panelGrid> 
-                   <br />
-					</td>
+
+
+						</h:panelGrid> <br /></td>
 				</tr>
-				
+
 				<tr>
 					<td>
 						<table align="center">
 							<tr>
+							<td><h:commandButton value="Pesquisar"
+										action="#{manterEquipeMB.pesquisar}"
+										image="../imagens/pesquisar.gif" immediate="true"/></td>
 								<td><h:commandButton value="Salvar"
 										action="#{manterEquipeMB.salvar}"
 										image="../imagens/salvar.gif" /></td>
-								<td><h:commandButton value="Cancelar" action="manterEquipe"
+								<td><h:commandButton value="Cancelar" action="principal"
 										immediate="true" image="../imagens/cancelar.gif" /></td>
 							</tr>
 						</table>
 					</td>
 				</tr>
-	
-	</table>
-			
-</h:form>
-		
+
+			</table>
+
+		</h:form>
+
 		<p></p>
 
 		<div style="text-align: center">
 			<h1>#{msg['manterEquipe.label.listaDeEquipes']}</h1>
-		
+
 		</div>
-		
+
 		<h:form>
-			<div style="width:565px; height:200px; border: 1px solid #111; overflow: scroll;">
-				<table style="font-size: 12px; color: blue" cellpadding="2px" cellspacing="5px">
-				<tbody>
-				
-				<h:outputText
-				value="#{msg['manterEquipe.mensagem.naoHaEquipes']}"
-				rendered="#{!manterEquipeMB.temEquipes}" />	
-				
-						
-					<tr>
-							<td>Categoria   </td>
-							<td>Nome     </td>
-							<td>Data de Fundacao    </td>
-							<td>Nacionalidade    </td>
-							
+			<div
+				style="width: 565px; height: 200px; border: 1px solid #111; overflow: scroll;">
+				<table style="font-size: 12px; color: blue" cellpadding="2px"
+					cellspacing="5px">
+					<tbody>
+
+						<h:outputText value="#{msg['manterEquipe.mensagem.naoHaEquipes']}"
+							rendered="#{!manterEquipeMB.temEquipes}" />
+
+
+						<tr>
+							<td>Categoria</td>
+							<td>Nome</td>
+							<td>Data de Fundacao</td>
+							<td>Nacionalidade</td>
+
 						</tr>
-					
-								
-					<ui:repeat var="eequipe" value="#{manterEquipeMB.equipes}"
-						varStatus="#{manterEquipeMB.temEquipes}">
-						
-							<td>
-									<h:outputText value="#{eequipe.categoria}" />
-								</td>
-								
-							<td>
-									<h:outputText value="#{eequipe.nome}" />
-								</td>
-								
-								<td>
-									<h:outputText value="#{eequipe.data_fundacao}">
-										<f:convertDateTime pattern="dd/MM/yyyy" type="both" />
-									</h:outputText>
-								</td>
-											
-							
-								<td>
-									<h:outputText value="#{eequipe.nacionalidade}" />
-								</td>
-															
-						
-							<td align="center">
-								<h:commandButton value="Editar"
+
+
+						<ui:repeat var="eequipe" value="#{manterEquipeMB.equipes}"
+							varStatus="#{manterEquipeMB.temEquipes}">
+
+							<td><h:outputText value="#{eequipe.categoria.nome}" /></td>
+
+							<td><h:outputText value="#{eequipe.nome}" /></td>
+
+							<td><h:outputText value="#{eequipe.data_fundacao}">
+									<f:convertDateTime pattern="dd/MM/yyyy" type="both" />
+								</h:outputText></td>
+
+
+							<td><h:outputText value="#{eequipe.nacionalidade}" /></td>
+
+
+							<td align="center"><h:commandButton value="Editar"
 									action="#{manterEquipeMB.editar}" image="../imagens/editar.gif">
 									<f:setPropertyActionListener
 										target="#{manterEquipeMB.idEquipe}" value="#{eequipe.id}" />
-								</h:commandButton> 
-								
-								<h:commandButton value="Excluir"
-									action="#{manterEquipeMB.excluir}" image="../imagens/excluir.gif">
+								</h:commandButton> <h:commandButton value="Excluir"
+									action="#{manterEquipeMB.excluir}"
+									image="../imagens/excluir.gif">
 									<f:setPropertyActionListener
 										target="#{manterEquipeMB.idEquipe}" value="#{eequipe.id}" />
 								</h:commandButton></td>
-						
-			
-						<tr>
-							<td><h:outputText value=" " />
-							</td>
-						</tr>
-					</ui:repeat>
-				</tbody>
-			</table>
+
+
+							<tr>
+								<td><h:outputText value=" " /></td>
+							</tr>
+						</ui:repeat>
+					</tbody>
+				</table>
 			</div>
 		</h:form>
-		
-	
-	
-	
-	
-</ui:define>
 
-</ui:composition>	
+
+
+
+
+	</ui:define>
+
+</ui:composition>
