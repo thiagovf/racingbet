@@ -2,17 +2,19 @@ package br.com.racingbet.controle;
 
 import java.io.Serializable;
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.Conversation;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.model.SelectItem;
 import javax.inject.Inject;
 import javax.inject.Named;
 
 import br.com.racingbet.entidade.Categoria;
 import br.com.racingbet.entidade.Equipe;
-import br.com.racingbet.entidade.GrandePremio;
+import br.com.racingbet.servico.CategoriaServico;
 import br.com.racingbet.servico.EquipeServico;
 import br.com.racingbet.util.ConversacaoUtil;
 
@@ -36,6 +38,14 @@ public class ManterEquipeMB implements Serializable {
 	
 	@Inject
 	private EquipeServico equipeServico;
+	
+	/* -------- Atributos necessarios para o ListBox de Categoria -------*/
+	private List<SelectItem> listaCategorias;
+	private String codigoCategoriaSelecionada;
+	@Inject
+	private CategoriaServico categoriaServico;
+	private Categoria categoriaSelecionada;
+	/* -------- Fim dos Atributos necessarios para o ListBox de Categoria -------*/
 	
 	@Inject
 	private ManterCategoriaMB manterCategoriaMB;
@@ -108,23 +118,21 @@ public class ManterEquipeMB implements Serializable {
 	
 	public String iniciar() {
 		
-		limparEquipe();
-		
-		equipes = equipeServico.recuperarEquipes(manterCategoriaMB.getCategoria());
-		/*System.out.println("passei no iniciar");*/
-		
+		limparEquipe();		
 		return "manterEquipe";
 	}
 
 	public String salvar() throws ParseException {
 		
+		//categoriaSelecionada = categoriaServico.recuperarPorId(Long.valueOf(codigoCategoriaSelecionada));
+		
 		if (equipe.getId() == null) {
-			equipeServico.incluir(manterCategoriaMB.getCategoria(), equipe);
+			equipeServico.incluir(categoriaSelecionada, equipe);
 		} else {
 			equipeServico.alterar(equipe);
 		}
 		
-		equipes = equipeServico.recuperarEquipes(manterCategoriaMB.getCategoria());
+		equipes = equipeServico.recuperarEquipes(categoriaSelecionada);
 		
 		limparEquipe();
 		
@@ -147,8 +155,9 @@ public class ManterEquipeMB implements Serializable {
 
 		ConversacaoUtil.iniciar(conversacao);
 
-		equipe = equipeServico.recuperarPorId(getIdEquipe());
-		equipes = equipeServico.recuperarEquipes(manterCategoriaMB.getCategoria());
+		equipe = equipeServico.recuperarPorId(getIdEquipe());		
+		equipes = equipeServico.recuperarEquipes(categoriaSelecionada);
+		//limparEquipe();
 
 		
 		return "manterEquipe";
@@ -160,12 +169,80 @@ public class ManterEquipeMB implements Serializable {
 		eqp.setId(idEquipe);
 		equipeServico.remover(eqp);
 
-		equipes = equipeServico.recuperarEquipes(manterCategoriaMB.getCategoria());
+		//categoriaSelecionada = categoriaServico.recuperarPorId(Long.valueOf(codigoCategoriaSelecionada));
+		equipes = equipeServico.recuperarEquipes(categoriaSelecionada);
 		limparEquipe();
 
 		
 
 		return "manterEquipe";
 	}
+	
+	public String pesquisar() {
+
+		//categoriaSelecionada = categoriaServico.recuperarPorId(Long.valueOf(codigoCategoriaSelecionada));
+		equipes = equipeServico.recuperarEquipes(categoriaSelecionada);
+		limparEquipe();
+
+		return "manterEquipe";
+	}
+	
+	/* -------- Metodos necessarios para o ListBox de Categoria -------*/
+
+	public List<SelectItem> getListaCategorias() {
+		
+		List<Categoria> categorias = categoriaServico.recuperarTodos();
+		Categoria categ;
+		
+		listaCategorias = new ArrayList<SelectItem>();
+		for (int i=0; i< categorias.size(); i++) {
+			categ = (Categoria) categorias.get(i);
+			listaCategorias.add(new SelectItem(categ.getId(), categ.getNome()));
+		}
+		
+		if ((codigoCategoriaSelecionada == null) || (codigoCategoriaSelecionada.equals(""))) {
+			if ((categorias != null) && (categorias.size() > 0)) {
+				categoriaSelecionada = categorias.get(0);
+				codigoCategoriaSelecionada = categoriaSelecionada.getId().toString();
+			}
+		}
+		
+		return listaCategorias;
+	}
+	
+	public void recuperarCategoria() {
+		categoriaSelecionada = categoriaServico.recuperarPorId(Long.valueOf(codigoCategoriaSelecionada));
+		System.out.println("Categoria="+categoriaSelecionada.getNome());
+	}
+
+	public void setListaCategorias(List<SelectItem> listaCategorias) {
+		this.listaCategorias = listaCategorias;
+	}
+
+	public String getCodigoCategoriaSelecionada() {
+		return codigoCategoriaSelecionada;
+	}
+
+	public void setCodigoCategoriaSelecionada(String codigoCategoriaSelecionada) {
+		this.codigoCategoriaSelecionada = codigoCategoriaSelecionada;
+	}
+
+	public CategoriaServico getCategoriaServico() {
+		return categoriaServico;
+	}
+
+	public void setCategoriaServico(CategoriaServico categoriaServico) {
+		this.categoriaServico = categoriaServico;
+	}
+
+	public Categoria getCategoriaSelecionada() {
+		return categoriaSelecionada;
+	}
+
+	public void setCategoriaSelecionada(Categoria categoriaSelecionada) {
+		this.categoriaSelecionada = categoriaSelecionada;
+	}
+	
+	/* -------- Fim dos Metodos necessarios para o ListBox de Categoria -------*/
 
 }
