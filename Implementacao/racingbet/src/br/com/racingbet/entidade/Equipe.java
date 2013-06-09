@@ -6,8 +6,6 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -43,17 +41,16 @@ public class Equipe implements Serializable {
 	@Column(nullable=false, length=50)
 	private String nacionalidade;
 
-	
-//	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "equipe", orphanRemoval = true)
-//    private List<Piloto> pilotos;
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "equipe", orphanRemoval = true)
+    private List<Piloto> pilotos;
 	
 	@ManyToOne(optional=false)
-	@JoinColumn(name="id_categoria", nullable=false)
+	@JoinColumn(name="id_categoria", nullable=false, insertable=true, updatable=true)
 	private Categoria categoria;
 	
-//	public List<Piloto> getPilotos() {
-//		return pilotos;
-//	}
+	public List<Piloto> getPilotos() {
+		return pilotos;
+	}
 
 	public Categoria getCategoria() {
 		return categoria;
@@ -63,9 +60,9 @@ public class Equipe implements Serializable {
 		this.categoria = categoria;
 	}
 
-//	public void setPilotos(List<Piloto> pilotos) {
-//		this.pilotos = pilotos;
-//	}
+	public void setPilotos(List<Piloto> pilotos) {
+		this.pilotos = pilotos;
+	}
 
 	public Long getId() {
 		return id;

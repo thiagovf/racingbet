@@ -9,48 +9,38 @@
 
 	<ui:define name="painelCentral">
 		<h:form>
+
 			<table align="center">
+
 				<tr>
 					<td align="center"><h:panelGrid columns="3">
+
+							<h:outputLabel for="equipe"
+								value="#{msg['manterEquipe.label.equipe']}" />
+							<h:selectOneListbox id="equipe"
+								value="#{manterPilotoMB.codigoEquipeSelecionada}" required="true"
+								requiredMessage="#{msg['manterPiloto.mensagem.equipeObrigatorio']}"
+								size="1">
+								<f:selectItem itemValue="" itemLabel="Selecione..." />
+								<f:selectItems value="#{manterPilotoMB.listaEquipes}" />
+								<f:ajax event="change" listener="#{manterPilotoMB.recuperarEquipe}"  />
+							</h:selectOneListbox>
+							<h:message for="equipe" class="mensagemDeErro" />
+
 							<h:outputLabel for="nome"
 								value="#{msg['manterPiloto.label.nome']}" />
-							<h:inputText id="nome"
-								value="#{manterPilotoMB.piloto.nome}" required="true"
+							<h:inputText id="nome" value="#{manterPilotoMB.piloto.nome}"
+								required="true"
 								requiredMessage="#{msg['manterPiloto.mensagem.nomeObrigatorio']}"
-								size="100" maxlength="100">
-								<f:validateLength minimum="3" maximum="100" />
+								size="50" maxlength="50">
+								<f:validateLength minimum="3" maximum="50" />
 							</h:inputText>
-							
-<!-- 							<h:inputText id="nacionalidade" -->
-<!-- 								value="#{manterPilotoMB.piloto.nacionalidade}" required="true" -->
-<!-- 								requiredMessage="#{msg['manterPiloto.mensagem.nomeObrigatorio']}" -->
-<!-- 								size="100" maxlength="100"> -->
-<!-- 								<f:validateLength minimum="3" maximum="100" /> -->
-<!-- 							</h:inputText> -->
-							
-<!-- 							<h:inputText id="numeroDoCarro" -->
-<!-- 								value="#{manterPilotoMB.piloto.numeroDoCarro}" required="true" -->
-<!-- 								requiredMessage="#{msg['manterPiloto.mensagem.nomeObrigatorio']}" -->
-<!-- 								size="100" maxlength="100"> -->
-<!-- 								<f:validateLength minimum="3" maximum="100" /> -->
-<!-- 							</h:inputText> -->
-							
 							<h:message for="nome" class="mensagemDeErro" />
 
-<!-- 							<h:outputLabel for="data" -->
-<!-- 								value="#{msg['manterGrandePremio.label.data']}" /> -->
-<!-- 							<rich:calendar -->
-<!-- 								value="#{manterGrandePremioMB.grandePremio.data}" -->
-<!-- 								id="data" popup="true" datePattern="dd/MM/yyyy" -->
-<!-- 								locale="pt_BR" showApplyButton="true" cellWidth="24px" -->
-<!-- 								cellHeight="22px" style="width:200px" disabled="false" -->
-<!-- 								required="true" -->
-<!-- 								requiredMessage="#{msg['manterGrandePremio.mensagem.dataObrigatoria']}"> -->
-<!-- 							</rich:calendar> -->
-<!-- 							<h:message for="data" class="mensagemDeErro" /> -->
-                   </h:panelGrid> <br />
-					</td>
+
+						</h:panelGrid> <br /></td>
 				</tr>
+
 				<tr>
 					<td>
 						<table align="center">
@@ -64,7 +54,9 @@
 						</table>
 					</td>
 				</tr>
+
 			</table>
+
 		</h:form>
 
 		<p></p>
@@ -72,57 +64,57 @@
 		<div style="text-align: center">
 			<h1>#{msg['manterPiloto.label.listaDePilotos']}</h1>
 
-			<h:outputText
-				value="#{msg['manterPiloto.mensagem.naoHaPilotos']}"
-				rendered="#{!manterPilotoMB.temPiloto}" />
 		</div>
 
 		<h:form>
-			<table align="center">
-				<tbody>
-					<ui:repeat var="pilot" value="#{manterPilotoMB.pilotos}"
-						varStatus="#{manterPilotoMB.temPiloto}">
+			<div
+				style="width: 565px; height: 200px; border: 1px solid #111; overflow: scroll;">
+				<table style="font-size: 12px; color: blue" cellpadding="2px"
+					cellspacing="5px">
+					<tbody>
+
+						<h:outputText value="#{msg['manterPiloto.mensagem.naoHaPilotos']}"
+							rendered="#{!manterPilotoMB.temPiloto}" />
+
+
 						<tr>
-							<td><h:outputLabel
-									value="#{msg['manterPiloto.label.nome']}" /> <h:outputText
-									value="#{pilot.nome}" />
-							</td>
+							<td>Categoria</td>
+							<td>Nome</td>
+
 						</tr>
-<!-- 						<tr> -->
-<!-- 							<td><h:outputLabel -->
-<!-- 									value="#{msg['manterPiloto.label.nacionalidade']}" /> <h:outputText -->
-<!-- 									value="#{pilot.nacionalidade}" /> -->
-<!-- 							</td> -->
-<!-- 						</tr> -->
-<!-- 						<tr> -->
-<!-- 							<td><h:outputLabel -->
-<!-- 									value="#{msg['manterPiloto.label.numeroDoCarro']}" /> <h:outputText -->
-<!-- 									value="#{pilot.numeroDoCarro}" /> -->
-<!-- 							</td> -->
-<!-- 						</tr> -->
-			
-						
-						<tr>
+
+
+						<ui:repeat var="ppiloto" value="#{manterPilotoMB.pilotos}"
+							varStatus="#{manterPilotoMB.temPiloto}">
+
+							<td><h:outputText value="#{ppiloto.equipe.nome}" /></td>
+
+							<td><h:outputText value="#{ppiloto.nome}" /></td>
+
 							<td align="center"><h:commandButton value="Editar"
 									action="#{manterPilotoMB.editar}" image="../imagens/editar.gif">
 									<f:setPropertyActionListener
-										target="#{manterPilotoMB.idPiloto}" value="#{pilot.id}" />
+										target="#{manterPilotoMB.idPiloto}" value="#{ppiloto.id}" />
 								</h:commandButton> <h:commandButton value="Excluir"
 									action="#{manterPilotoMB.excluir}"
 									image="../imagens/excluir.gif">
 									<f:setPropertyActionListener
-										target="#{manterPilotoMB.idPiloto}" value="#{pilot.id}" />
+										target="#{manterPilotoMB.idPiloto}" value="#{ppiloto.id}" />
 								</h:commandButton></td>
-						</tr>
-			
-						<tr>
-							<td><h:outputText value=" " />
-							</td>
-						</tr>
-					</ui:repeat>
-				</tbody>
-			</table>
+
+
+							<tr>
+								<td><h:outputText value=" " /></td>
+							</tr>
+						</ui:repeat>
+					</tbody>
+				</table>
+			</div>
 		</h:form>
+
+
+
+
 
 	</ui:define>
 
