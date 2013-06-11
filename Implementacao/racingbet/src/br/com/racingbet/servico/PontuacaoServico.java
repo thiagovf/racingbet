@@ -144,7 +144,7 @@ public class PontuacaoServico implements Serializable {
 		equipe1.setNome("Equipe1");
 		equipe1.setNacionalidade("Pais1");
 		equipe1.setData_fundacao(dtHoje);
-		equipeDAO.incluir(equipe1);
+	/*	equipeDAO.incluir(equipe1);
 		
 		Equipe equipe2 = new Equipe();
 		equipe2.setNome("Equipe2");
@@ -156,21 +156,21 @@ public class PontuacaoServico implements Serializable {
 		Piloto piloto1 = new Piloto();
 		piloto1.setNome("Piloto1");
 		piloto1.setNacionalidade("Pais1");
-		piloto1.setIdEquipe((long) 1);
+		//piloto1.setIdEquipe((long) 1);
 		piloto1.setNumeroDoCarro("1");
 		pilotoDAO.incluir(piloto1);
 		
 		Piloto piloto2 = new Piloto();
 		piloto2.setNome("Piloto2");
 		piloto2.setNacionalidade("Pais2");
-		piloto2.setIdEquipe((long) 1);
+		//piloto2.setIdEquipe((long) 1);
 		piloto2.setNumeroDoCarro("2");
 		pilotoDAO.incluir(piloto2);
 		
 		Piloto piloto3 = new Piloto();
 		piloto3.setNome("Piloto1");
 		piloto3.setNacionalidade("Pais1");
-		piloto3.setIdEquipe((long) 2);
+		//piloto3.setIdEquipe((long) 2);
 		piloto3.setNumeroDoCarro("1");
 		pilotoDAO.incluir(piloto3);
 
@@ -244,14 +244,16 @@ public class PontuacaoServico implements Serializable {
 		
 		//Gerar Resultado do Grande Premio
 		ResultadoGrandePremio resultadoGrandePremio1 = new ResultadoGrandePremio(); 
-		resultadoGrandePremio1.setIdGrandePremio((long) 1);
+		//resultadoGrandePremio1.setIdGrandePremio((long) 1);
 		resultadoGrandePremio1.setIdPilotoPergunta1((long) 1);
 		resultadoGrandePremio1.setIdPilotoPergunta2((long) 2);
-		resultadoGrandePremio1.setIdCategoria((long) 1);
-		resultadoGrandePremio1.setNomeGrandePremio("GP do BRASIL");
-		resultadoGrandePremio1.setRepostaPerguntaPole("Piloto 1");
-		resultadoGrandePremio1.setRepostaPerguntaPrimeiro("Piloto 2");
-		resultadoGrandePremioDAO.incluir(resultadoGrandePremio1);
+		//resultadoGrandePremio1.setIdCategoria((long) 1);
+//		resultadoGrandePremio1.setNomeGrandePremio("GP do BRASIL");
+//		resultadoGrandePremio1.setRepostaPerguntaPole("Piloto 1");
+//		resultadoGrandePremio1.setRepostaPerguntaPrimeiro("Piloto 2");
+ * 
+ 
+		resultadoGrandePremioDAO.incluir(resultadoGrandePremio1);*/
 	}
 	
 	public void calcularPontuacao(ResultadoGrandePremio resultadoGrandePremio, Palpite palpite)
@@ -261,16 +263,16 @@ public class PontuacaoServico implements Serializable {
 		long pontos = 0;
 		
 		
-		idPilotoGabaritoPergunta1 = resultadoGrandePremio.getIdPilotoPergunta1();
-		idPilotoGabaritoPergunta2 = resultadoGrandePremio.getIdPilotoPergunta2();
+		//idPilotoGabaritoPergunta1 = resultadoGrandePremio.getIdPilotoPergunta1();
+		//idPilotoGabaritoPergunta2 = resultadoGrandePremio.getIdPilotoPergunta2();
 		
-		idPilotoPalpitePergunta1 = palpite.getIdPilotoResp1();
-		idPilotoPalpitePergunta2 = palpite.getIdPilotoResp2();
-		
-		idUsuario = palpite.getIdUsuario();
+	//	idPilotoPalpitePergunta1 = palpite.getIdPilotoResp1();
+	//	idPilotoPalpitePergunta2 = palpite.getIdPilotoResp2();
+	//	
+	//	idUsuario = palpite.getIdUsuario();
 		
 		//Pergunta: Quem Vence ? (10 Pontos)
-		if (idPilotoGabaritoPergunta1 == idPilotoPalpitePergunta1)
+/*		if (idPilotoGabaritoPergunta1 == idPilotoPalpitePergunta1)
 		{
 			pontos = pontos + 10;
 		}
@@ -282,10 +284,10 @@ public class PontuacaoServico implements Serializable {
 		}
 		
 		Pontuacao pontuacao = new Pontuacao();		
-		pontuacao.setIdCategoria(resultadoGrandePremio.getIdCategoria());
+		//pontuacao.setIdCategoria(resultadoGrandePremio.getIdCategoria());
 		pontuacao.setIdUsuario(idUsuario);
 		pontuacao.setPontos(pontos);		
-		pontuacaoDAO.incluir(pontuacao);
+		pontuacaoDAO.incluir(pontuacao);*/
 	}
 	
 	public void gerarPontuacao()

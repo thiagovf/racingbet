@@ -70,5 +70,9 @@ public class EquipeServico implements Serializable {
 			return equipes;
 		}
 	}
+	public List<Equipe> recuperarTodos(String clausula_where) {
+		return equipeDAO.recuperarTodos(clausula_where);
+	}
+	
 
 }

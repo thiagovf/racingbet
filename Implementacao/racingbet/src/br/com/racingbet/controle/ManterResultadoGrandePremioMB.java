@@ -2,27 +2,37 @@ package br.com.racingbet.controle;
 
 import java.io.Serializable;
 import java.text.ParseException;
-import java.util.LinkedHashMap;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.Conversation;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
 import br.com.racingbet.entidade.Categoria;
+import br.com.racingbet.entidade.Equipe;
+import br.com.racingbet.entidade.GrandePremio;
+import br.com.racingbet.entidade.Piloto;
 import br.com.racingbet.entidade.ResultadoGrandePremio;
 import br.com.racingbet.servico.CategoriaServico;
+import br.com.racingbet.servico.EquipeServico;
+import br.com.racingbet.servico.GrandePremioServico;
+import br.com.racingbet.servico.PilotoServico;
 import br.com.racingbet.servico.ResultadoGrandePremioServico;
 import br.com.racingbet.util.ConversacaoUtil;
 
-@SuppressWarnings("serial")
 @Named("manterResultadoGrandePremioMB")
 @SessionScoped
 public class ManterResultadoGrandePremioMB implements Serializable {
 
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	@Inject
 	private Conversation conversacao;
@@ -31,93 +41,134 @@ public class ManterResultadoGrandePremioMB implements Serializable {
 	private ResultadoGrandePremio resultadoGrandePremio;
 	
 	@Inject
-	private CategoriaServico catServico;
-	
-	private static Map<String, String> categorias;
-	
-	public static Map<String, String> grandePremios;
-	
-	public static Map<String, String> pilotos;
-	
-	private String categoria = "";
-	
-	private String grandePremio = "";
-	
-	private String piloto1 = "";
-	
-	private String piloto2 = "";
-	
-	public String getCategoria() {
-		return categoria;
-	}
+	private ResultadoGrandePremioServico resultadoGrandePremioServico;
 
-	public void setCategoria(String categoria) {
-		this.categoria = categoria;
-	}
+	@Inject
+	private CategoriaServico categoriaServico;
 	
-	public String getGrandePremio() {
-		return grandePremio;
-	}
+	@Inject
+	private GrandePremioServico grandePremioServico;
 	
-	public String getPiloto1() {
-		return piloto1;
-	}
-
-	public void setPiloto1(String piloto1) {
-		this.piloto1 = piloto1;
-	}
-
-	public String getPiloto2() {
-		return piloto2;
-	}
-
-	public void setPiloto2(String piloto2) {
-		this.piloto2 = piloto2;
-	}
-
-	public void setGrandePremio(String grandePremio) {
-		this.grandePremio = grandePremio;
-	}
-
-	public Map<String, String> getCategoriasInMap() {
-		Map<String, String> countries = new LinkedHashMap<String, String>();
-		List<Categoria> lsCategorias = catServico.recuperarTodos();
-		for (Categoria categoria : lsCategorias) {
-			countries.put(categoria.getDescricao(), categoria.getId().toString());
-		}
-		categorias = countries;
-		return categorias;
-	}
+	@Inject
+	private EquipeServico equipeServico;
 	
-	public Map<String, String> getGrandePremiosInMap() {
-		if(grandePremios == null) {
-			grandePremios = new LinkedHashMap<String, String>();
-		}
-		return grandePremios;
-	}
-	
-	public Map<String, String> getPilotosInMap() {
-		if(pilotos == null) {
-			pilotos = new LinkedHashMap<String, String>();
-		}
-		return pilotos;
-	}
-	
-	
-//	@SuppressWarnings("static-access")
-//	public void setGrandePremios(Map<String, String> grandePremios) {
-//		this.grandePremios = grandePremios;
-//	}
+	@Inject
+	private PilotoServico pilotoServico;
 
+	private Long categoriaId;
+	
+	private Long idGrandePremio;
+	
+	private Long idPilotoPole;
+	
+	private Long idPilotoPrimeiro;
+	
+	private List<Piloto> pilotos;
+	
+	private List<GrandePremio> grandesPremios;
+	
 	private List<ResultadoGrandePremio> resultadosGrandesPremios;
 	
 	private Boolean temResultadosGrandesPremios;
 	
 	private Long idResultadoGrandePremio;
 
-	@Inject
-	private ResultadoGrandePremioServico resultadoGrandePremioServico;
+	public ManterResultadoGrandePremioMB() {
+		resultadoGrandePremio = new ResultadoGrandePremio();
+	}
+
+	@PostConstruct
+	public void init() {
+		resultadoGrandePremio = new ResultadoGrandePremio();
+		resultadosGrandesPremios = resultadoGrandePremioServico.recuperarTodos();
+	}
+
+	public String selecionarCategoria() {
+		//ResultadoGrandePremio rgp = (ResultadoGrandePremio) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("country");
+		System.out.println(categoriaId);
+		preencheSelectBox();
+
+		return "manterResultadoGrandePremio";
+	}
 	
+	private void preencheSelectBox(){
+		String clausula_where = "id_categoria=" + categoriaId;
+		grandesPremios = grandePremioServico.recuperarTodos(clausula_where);
+		List<Equipe> equipes = equipeServico.recuperarTodos(clausula_where);
+		pilotos = new ArrayList<Piloto>();
+		for(Equipe equipe : equipes) {
+			pilotos.addAll(pilotoServico.recuperarPilotos(equipe));
+		}
+	}
+
+	private void limparResultadoGrandePremio() {
+		resultadoGrandePremio = new ResultadoGrandePremio();
+		categoriaId = null;
+		idGrandePremio = null;
+		idPilotoPole = null;
+		idPilotoPrimeiro = null;
+		grandesPremios = null;
+		pilotos = null;
+	}
+	
+	public String iniciar() {
+		limparResultadoGrandePremio();
+		resultadosGrandesPremios = resultadoGrandePremioServico.recuperarTodos();
+		return "manterResultadoGrandePremio";
+	}
+	
+	public String salvar() throws ParseException { 
+		resultadoGrandePremio.setGrandePremio(grandePremioServico.recuperarPorId(idGrandePremio));
+		resultadoGrandePremio.setRepostaPerguntaPole(pilotoServico.recuperarPorId(idPilotoPole));
+		resultadoGrandePremio.setRepostaPerguntaPrimeiro(pilotoServico.recuperarPorId(idPilotoPrimeiro));
+		
+		if (resultadoGrandePremio.getId() == null) {
+			resultadoGrandePremioServico.incluir(resultadoGrandePremio);
+		} else {
+			resultadoGrandePremioServico.alterar(resultadoGrandePremio);
+		}
+		
+		resultadosGrandesPremios = resultadoGrandePremioServico.recuperarTodos();
+		
+		limparResultadoGrandePremio();
+		
+		ConversacaoUtil.terminar(conversacao);
+		
+		return "manterResultadoGrandePremio";
+	}
+	
+	public String editar() {
+		ConversacaoUtil.iniciar(conversacao);
+		resultadoGrandePremio = resultadoGrandePremioServico.recuperarPorId(getIdResultadoGrandePremio());
+		categoriaId = resultadoGrandePremio.getGrandePremio().getCategoria().getId();
+		preencheSelectBox();
+		idGrandePremio = resultadoGrandePremio.getGrandePremio().getId();
+		idPilotoPole = resultadoGrandePremio.getRepostaPerguntaPole().getId();
+		idPilotoPrimeiro = resultadoGrandePremio.getRepostaPerguntaPrimeiro().getId();
+		resultadosGrandesPremios = resultadoGrandePremioServico.recuperarTodos();
+		
+		return "manterResultadoGrandePremio";
+	}
+	
+	public String excluir() {
+		
+		ResultadoGrandePremio resultadoGP = new ResultadoGrandePremio();
+		resultadoGP.setId(idResultadoGrandePremio);
+		resultadoGrandePremioServico.remover(resultadoGP);
+		
+		resultadosGrandesPremios = resultadoGrandePremioServico.recuperarTodos();
+		limparResultadoGrandePremio();
+		
+		return "manterResultadoGrandePremio";
+		
+	}	
+	
+	public String cancelar() {
+		resultadoGrandePremio.setId(null);
+		limparResultadoGrandePremio();
+		return "principal";
+	}
+
 	public Conversation getConversacao() {
 		return conversacao;
 	}
@@ -172,58 +223,58 @@ public class ManterResultadoGrandePremioMB implements Serializable {
 		this.resultadoGrandePremioServico = resultadoGrandePremioServico;
 	}
 
-	@PostConstruct
-	public void init() {
-		resultadoGrandePremio = new ResultadoGrandePremio();
-		resultadosGrandesPremios = resultadoGrandePremioServico.recuperarTodos();
+	public List<GrandePremio> getGrandesPremios() {
+		return grandesPremios;
 	}
 
-	private void limparResultadoGrandePremio() {
-		resultadoGrandePremio = new ResultadoGrandePremio();
-	}
-	
-	public String iniciar() {
-		limparResultadoGrandePremio();
-		resultadosGrandesPremios = resultadoGrandePremioServico.recuperarTodos();
-		return "manterResultadoGrandePremio";
-	}
-	
-	public String salvar() throws ParseException { 
-		if (resultadoGrandePremio.getId() == null) {
-			resultadoGrandePremioServico.incluir(resultadoGrandePremio);
-		} else {
-			resultadoGrandePremioServico.alterar(resultadoGrandePremio);
-		}
-		
-		resultadosGrandesPremios = resultadoGrandePremioServico.recuperarTodos();
-		
-		limparResultadoGrandePremio();
-		
-		ConversacaoUtil.terminar(conversacao);
-		
-		return "manterResultadoGrandePremio";
-	}
-	
-	public String editar() {
-		ConversacaoUtil.iniciar(conversacao);
-		
-		resultadoGrandePremio = resultadoGrandePremioServico.recuperarPorId(getIdResultadoGrandePremio());
-		resultadosGrandesPremios = resultadoGrandePremioServico.recuperarTodos();
-		
-		return "manterResultadoGrandePremio";
-	}
-	
-	public String excluir() {
-		
-		ResultadoGrandePremio resultadoGP = new ResultadoGrandePremio();
-		resultadoGP.setId(idResultadoGrandePremio);
-		resultadoGrandePremioServico.remover(resultadoGP);
-		
-		resultadosGrandesPremios = resultadoGrandePremioServico.recuperarTodos();
-		limparResultadoGrandePremio();
-		
-		return "manterResultadoGrandePremio";
-		
+	public void setGrandesPremios(List<GrandePremio> grandesPremios) {
+		this.grandesPremios = grandesPremios;
 	}
 
+	public List<Categoria> getCategorias() {
+		return categoriaServico.recuperarTodos();
+	}
+
+	public Long getCategoriaId() {
+		return categoriaId;
+	}
+
+	public void setCategoriaId(Long categoriaId) {
+		this.categoriaId = categoriaId;
+	}
+
+	public List<Piloto> getPilotos() {
+		return pilotos;
+	}
+
+	public void setPilotos(List<Piloto> pilotos) {
+		this.pilotos = pilotos;
+	}
+
+	public Long getIdPilotoPole() {
+		return idPilotoPole;
+	}
+
+	public void setIdPilotoPole(Long idPilotoPole) {
+		this.idPilotoPole = idPilotoPole;
+	}
+
+	public Long getIdPilotoPrimeiro() {
+		return idPilotoPrimeiro;
+	}
+
+	public void setIdPilotoPrimeiro(Long idPilotoPrimeiro) {
+		this.idPilotoPrimeiro = idPilotoPrimeiro;
+	}
+
+	public Long getIdGrandePremio() {
+		return idGrandePremio;
+	}
+
+	public void setIdGrandePremio(Long idGrandePremio) {
+		this.idGrandePremio = idGrandePremio;
+	}
+
+	
+	
 }

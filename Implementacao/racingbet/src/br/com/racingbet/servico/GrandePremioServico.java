@@ -10,6 +10,7 @@ import javax.ejb.TransactionAttributeType;
 import javax.inject.Inject;
 
 import br.com.racingbet.dao.GrandePremioDAO;
+import br.com.racingbet.entidade.Categoria;
 import br.com.racingbet.entidade.GrandePremio;
 
 @Stateless
@@ -46,6 +47,10 @@ public class GrandePremioServico implements Serializable {
 	
 	public GrandePremio recuperarPorId(Long id) {
 		return grandePremioDAO.recuperar(id);
+	}
+	
+	public List<GrandePremio> recuperarTodos(String clausula_where) {
+		return grandePremioDAO.recuperarTodos(clausula_where);
 	}
 
 }
