@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 
 @Entity
 public class ResultadoGrandePremio implements Serializable {
@@ -16,64 +18,28 @@ public class ResultadoGrandePremio implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="id_resultadograndepremio")
+	@Column(name="id_ResultadoGrandePremio")
 	private Long id;
-	
-	@Column(nullable=false, length=50)
-	private String nomeGrandePremio;
 
-	@Column(nullable=false, length=50)
-	private String repostaPerguntaPole;
+    @OneToOne(optional=false)
+    @JoinColumn(name="idPilotoPerguntaPole", nullable=false, insertable=true, updatable=true)
+	private Piloto repostaPerguntaPole;
 	
-	@Column(nullable=false, length=50)
-	private String repostaPerguntaPrimeiro;
+    @OneToOne(optional=false)
+    @JoinColumn(name="idPilotoPerguntaPrimeiro", nullable=false, insertable=true, updatable=true)
+	private Piloto repostaPerguntaPrimeiro;
 	
-	@Column
-	private Long idGrandePremio;
+	@OneToOne(optional=false)
+	@JoinColumn(name="idGrandePremio",  nullable=false, insertable=true, updatable=true)
+	private GrandePremio grandePremio;	
 	
-	@Column
-	private Long idCategoria;
-	
-	public Long getIdCategoria() {
-		return idCategoria;
+	public GrandePremio getGrandePremio() {
+		return grandePremio;
 	}
 
-
-	public void setIdCategoria(Long idCategoria) {
-		this.idCategoria = idCategoria;
+	public void setGrandePremio(GrandePremio grandePremio) {
+		this.grandePremio = grandePremio;
 	}
-
-
-	public Long getIdGrandePremio() {
-		return idGrandePremio;
-	}
-	
-	
-	public void setIdGrandePremio(Long idGrandePremio) {
-		this.idGrandePremio = idGrandePremio;
-	}
-
-	public Long getIdPilotoPergunta1() {
-		return idPilotoPergunta1;
-	}
-
-	public void setIdPilotoPergunta1(Long idPilotoPergunta1) {
-		this.idPilotoPergunta1 = idPilotoPergunta1;
-	}
-
-	public Long getIdPilotoPergunta2() {
-		return idPilotoPergunta2;
-	}
-
-	public void setIdPilotoPergunta2(Long idPilotoPergunta2) {
-		this.idPilotoPergunta2 = idPilotoPergunta2;
-	}
-
-	@Column
-	private Long idPilotoPergunta1;
-	
-	@Column
-	private Long idPilotoPergunta2;
 
 	public Long getId() {
 		return id;
@@ -83,28 +49,22 @@ public class ResultadoGrandePremio implements Serializable {
 		this.id = id;
 	}
 
-	public String getNomeGrandePremio() {
-		return nomeGrandePremio;
-	}
-
-	public void setNomeGrandePremio(String nomeGrandePremio) {
-		this.nomeGrandePremio = nomeGrandePremio;
-	}
-
-	public String getRepostaPerguntaPole() {
+	public Piloto getRepostaPerguntaPole() {
 		return repostaPerguntaPole;
 	}
 
-	public void setRepostaPerguntaPole(String repostaPerguntaPole) {
+	public void setRepostaPerguntaPole(Piloto repostaPerguntaPole) {
 		this.repostaPerguntaPole = repostaPerguntaPole;
 	}
 
-	public String getRepostaPerguntaPrimeiro() {
+	public Piloto getRepostaPerguntaPrimeiro() {
 		return repostaPerguntaPrimeiro;
 	}
 
-	public void setRepostaPerguntaPrimeiro(String repostaPerguntaPrimeiro) {
+	public void setRepostaPerguntaPrimeiro(Piloto repostaPerguntaPrimeiro) {
 		this.repostaPerguntaPrimeiro = repostaPerguntaPrimeiro;
 	}
+
+
 
 }
