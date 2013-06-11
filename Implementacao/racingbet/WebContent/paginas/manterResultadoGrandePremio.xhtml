@@ -7,117 +7,56 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	template="../templates/template.xhtml">
 
-	<h:outputScript name="jsf.js" library="javax.faces"/>
 	<ui:define name="painelCentral">
-	
 		<h:form>
 			<table align="center">
 				<tr>
 					<td align="center">
-	<!--   <h:form>
- 
-	  <h:panelGrid columns="2">
- 
-		Selected country : 
-		<h:inputText id="country" value="#{country.localeCode}" size="20" />
- 
-		Select a country {ValueChangeListener class}: 
-		<h:selectOneMenu value="#{country.localeCode}" onchange="submit()">
-			<f:valueChangeListener type="br.com.racingbet.dynamic.CountryValueListener" />
-   			<f:selectItems value="#{country.countryInMap}" />
-   		</h:selectOneMenu>
- 
-	  </h:panelGrid>
- 
-	 </h:form>-->
-					</td>
-				</tr>
-				<tr>
-					<td align="center">
-						  <h:form>
- 							  <h:panelGrid columns="2">
-					 
-							Catiguria: 
-							<h:selectOneMenu value="#{manterResultadoGrandePremioMB.categoria}" onchange="submit()">
-								<f:valueChangeListener type="br.com.racingbet.util.CategoriaResultadoGPValueListener" />
-					   			<f:selectItems value="#{manterResultadoGrandePremioMB.categoriasInMap}" />
-					   		</h:selectOneMenu>
-					   		
-					   		<h:outputLabel for="nomeGrandePremio"
-								value="#{msg['manterResultadoGrandePremio.label.nomeGrandePremio']}" />
-			   				<h:selectOneMenu value="#{manterResultadoGrandePremioMB.grandePremio}" >
-					   			<f:selectItems value="#{manterResultadoGrandePremioMB.grandePremiosInMap}" />
-					   		</h:selectOneMenu>
-
-							<h:outputLabel for="repostaPerguntaPole"
-								value="#{msg['manterResultadoGrandePremio.label.repostaPerguntaPole']}" />					   		
-					   		<h:selectOneMenu value="#{manterResultadoGrandePremioMB.piloto1}" >
-					   			<f:selectItems value="#{manterResultadoGrandePremioMB.pilotosInMap}" />
-					   		</h:selectOneMenu>
-					   		
-							<h:outputLabel for="repostaPerguntaPrimeiro"
-								value="#{msg['manterResultadoGrandePremio.label.repostaPerguntaPrimeiro']}" />
-					   		<h:selectOneMenu value="#{manterResultadoGrandePremioMB.piloto2}" >
-					   			<f:selectItems value="#{manterResultadoGrandePremioMB.pilotosInMap}" />
-					   		</h:selectOneMenu>
-					 
-						  </h:panelGrid>
-					 
-						 </h:form>
 						<h:panelGrid columns="3">
+							<h:outputLabel for="categoriaResutadoGP"
+								value="#{msg['manterResultadoGrandePremio.label.categoria']}" />
+							<h:selectOneMenu id="categoriaResutadoGP" 
+									value="#{manterResultadoGrandePremioMB.categoriaId}" required="true"
+									requiredMessage="#{msg['manterResultadoGrandePremio.mensagem.nomeCategoriaObrigatorio']}" >
+								<f:selectItem itemValue="" itemLabel="Selecione..." />
+					   			<f:selectItems value="#{manterResultadoGrandePremioMB.categorias}" var="cat"
+					   					itemLabel="#{cat.nome}" itemValue="#{cat.id}"/>
+					   			<f:ajax event="change" listener="#{manterResultadoGrandePremioMB.selecionarCategoria}"  render="nomeGrandePremio repostaPerguntaPole repostaPerguntaPrimeiro"/>
+   							</h:selectOneMenu>
+   							<h:message for="categoriaResutadoGP" class="mensagemDeErro" />
+						
 							<h:outputLabel for="nomeGrandePremio"
 								value="#{msg['manterResultadoGrandePremio.label.nomeGrandePremio']}" />
 							<h:selectOneListbox id="nomeGrandePremio"
-								value="#{manterResultadoGrandePremioMB.resultadoGrandePremio.nomeGrandePremio}" required="true"
-								requiredMessage="#{msg['manterResultadoGrandePremio.mensagem.nomeGrandePremioObrigatorio']}"
-								size="1">
-									<f:selectItem itemValue="Australia" itemLabel="Australia" />
-								   	<f:selectItem ManterResultadoGrandePremioMBitemValue="Malaysia" itemLabel="Malaysia" />
-								   	<f:selectItem itemValue="China" itemLabel="China" />
-								   	<f:selectItem itemValue="Bahrain" itemLabel="Bahrain" />
-								   	<f:selectItem itemValue="Spain" itemLabel="Spain" />
-								   	<f:selectItem itemValue="Monaco" itemLabel="Monaco" />
-								   	<f:selectItem itemValue="Canada" itemLabel="Canada" />
-								   	<f:selectItem itemValue="Great Britain" itemLabel="Great Britain" />
-								   	<f:selectItem itemValue="Germany" itemLabel="Germany" />
-								   	<f:selectItem itemValue="Hungary" itemLabel="Hungary" />
-								   	<f:selectItem itemValue="Belgium" itemLabel="Belgium" />
-								   	<f:selectItem itemValue="Italy" itemLabel="Italy" />
-								   	<f:selectItem itemValue="Singapore" itemLabel="Singapore" />
-								   	<f:selectItem itemValue="Korea" itemLabel="Korea" />
-								   	<f:selectItem itemValue="Japan" itemLabel="Japan" />
-								   	<f:selectItem itemValue="India" itemLabel="India" />
-								   	<f:selectItem itemValue="Abu Dhabi" itemLabel="Abu Dhabi" />
-								   	<f:selectItem itemValue="United States" itemLabel="United States" />
-								   	<f:selectItem itemValue="Brazil" itemLabel="Brazil" />
+								value="#{manterResultadoGrandePremioMB.idGrandePremio}" required="true"
+								requiredMessage="#{msg['manterResultadoGrandePremio.mensagem.nomeGrandePremioObrigatorio']}" size="1">
+								<f:selectItem itemValue="" itemLabel="Selecione..." />
+								<f:selectItems value="#{manterResultadoGrandePremioMB.grandesPremios}" var="gp"
+					   					itemLabel="#{gp.nome} #{gp.data}" itemValue="#{gp.id}"/>
 							</h:selectOneListbox>
 							<h:message for="nomeGrandePremio" class="mensagemDeErro" />
 							
 							<h:outputLabel for="repostaPerguntaPole"
 								value="#{msg['manterResultadoGrandePremio.label.repostaPerguntaPole']}" />
 							<h:selectOneListbox id="repostaPerguntaPole"
-								value="#{manterResultadoGrandePremioMB.resultadoGrandePremio.repostaPerguntaPole}" required="true"
+								value="#{manterResultadoGrandePremioMB.idPilotoPole}" required="true"
 								requiredMessage="#{msg['manterResultadoGrandePremio.mensagem.repostaPerguntaPoleObrigatorio']}"
 								size="1">
-									<f:selectItem itemValue="Sebastian Vettel" itemLabel="Sebastian Vettel" />
-								   	<f:selectItem itemValue="Kimi Räikkönen" itemLabel="Kimi Räikkönen" />
-								   	<f:selectItem itemValue="Lewis Hamilton" itemLabel="Lewis Hamilton" />
-								   	<f:selectItem itemValue="Fernando Alonso" itemLabel="Fernando Alonso" />
-								   	<f:selectItem itemValue="Mark Webber" itemLabel="Mark Webber" />
+									<f:selectItem itemValue="" itemLabel="Selecione..." />
+									<f:selectItems value="#{manterResultadoGrandePremioMB.pilotos}" var="piloto"
+					   					itemLabel="#{piloto.nome}" itemValue="#{piloto.id}"/>
 							</h:selectOneListbox>
 							<h:message for="repostaPerguntaPole" class="mensagemDeErro" />
 							
 							<h:outputLabel for="repostaPerguntaPrimeiro"
 								value="#{msg['manterResultadoGrandePremio.label.repostaPerguntaPrimeiro']}" />
 							<h:selectOneListbox id="repostaPerguntaPrimeiro"
-								value="#{manterResultadoGrandePremioMB.resultadoGrandePremio.repostaPerguntaPrimeiro}" required="true"
+								value="#{manterResultadoGrandePremioMB.idPilotoPrimeiro}" required="true"
 								requiredMessage="#{msg['manterResultadoGrandePremio.mensagem.repostaPerguntaPrimeiroObrigatorio']}"
 								size="1">
-									<f:selectItem itemValue="Sebastian Vettel" itemLabel="Sebastian Vettel" />
-								   	<f:selectItem itemValue="Kimi Räikkönen" itemLabel="Kimi Räikkönen" />
-								   	<f:selectItem itemValue="Lewis Hamilton" itemLabel="Lewis Hamilton" />
-								   	<f:selectItem itemValue="Fernando Alonso" itemLabel="Fernando Alonso" />
-								   	<f:selectItem itemValue="Mark Webber" itemLabel="Mark Webber" />
+									<f:selectItem itemValue="" itemLabel="Selecione..." />
+									<f:selectItems value="#{manterResultadoGrandePremioMB.pilotos}" var="piloto"
+					   					itemLabel="#{piloto.nome}" itemValue="#{piloto.id}"/>
 							</h:selectOneListbox>
 							<h:message for="repostaPerguntaPrimeiro" class="mensagemDeErro" />
 	                  	</h:panelGrid> <br />
@@ -130,8 +69,9 @@
 								<td><h:commandButton value="Salvar"
 										action="#{manterResultadoGrandePremioMB.salvar}"
 										image="../imagens/salvar.gif" /></td>
-								<td><h:commandButton value="Cancelar" action="manterResultadoGrandePremio"
-										immediate="true" image="../imagens/cancelar.gif" /></td>
+								<td><h:commandButton value="Cancelar"
+									action="#{manterResultadoGrandePremioMB.cancelar}"
+									image="../imagens/cancelar.gif" /></td>
 							</tr>
 						</table>
 					</td>
@@ -155,19 +95,19 @@
 						<tr>
 							<td><h:outputLabel
 									value="#{msg['manterResultadoGrandePremio.label.nomeGrandePremio']}" /> <h:outputText
-									value="#{resultadoGP.nomeGrandePremio}" />
+									value="#{resultadoGP.grandePremio.nome}" />
 							</td>
 						</tr>
 						<tr>
 							<td><h:outputLabel
 									value="#{msg['manterResultadoGrandePremio.label.repostaPerguntaPole']}" /> <h:outputText
-									value="#{resultadoGP.repostaPerguntaPole}" />
+									value="#{resultadoGP.repostaPerguntaPole.nome}" />
 							</td>
 						</tr>
 						<tr>
 							<td><h:outputLabel
 									value="#{msg['manterResultadoGrandePremio.label.repostaPerguntaPrimeiro']}" /> <h:outputText
-									value="#{resultadoGP.repostaPerguntaPrimeiro}" />
+									value="#{resultadoGP.repostaPerguntaPrimeiro.nome}" />
 							</td>
 						</tr>
 						
