@@ -2,15 +2,19 @@ package br.com.racingbet.controle;
 
 import java.io.Serializable;
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.Conversation;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.model.SelectItem;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import br.com.racingbet.entidade.Categoria;
 import br.com.racingbet.entidade.GrandePremio;
+import br.com.racingbet.servico.CategoriaServico;
 import br.com.racingbet.servico.GrandePremioServico;
 import br.com.racingbet.util.ConversacaoUtil;
 
@@ -23,6 +27,75 @@ public class ManterGrandePremioMB implements Serializable {
 
 	@Inject
 	private GrandePremio grandePremio;
+	
+	@Inject
+	private ManterCategoriaMB manterCategoriaMB;
+	
+	/* -------- Atributos necessarios para o ListBox de Categoria -------*/
+    private List<SelectItem> listaCategorias;
+    private String codigoCategoriaSelecionada;
+    @Inject
+    private CategoriaServico categoriaServico;
+    private Categoria categoriaSelecionada;
+ /* -------- Fim dos Atributos necessarios para o ListBox de Categoria -------*/
+
+/* -------- Metodos necessarios para o ListBox de Categoria -------*/
+
+    public List<SelectItem> getListaCategorias() {
+        
+        List<Categoria> categorias = categoriaServico.recuperarTodos();
+        Categoria categ;
+        
+        listaCategorias = new ArrayList<SelectItem>();
+        for (int i=0; i< categorias.size(); i++) {
+            categ = (Categoria) categorias.get(i);
+            listaCategorias.add(new SelectItem(categ.getId(), categ.getNome()));
+        }
+        
+        if ((codigoCategoriaSelecionada == null) || (codigoCategoriaSelecionada.equals(""))) {
+            if ((categorias != null) && (categorias.size() > 0)) {
+                categoriaSelecionada = categorias.get(0);
+                codigoCategoriaSelecionada = categoriaSelecionada.getId().toString();
+            }
+        }
+        
+        return listaCategorias;
+    }
+    
+    public void recuperarCategoria() {
+        categoriaSelecionada = categoriaServico.recuperarPorId(Long.valueOf(codigoCategoriaSelecionada));
+        System.out.println("Categoria="+categoriaSelecionada.getNome());
+    }
+
+    public void setListaCategorias(List<SelectItem> listaCategorias) {
+        this.listaCategorias = listaCategorias;
+    }
+
+    public String getCodigoCategoriaSelecionada() {
+        return codigoCategoriaSelecionada;
+    }
+
+    public void setCodigoCategoriaSelecionada(String codigoCategoriaSelecionada) {
+        this.codigoCategoriaSelecionada = codigoCategoriaSelecionada;
+    }
+
+    public CategoriaServico getCategoriaServico() {
+        return categoriaServico;
+    }
+
+    public void setCategoriaServico(CategoriaServico categoriaServico) {
+        this.categoriaServico = categoriaServico;
+    }
+
+    public Categoria getCategoriaSelecionada() {
+        return categoriaSelecionada;
+    }
+
+    public void setCategoriaSelecionada(Categoria categoriaSelecionada) {
+        this.categoriaSelecionada = categoriaSelecionada;
+    }
+    
+    /* -------- Fim dos Metodos necessarios para o ListBox de Categoria -------*/	
 
 	private List<GrandePremio> grandesPremios;
 
@@ -114,7 +187,8 @@ public class ManterGrandePremioMB implements Serializable {
 	public String salvar() throws ParseException {
 		
 		if (grandePremio.getId() == null) {
-			grandePremioServico.incluir(grandePremio);
+			categoriaSelecionada = categoriaServico.recuperarPorId(new Long(codigoCategoriaSelecionada));
+			grandePremioServico.incluir(grandePremio, categoriaSelecionada);
 		} else {
 			grandePremioServico.alterar(grandePremio);
 		}
@@ -130,6 +204,13 @@ public class ManterGrandePremioMB implements Serializable {
 		return "manterGrandePremio";
 	}
 
+	public ManterCategoriaMB getManterCategoriaMB() {
+		return manterCategoriaMB;
+	}
+
+	public void setManterCategoriaMB(ManterCategoriaMB manterCategoriaMB) {
+		this.manterCategoriaMB = manterCategoriaMB;
+	}
 	public String editar() {
 
 		ConversacaoUtil.iniciar(conversacao);
