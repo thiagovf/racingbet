@@ -25,6 +25,18 @@
 							</h:inputText>
 							<h:message for="nome" class="mensagemDeErro" />
 
+							<h:outputLabel for="categoria"
+                                value="#{msg['manterGrandePremio.label.categoria']}" />
+                            <h:selectOneListbox id="categoria"
+                                value="#{manterGrandePremioMB.codigoCategoriaSelecionada}" required="true"
+                                requiredMessage="#{msg['manterGrandePremio.mensagem.categoriaObrigatoria']}"
+                                size="1">
+                                <f:selectItem itemValue="" itemLabel="Selecione..." />
+                                <f:selectItems value="#{manterGrandePremioMB.listaCategorias}" />
+                                <f:ajax event="change" listener="#{manterGrandePremioMB.recuperarCategoria}"  />
+                            </h:selectOneListbox>
+							 <h:message for="categoria" class="mensagemDeErro" />							
+
 							<h:outputLabel for="pais"
 								value="#{msg['manterGrandePremio.label.pais']}" />
 							<h:inputText id="pais"
@@ -101,6 +113,7 @@
 					<tbody>
 						<tr>
 							<td>Nome</td>
+							<td>Categoria</td>
 							<td>Pais</td>
 							<td>Cidade</td>
 							<td>Autodromo</td>
@@ -111,6 +124,9 @@
 							<tr style="color: green">
 								<td>
 									<h:outputText value="#{gpremio.nome}" />
+								</td>
+								<td>
+									<h:outputText value="#{gpremio.categoria.nome}" />
 								</td>
 								<td>
 									<h:outputText value="#{gpremio.pais}" />
