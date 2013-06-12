@@ -6,8 +6,6 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.Conversation;
 import javax.enterprise.context.SessionScoped;
-import javax.faces.component.behavior.AjaxBehavior;
-import javax.faces.event.AjaxBehaviorEvent;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -46,17 +44,32 @@ public class ConsultarPalpiteMB implements Serializable {
 	@Inject
 	private PalpiteServico palpiteServico;
 	
+	private String errorMsg;
+	
 	public String atualizarGrandePremios(){
 		String clausula_where = "id_categoria=" + categoriaSelecionadaId;
 		grandePremios = getGrandePremioServico().recuperarTodos(clausula_where);
 	
+		if(grandePremios.isEmpty()){
+			errorMsg = "Nao ha Grande Premio cadastrado para a categoria selecionada";
+		}else{
+			errorMsg = "";
+		}
+			
+		
 		return "consultarPalpite";
 	}
 
 	public String atualizarPalpites(){
-		String clausula_where = "idGrandePremio=" + grandePremioSelecionadoId;
+		String clausula_where = "idGrandePremio=" + grandePremioSelecionadoId + " AND id_usuario=" + gerenciarUsuario.getUsuario().getId();
 		
 		palpites = palpiteServico.recuperarTodos(clausula_where);
+		
+		if(palpites.isEmpty()){
+			errorMsg = "Nao ha palpites para o usuario logado";
+		}else{
+			errorMsg = "";
+		}
 		
 		return "consultarPalpite";
 	}
@@ -148,5 +161,13 @@ public class ConsultarPalpiteMB implements Serializable {
 
 	public void setPalpiteServico(PalpiteServico palpiteServico) {
 		this.palpiteServico = palpiteServico;
+	}
+
+	public String getErrorMsg() {
+		return errorMsg;
+	}
+
+	public void setErrorMsg(String errorMsg) {
+		this.errorMsg = errorMsg;
 	}
 }
