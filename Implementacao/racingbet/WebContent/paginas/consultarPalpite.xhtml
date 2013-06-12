@@ -13,7 +13,7 @@
 			<h:selectOneMenu  value="#{consultarPalpiteMB.categoriaSelecionadaId}">
 				<f:selectItem itemValue="" itemLabel="Selecione..." />
                <f:selectItems value="#{consultarPalpiteMB.categorias}" var="categoria" itemLabel="#{categoria.nome}" itemValue="#{categoria.id}"/>
-               <f:ajax event="change" listener="#{consultarPalpiteMB.atualizarGrandePremios}" render="grandesPremios"/>
+               <f:ajax event="change" listener="#{consultarPalpiteMB.atualizarGrandePremios}" render="grandesPremios errorMsg"/>
 			</h:selectOneMenu>
 			
 			<h:outputLabel for="grandesPremios" value="#{msg['manterResultadoGrandePremio.label.nomeGrandePremio']}" />
@@ -21,8 +21,11 @@
 				<f:selectItem itemValue="" itemLabel="Selecione..." />
                <f:selectItems value="#{consultarPalpiteMB.grandePremios}" var="gp" itemLabel="#{gp.nome}" itemValue="#{gp.id}"/>
                
-               <f:ajax event="change" listener="#{consultarPalpiteMB.atualizarPalpites}" render="palpites"/>
+               <f:ajax event="change" listener="#{consultarPalpiteMB.atualizarPalpites}" render="palpites errorMsg"/>
 			</h:selectOneMenu>
+			<br/><br/>
+			<h:outputText id="errorMsg" value="#{consultarPalpiteMB.errorMsg}" style="color: red;"/>
+			<br/><br/>
 			
 			<rich:dataGrid var="palpite" value="#{consultarPalpiteMB.palpites}" id="palpites">
 				<f:facet name="header">
@@ -30,9 +33,11 @@
                 </f:facet>
 				<h:panelGrid columns="2">
 					<h:outputText value="#{msg['consultarPalpites.label.data']}" styleClass="label"></h:outputText>
-					<h:outputText value="#{palpite.data}" />
+					<h:outputText value="#{palpite.data}" >
+					 	<f:convertDateTime pattern="dd/MM/yyyy" />
+					</h:outputText>
 					<h:outputText value="#{msg['consultarPalpites.label.respostaPrimeiro']}" styleClass="label"></h:outputText>
-					<h:outputText value="#{palpite.repostaPerguntaPrimeiro}" />
+					<h:outputText value="#{palpite.repostaPerguntaPrimeiro.nome}" />
 					<h:outputText value="#{msg['consultarPalpites.label.respostaPole']}" styleClass="label"></h:outputText>
 					<h:outputText value="#{palpite.repostaPerguntaPole.nome}" />
 				</h:panelGrid>
