@@ -50,6 +50,7 @@ public class ManterPilotoMB implements Serializable {
 	private Equipe equipeSelecionada;
 	/* -------- Fim dos Atributos necessarios para o ListBox de Equipe -------*/
 	
+	@Inject
 	private ManterEquipeMB manterEquipeMB;
 	
 	public ManterEquipeMB getManterEquipeMB() {
@@ -58,6 +59,11 @@ public class ManterPilotoMB implements Serializable {
 
 	public void setManterEquipeMB(ManterEquipeMB manterEquipeMB) {
 		this.manterEquipeMB = manterEquipeMB;
+	}
+	
+	public void recuperarCategorias() {
+		manterEquipeMB.recuperarCategoria();
+		getListaEquipes();
 	}
 
 	@Inject
@@ -190,11 +196,9 @@ public class ManterPilotoMB implements Serializable {
 		return "manterPiloto";
 	}
 	
-	/* -------- Metodos necessarios para o ListBox de Equipe -------*/
-
 	public List<SelectItem> getListaEquipes() {
 		
-		List<Equipe> equipes = equipeServico.recuperarTodos();
+		List<Equipe> equipes = equipeServico.recuperarEquipes(manterEquipeMB.getCategoriaSelecionada());
 		Equipe eqpe;
 		
 		listaEquipes = new ArrayList<SelectItem>();
@@ -246,6 +250,6 @@ public class ManterPilotoMB implements Serializable {
 		this.equipeSelecionada = equipeSelecionada;
 	}
 	
-	/* -------- Fim dos Metodos necessarios para o ListBox de Equipe -------*/
+	
 	
 }
