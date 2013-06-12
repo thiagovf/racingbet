@@ -14,7 +14,21 @@
 
 				<tr>
 					<td align="center"><h:panelGrid columns="3">
-
+					
+					
+							<h:outputLabel for="categoria"
+								value="#{msg['manterpalpite.label.categoria']}" />
+							<h:selectOneListbox id="categoria"
+								value="#{manterEquipeMB.codigoCategoriaSelecionada}" required="true"
+								requiredMessage="#{msg['manterEquipe.mensagem.categoriaObrigatoria']}"
+								size="1">
+								<f:selectItem itemValue="" itemLabel="Selecione..." />
+								<f:selectItems value="#{manterPilotoMB.manterEquipeMB.listaCategorias}" />
+								<f:ajax event="change" listener="#{manterPilotoMB.recuperarCategorias}"  />
+								<f:ajax event="click" execute="@form" render="equipe"/>
+							</h:selectOneListbox>
+							<h:message for="categoria" class="mensagemDeErro" />
+							
 							<h:outputLabel for="equipe"
 								value="#{msg['manterEquipe.label.equipe']}" />
 							<h:selectOneListbox id="equipe"
@@ -36,7 +50,7 @@
 								<f:validateLength minimum="3" maximum="50" />
 							</h:inputText>
 							<h:message for="nome" class="mensagemDeErro" />
-
+						
 
 						</h:panelGrid> <br /></td>
 				</tr>
@@ -78,7 +92,8 @@
 
 
 						<tr>
-							<td>Categoria</td>
+							<td>Categoria</td>	
+							<td>Equipe</td>
 							<td>Nome</td>
 
 						</tr>

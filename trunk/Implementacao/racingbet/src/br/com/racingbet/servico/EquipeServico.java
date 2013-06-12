@@ -1,6 +1,7 @@
 package br.com.racingbet.servico;
 
 import java.io.Serializable;
+import java.util.Collections;
 import java.util.List;
 
 import javax.ejb.LocalBean;
@@ -65,7 +66,7 @@ public class EquipeServico implements Serializable {
 		System.out.println("recperando as Equipes");
 		
 		if ((equipes == null) || (equipes.size() == 0)) {
-			return null;
+			return Collections.emptyList();
 		} else {
 			return equipes;
 		}
