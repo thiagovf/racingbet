@@ -8,7 +8,6 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.Conversation;
 import javax.enterprise.context.SessionScoped;
-import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -117,7 +116,12 @@ public class ManterResultadoGrandePremioMB implements Serializable {
 		return "manterResultadoGrandePremio";
 	}
 	
-	public String salvar() throws ParseException { 
+	public String salvar() throws ParseException {
+		String clausulaWhere = " idGrandePremio = " + idGrandePremio;
+		List<ResultadoGrandePremio> resultadosTemp = resultadoGrandePremioServico.recuperarTodos(clausulaWhere);
+		for(ResultadoGrandePremio rgp : resultadosTemp) {
+			resultadoGrandePremio.setId(rgp.getId());
+		}
 		resultadoGrandePremio.setGrandePremio(grandePremioServico.recuperarPorId(idGrandePremio));
 		resultadoGrandePremio.setRepostaPerguntaPole(pilotoServico.recuperarPorId(idPilotoPole));
 		resultadoGrandePremio.setRepostaPerguntaPrimeiro(pilotoServico.recuperarPorId(idPilotoPrimeiro));
