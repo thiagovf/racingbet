@@ -53,6 +53,10 @@ public class GrandePremioServico implements Serializable {
 		return grandePremioDAO.recuperarTodos();
 	}
 	
+	public List<GrandePremio> recuperarTodos(String clausulaWhere) {
+		return grandePremioDAO.recuperarTodos(clausulaWhere);
+	}
+	
 	public GrandePremio recuperarPorId(Long id) {
 		return grandePremioDAO.recuperar(id);
 	}
