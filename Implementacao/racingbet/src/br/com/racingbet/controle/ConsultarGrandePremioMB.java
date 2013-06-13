@@ -21,15 +21,60 @@ import br.com.racingbet.servico.GrandePremioServico;
 @SessionScoped
 public class ConsultarGrandePremioMB implements Serializable {
 	
-	/* -------- Atributos necessarios para o ListBox de Categoria -------*/
+
     private List<SelectItem> listaCategorias;
     private String codigoCategoriaSelecionada;
     @Inject
     private CategoriaServico categoriaServico;
-    private Categoria categoriaSelecionada;
- /* -------- Fim dos Atributos necessarios para o ListBox de Categoria -------*/
+    private Categoria categoriaSelecionada;    
+    private List<Categoria> categorias;
+    private List<GrandePremio> grandesPremios;
+    private String errorMsg;
+    private Long categoriaSelecionadaId;
+    
+	public String getErrorMsg() {
+		return errorMsg;
+	}
 
-/* -------- Metodos necessarios para o ListBox de Categoria -------*/
+	public void setErrorMsg(String errorMsg) {
+		this.errorMsg = errorMsg;
+	}
+
+	public List<Categoria> getCategorias() {
+		return categorias;
+	}
+
+	public void setCategorias(List<Categoria> categorias) {
+		this.categorias = categorias;
+	}
+
+	public Long getCategoriaSelecionadaId() {
+		return categoriaSelecionadaId;
+	}
+
+	public void setCategoriaSelecionadaId(Long categoriaSelecionadaId) {
+		this.categoriaSelecionadaId = categoriaSelecionadaId;
+	}
+
+	
+
+    private Long grandePremioSelecionadoId;
+	public Long getGrandePremioSelecionadoId() {
+		return grandePremioSelecionadoId;
+	}
+
+	public void setGrandePremioSelecionadoId(Long grandePremioSelecionadoId) {
+		this.grandePremioSelecionadoId = grandePremioSelecionadoId;
+	}
+
+	public List<GrandePremio> getGrandesPremios() {
+		return grandesPremios;
+	}
+
+	public void setGrandePremios(List<GrandePremio> grandePremios) {
+		this.grandesPremios = grandePremios;
+	}	
+
 
     public List<SelectItem> getListaCategorias() {
        
@@ -51,6 +96,19 @@ public class ConsultarGrandePremioMB implements Serializable {
        
         return listaCategorias;
     }
+    
+    public String atualizarGrandesPremios(){
+		String clausula_where = "id_grandePremio=" + grandePremioSelecionadoId;
+		grandesPremios = getGrandePremioServico().recuperarTodos(clausula_where);
+	
+		if(grandesPremios.isEmpty()){
+			errorMsg = "Nao ha Grande Premio cadastrado para a categoria selecionada";
+		}else{
+			errorMsg = "";
+		}
+			
+		return "consultarGrandePremio";
+	}
    
     public void recuperarCategoria() {
         categoriaSelecionada = categoriaServico.recuperarPorId(Long.valueOf(codigoCategoriaSelecionada));
@@ -85,12 +143,9 @@ public class ConsultarGrandePremioMB implements Serializable {
         this.categoriaSelecionada = categoriaSelecionada;
     }
    
-    /* -------- Fim dos Metodos necessarios para o ListBox de Categoria -------*/
 
 	@Inject
 	private Conversation conversacao;
-
-	private List<GrandePremio> grandesPremios;
 
 	@Inject
 	private GrandePremioServico grandePremioServico;
@@ -119,10 +174,6 @@ public class ConsultarGrandePremioMB implements Serializable {
 
 	public void setGrandePremioServico(GrandePremioServico grandePremioServico) {
 		this.grandePremioServico = grandePremioServico;
-	}
-
-	public List<GrandePremio> getGrandesPremios() {
-		return grandesPremios;
 	}
 
 	public void setGrandesPremios(List<GrandePremio> grandesPremios) {
