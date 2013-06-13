@@ -23,7 +23,13 @@ public class PalpiteServico implements Serializable {
 	private PalpiteDAO dao;
 	
 	public List<Palpite> recuperarPorUsuario(Usuario usuario){
-		return dao.recuperarTodos("idUsuario =" + usuario.getId());
+		return dao.recuperarTodos("id_usuario =" + usuario.getId());
+	}
+	
+	public Palpite recuperarPorId(Long idPalpite) {
+		
+		return dao.recuperar(idPalpite);
+		
 	}
 	
 	public List<Palpite> recuperarTodos(String where){
@@ -56,4 +62,12 @@ public class PalpiteServico implements Serializable {
 	public void alterar(Palpite palpite) {
 		dao.alterar(palpite);		
 	}
+
+	public void excluir(Palpite palpite) {
+		
+		dao.remover(palpite.getId());
+		
+	}
+
+
 }

@@ -52,6 +52,9 @@ public class ManterPalpiteMB implements Serializable {
 	private ResultadoGrandePremioServico resultadoGrandePremioServico;
 	
 	@Inject
+	private ConsultarPalpiteMB consultarPalpiteMB;
+	
+	@Inject
 	private PalpiteServico palpiteServico;
 	
 	@Inject
@@ -74,6 +77,8 @@ public class ManterPalpiteMB implements Serializable {
 
 	private Long categoriaId;
 	
+	private Long idPalpite;
+	
 	private Long idGrandePremio;
 	
 	private Long idPilotoPole;
@@ -89,6 +94,8 @@ public class ManterPalpiteMB implements Serializable {
 	private Boolean temResultadosGrandesPremios;
 	
 	private Long idResultadoGrandePremio;
+	
+	private String errorMsg;
 
 //	public ManterResultadoGrandePremioMB() {
 //		resultadoGrandePremio = new ResultadoGrandePremio();
@@ -142,31 +149,51 @@ public class ManterPalpiteMB implements Serializable {
 		getPalpite().setGrandePremio(grandePremioServico.recuperarPorId(idGrandePremio));
 		getPalpite().setRepostaPerguntaPole(pilotoServico.recuperarPorId(idPilotoPole));
 		getPalpite().setRepostaPerguntaPrimeiro(pilotoServico.recuperarPorId(idPilotoPrimeiro));
-		getPalpite().setUsuario(usuarioServico.recuperarPorId(new Long(2)));
-		//getPalpite().setUsuario(getGerenciarUsuarioMB().getUsuario());
+		getPalpite().setUsuario(gerenciarUsuarioMB.getUsuario());
 		getPalpite().setData(new Date());
 		
-		// TODO comentar esse codigo jaja
-		
-//		if(getPalpite().getUsuario() == null){
-//			getPalpite().setUsuario(usuarioServico.recuperarPorId(new Long(1)));
-//		}
-		
-		if (getPalpite().getId() == null) {
-			palpiteServico.incluir(getPalpite());
-		} else {
-			palpiteServico.alterar(getPalpite());
+
+		try {
+			validarPalpite(getPalpite());
+			
+			if (getPalpite().getId() == null) {
+				palpiteServico.incluir(getPalpite());
+				setErrorMsg("Palpite feito com sucesso!");
+			} else {
+				palpiteServico.alterar(getPalpite());
+			}
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			setErrorMsg(e.getMessage());
+		} finally {
+			limparResultados(); 
+			ConversacaoUtil.terminar(conversacao);
 		}
 		
-		//resultadosGrandesPremios = resultadoGrandePremioServico.recuperarTodos();
-		
-		limparResultados(); 
-		
-		ConversacaoUtil.terminar(conversacao);
-		
-		return "consultarPalpite";
+		return "manterPalpite";
 	}
 	
+	private void validarPalpite(Palpite palpite) throws Exception {
+
+		if(palpite.getGrandePremio().getData().getTime() < new Date().getTime()){
+			
+			throw new Exception("Palpites nao liberados para esse Grande Premio");
+		} 
+		
+		List<Palpite> palpites = palpiteServico.recuperarPorUsuario(gerenciarUsuarioMB.getUsuario());
+		
+		//poderia fazer um HQL pra buscar usuario + grande premio, mas assim foi mais facil e rapido... >)
+		
+		for (Palpite p : palpites) {
+			if(p.getGrandePremio().getId().equals(palpite.getGrandePremio().getId())){
+				throw new Exception("Voce j‡ fez um Palpite para o Grande Premio "+palpite.getGrandePremio().getNome());
+			}
+		}
+		
+	}
+
 	public String editar() {
 		ConversacaoUtil.iniciar(conversacao);
 		resultadoGrandePremio = resultadoGrandePremioServico.recuperarPorId(getIdResultadoGrandePremio());
@@ -182,14 +209,15 @@ public class ManterPalpiteMB implements Serializable {
 	
 	public String excluir() {
 		
-		ResultadoGrandePremio resultadoGP = new ResultadoGrandePremio();
-		resultadoGP.setId(idResultadoGrandePremio);
-		resultadoGrandePremioServico.remover(resultadoGP);
+		Palpite palpite = palpiteServico.recuperarPorId(this.idPalpite);
 		
-		resultadosGrandesPremios = resultadoGrandePremioServico.recuperarTodos();
+		palpiteServico.excluir(palpite);
+		
+		consultarPalpiteMB.setErrorMsg("Palpite Excluido");
+		
 		limparResultados();
 		
-		return "manterResultadoGrandePremio";
+		return "consultarPalpite";
 		
 	}	
 	
@@ -327,5 +355,21 @@ public class ManterPalpiteMB implements Serializable {
 
 	public void setGerenciarUsuarioMB(GerenciarUsuarioMB gerenciarUsuarioMB) {
 		this.gerenciarUsuarioMB = gerenciarUsuarioMB;
+	}
+
+	public String getErrorMsg() {
+		return errorMsg;
+	}
+
+	public void setErrorMsg(String errorMsg) {
+		this.errorMsg = errorMsg;
+	}
+
+	public Long getIdPalpite() {
+		return idPalpite;
+	}
+
+	public void setIdPalpite(Long idPalpite) {
+		this.idPalpite = idPalpite;
 	}
 }
