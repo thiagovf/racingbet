@@ -31,12 +31,12 @@
 				<tr>
 					<td align="center"><h:panelGrid columns="3">
 							<h:outputLabel for="senha" value="#{msg['logar.label.senha']}" />
-							<h:inputText id="senha"
+							<h:inputSecret id="senha"
 								value="#{gerenciarUsuarioMB.usuario.senha}" required="true"
 								requiredMessage="#{msg['logar.mensagem.senhaObrigatoria']}"
 								size="30" maxlength="100">
 								<f:validateLength minimum="3" maximum="100" />
-							</h:inputText>
+							</h:inputSecret>
 							<h:message for="senha" class="mensagemDeErro" />
 						</h:panelGrid> <br /></td>
 				</tr>
