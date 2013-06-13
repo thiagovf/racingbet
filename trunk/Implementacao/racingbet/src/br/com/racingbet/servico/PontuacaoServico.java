@@ -83,8 +83,10 @@ public class PontuacaoServico implements Serializable {
 		return pontuacaoDAO.recuperar(id);
 	}
 	
+	/*
 	public void gerarDadosTeste()
 	{
+		
 		//Gerar Usuarios		
 		Date dtHoje = new Date();		
 		Usuario usuario1 = new Usuario();
@@ -180,9 +182,17 @@ public class PontuacaoServico implements Serializable {
 		piloto4.setIdEquipe((long) 2);
 		piloto4.setNumeroDoCarro("2");
 		pilotoDAO.incluir(piloto4);
-
+		
 		//Gerar Palpites
 		Palpite palpite1 = new Palpite();
+		palpite1.setGrandePremio(grandePremio)
+		palpite1.setRepostaPerguntaPole(repostaPerguntaPole)
+		
+		Equipe equipe1 = new Equipe();
+		equipe1.setCategoria(categoria)
+		
+		
+		
 		palpite1.setGrandePremio("Grande Premio do Brasil");
 		palpite1.setIdGrandePremio((long) 1);
 		palpite1.setAutorPergunta("usuario1");
@@ -206,41 +216,7 @@ public class PontuacaoServico implements Serializable {
 		palpite2.setIdPilotoResp2((long) 1);
 		palpiteDAO.incluir(palpite2);
 		
-		Palpite palpite3 = new Palpite();
-		palpite3.setGrandePremio("Grande Premio do Brasil");
-		palpite3.setIdGrandePremio((long) 1);
-		palpite3.setAutorPergunta("usuario3");
-		palpite3.setIdUsuario((long) 3);
-		palpite3.setData(dtHoje);
-		palpite3.setRespostaPole("Piloto2");
-		palpite3.setRespostaPrimeiro("Piloto2");
-		palpite3.setIdPilotoResp1((long) 2);
-		palpite3.setIdPilotoResp2((long) 2);
-		palpiteDAO.incluir(palpite3);
-		
-		Palpite palpite4 = new Palpite();
-		palpite4.setGrandePremio("Grande Premio do Brasil");
-		palpite4.setIdGrandePremio((long) 1);
-		palpite4.setAutorPergunta("usuario4");
-		palpite4.setIdUsuario((long) 4);
-		palpite4.setData(dtHoje);
-		palpite4.setRespostaPole("Piloto2");
-		palpite4.setRespostaPrimeiro("Piloto1");
-		palpite4.setIdPilotoResp1((long) 2);
-		palpite4.setIdPilotoResp2((long) 1);
-		palpiteDAO.incluir(palpite4);
-		
-		Palpite palpite5 = new Palpite();
-		palpite5.setGrandePremio("Grande Premio do Brasil");
-		palpite5.setIdGrandePremio((long) 1);
-		palpite5.setAutorPergunta("usuario5");
-		palpite5.setIdUsuario((long) 5);
-		palpite5.setData(dtHoje);
-		palpite5.setRespostaPole("Piloto3");
-		palpite5.setRespostaPrimeiro("Piloto3");
-		palpite5.setIdPilotoResp1((long) 3);
-		palpite5.setIdPilotoResp2((long) 3);
-		palpiteDAO.incluir(palpite5);
+		/*
 		
 		//Gerar Resultado do Grande Premio
 		ResultadoGrandePremio resultadoGrandePremio1 = new ResultadoGrandePremio(); 
@@ -253,53 +229,56 @@ public class PontuacaoServico implements Serializable {
 //		resultadoGrandePremio1.setRepostaPerguntaPrimeiro("Piloto 2");
  * 
  
-		resultadoGrandePremioDAO.incluir(resultadoGrandePremio1);*/
+		resultadoGrandePremioDAO.incluir(resultadoGrandePremio1);
 	}
-	
+	*/
 	public void calcularPontuacao(ResultadoGrandePremio resultadoGrandePremio, Palpite palpite)
 	{
-		long idPilotoGabaritoPergunta1, idPilotoGabaritoPergunta2;
-		long idPilotoPalpitePergunta1, idPilotoPalpitePergunta2, idUsuario;
+		long idPilotoGabaritoPerguntaPole, idPilotoGabaritoPerguntaPrimeiro;
+		long idPilotoPalpitePerguntaPole, idPilotoPalpitePerguntaPrimeiro, idUsuario;
 		long pontos = 0;
 		
 		
-		//idPilotoGabaritoPergunta1 = resultadoGrandePremio.getIdPilotoPergunta1();
-		//idPilotoGabaritoPergunta2 = resultadoGrandePremio.getIdPilotoPergunta2();
+		idPilotoGabaritoPerguntaPole = resultadoGrandePremio.getRepostaPerguntaPole().getId();
+		idPilotoGabaritoPerguntaPrimeiro = resultadoGrandePremio.getRepostaPerguntaPrimeiro().getId();
 		
-	//	idPilotoPalpitePergunta1 = palpite.getIdPilotoResp1();
-	//	idPilotoPalpitePergunta2 = palpite.getIdPilotoResp2();
-	//	
-	//	idUsuario = palpite.getIdUsuario();
+		idPilotoPalpitePerguntaPole = palpite.getRepostaPerguntaPole().getId();
+		idPilotoPalpitePerguntaPrimeiro = palpite.getRepostaPerguntaPrimeiro().getId();
+	
+		idUsuario = palpite.getUsuario().getId();
 		
 		//Pergunta: Quem Vence ? (10 Pontos)
-/*		if (idPilotoGabaritoPergunta1 == idPilotoPalpitePergunta1)
+		if (idPilotoGabaritoPerguntaPrimeiro == idPilotoPalpitePerguntaPrimeiro)
 		{
 			pontos = pontos + 10;
 		}
 		
 		//Pergunta: Quem Larga na Pole? (5 Pontos)
-		if (idPilotoGabaritoPergunta2 == idPilotoPalpitePergunta2)
+		if (idPilotoGabaritoPerguntaPole == idPilotoPalpitePerguntaPole)
 		{
 			pontos = pontos + 5;
 		}
 		
 		Pontuacao pontuacao = new Pontuacao();		
-		//pontuacao.setIdCategoria(resultadoGrandePremio.getIdCategoria());
+		pontuacao.setIdCategoria(resultadoGrandePremio.getGrandePremio().getCategoria().getId());
 		pontuacao.setIdUsuario(idUsuario);
 		pontuacao.setPontos(pontos);		
-		pontuacaoDAO.incluir(pontuacao);*/
+		pontuacaoDAO.incluir(pontuacao);
 	}
 	
-	public void gerarPontuacao()
+	public void gerarPontuacao(long idGrandePremio)
 	{
 		ResultadoGrandePremio res = new ResultadoGrandePremio();
-		res = resultadoGrandePremioDAO.recuperar((long) 1);
+		res = resultadoGrandePremioDAO.recuperar(idGrandePremio);
 		
 		List<Palpite> palpites = new ArrayList<Palpite>();
 		palpites = palpiteDAO.recuperarTodos();
 		
 		for (Palpite palpite : palpites) {
-			calcularPontuacao(res, palpite);			
+			if (palpite.getGrandePremio().getId() == idGrandePremio)
+			{
+				calcularPontuacao(res, palpite);
+			}						
 		}		
 	}
 }
