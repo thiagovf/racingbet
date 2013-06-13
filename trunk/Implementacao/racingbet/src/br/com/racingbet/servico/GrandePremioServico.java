@@ -12,6 +12,7 @@ import javax.inject.Inject;
 import br.com.racingbet.dao.CategoriaDAO;
 import br.com.racingbet.dao.GrandePremioDAO;
 import br.com.racingbet.entidade.Categoria;
+import br.com.racingbet.entidade.Equipe;
 import br.com.racingbet.entidade.GrandePremio;
 
 @Stateless
@@ -48,7 +49,21 @@ public class GrandePremioServico implements Serializable {
 	public void remover(GrandePremio grandePremio) {
 		grandePremioDAO.remover(grandePremio.getId());
 	}
-	
+
+	public List<GrandePremio> recuperarGrandesPremios(Categoria categoria) {
+		
+		Categoria categoriaDoContexto = categoriaDAO.recuperar(categoria.getId());
+		
+		List<GrandePremio> gps = categoriaDoContexto.getGrandespremios();
+		
+		System.out.println("recperando as Equipes");
+		
+		if ((gps == null) || (gps.size() == 0)) {
+			return null;
+		} else {
+			return gps;
+		}
+	}
 	public List<GrandePremio> recuperarTodos() {
 		return grandePremioDAO.recuperarTodos();
 	}
