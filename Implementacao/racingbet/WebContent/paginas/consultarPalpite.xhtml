@@ -13,7 +13,7 @@
 			<h:selectOneMenu  value="#{consultarPalpiteMB.categoriaSelecionadaId}">
 				<f:selectItem itemValue="" itemLabel="Selecione..." />
                <f:selectItems value="#{consultarPalpiteMB.categorias}" var="categoria" itemLabel="#{categoria.nome}" itemValue="#{categoria.id}"/>
-               <f:ajax event="change" listener="#{consultarPalpiteMB.atualizarGrandePremios}" render="grandesPremios errorMsg"/>
+               <f:ajax event="change" listener="#{consultarPalpiteMB.atualizarGrandePremios}"  render="grandesPremios errorMsg"/>
 			</h:selectOneMenu>
 			
 			<h:outputLabel for="grandesPremios" value="#{msg['manterResultadoGrandePremio.label.nomeGrandePremio']}" />
@@ -40,6 +40,12 @@
 					<h:outputText value="#{palpite.repostaPerguntaPrimeiro.nome}" />
 					<h:outputText value="#{msg['consultarPalpites.label.respostaPole']}" styleClass="label"></h:outputText>
 					<h:outputText value="#{palpite.repostaPerguntaPole.nome}" />
+					<h:commandButton value="Excluir"
+										action="#{manterPalpiteMB.excluir}"
+										image="../imagens/excluir.gif" >
+										<f:setPropertyActionListener
+											target="#{manterPalpiteMB.idPalpite}" value="#{palpite.id}"  />
+				    </h:commandButton>
 				</h:panelGrid>
 			</rich:dataGrid>
 

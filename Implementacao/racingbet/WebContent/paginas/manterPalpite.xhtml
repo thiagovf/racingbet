@@ -58,7 +58,9 @@
 									<f:selectItems value="#{manterPalpiteMB.pilotos}" var="piloto"
 					   					itemLabel="#{piloto.nome}" itemValue="#{piloto.id}"/>
 							</h:selectOneListbox>
-							<h:message for="repostaPerguntaPrimeiro" class="mensagemDeErro" />
+							<br/><br/>
+							<h:outputText id="errorMsg" value="#{manterPalpiteMB.errorMsg}" style="color: red;"/>
+							<br/><br/>
 	                  	</h:panelGrid> <br />
 					</td>
 				</tr>
@@ -79,60 +81,7 @@
 			</table>
 		</h:form>
 		<p></p>
-		<div style="text-align: center">
-			<h1>#{msg['manterResultadoGrandePremio.label.listaDeResultadosGrandesPremios']}</h1>
-
-			<h:outputText
-				value="#{msg['manterResultadoGrandePremio.mensagem.naoHaResultadosGrandesPremios']}"
-				rendered="#{!manterPalpiteMB.temResultadosGrandesPremios}" />
-		</div>
-		
-		<h:form>
-			<table align="center">
-				<tbody>
-					<ui:repeat var="resultadoGP" value="#{manterPalpiteMB.resultadosGrandesPremios}"
-						varStatus="#{manterPalpiteMB.temResultadosGrandesPremios}">
-						<tr>
-							<td><h:outputLabel
-									value="#{msg['manterResultadoGrandePremio.label.nomeGrandePremio']}" /> <h:outputText
-									value="#{resultadoGP.grandePremio.nome}" />
-							</td>
-						</tr>
-						<tr>
-							<td><h:outputLabel
-									value="#{msg['manterResultadoGrandePremio.label.repostaPerguntaPole']}" /> <h:outputText
-									value="#{resultadoGP.repostaPerguntaPole.nome}" />
-							</td>
-						</tr>
-						<tr>
-							<td><h:outputLabel
-									value="#{msg['manterResultadoGrandePremio.label.repostaPerguntaPrimeiro']}" /> <h:outputText
-									value="#{resultadoGP.repostaPerguntaPrimeiro.nome}" />
-							</td>
-						</tr>
-						
-						<tr>
-							<td align="center"><h:commandButton value="Editar"
-									action="#{manterPalpiteMB.editar}" image="../imagens/editar.gif">
-									<f:setPropertyActionListener
-										target="#{manterPalpiteMB.idResultadoGrandePremio}" value="#{resultadoGP.id}" />
-								</h:commandButton> <h:commandButton value="Excluir"
-									action="#{manterPalpiteMB.excluir}"
-									image="../imagens/excluir.gif">
-									<f:setPropertyActionListener
-										target="#{manterPalpiteMB.idResultadoGrandePremio}" value="#{resultadoGP.id}" />
-								</h:commandButton></td>
-						</tr>
-			
-						<tr>
-							<td><h:outputText value=" " />
-							</td>
-						</tr>
-					</ui:repeat>
-				</tbody>
-			</table>
-		</h:form>
-		
+	
 	</ui:define>
 
 </ui:composition>
