@@ -190,6 +190,7 @@ public class ManterGrandePremioMB implements Serializable {
 			categoriaSelecionada = categoriaServico.recuperarPorId(new Long(codigoCategoriaSelecionada));
 			grandePremioServico.incluir(grandePremio, categoriaSelecionada);
 		} else {
+			categoriaSelecionada = categoriaServico.recuperarPorId(new Long(codigoCategoriaSelecionada));
 			grandePremioServico.alterar(grandePremio);
 		}
 		
@@ -235,5 +236,13 @@ public class ManterGrandePremioMB implements Serializable {
 
 		return "manterGrandePremio";
 	}
+	
+	public String pesquisar() {
 
+		//categoriaSelecionada = categoriaServico.recuperarPorId(Long.valueOf(codigoCategoriaSelecionada));
+		grandesPremios = grandePremioServico.recuperarGrandesPremios(categoriaSelecionada);
+		limparGrandePremio();
+
+		return "manterGrandePremio";
+	}
 }
