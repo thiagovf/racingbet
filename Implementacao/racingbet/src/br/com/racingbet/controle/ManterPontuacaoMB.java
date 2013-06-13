@@ -10,6 +10,7 @@ import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import br.com.racingbet.entidade.GrandePremio;
 import br.com.racingbet.entidade.Pontuacao;
 import br.com.racingbet.servico.PontuacaoServico;
 import br.com.racingbet.util.ConversacaoUtil;
@@ -31,6 +32,8 @@ public class ManterPontuacaoMB implements Serializable {
 	private Boolean temPontuacoes;
 
 	private Long idPontuacao;
+	
+	private Long idGrandePremio;
 	
 	@Inject
 	private PontuacaoServico pontuacaoServico;
@@ -155,18 +158,30 @@ public class ManterPontuacaoMB implements Serializable {
 		return "manterPontuacao";
 	}
 	
-	public String gerarDadosTeste()
-	{
-		pontuacaoServico.gerarDadosTeste();
-		
-		return "manterPontuacao";
-	}
+//	public String gerarDadosTeste()
+//	{
+//		pontuacaoServico.gerarDadosTeste();
+//		
+//		return "manterPontuacao";
+//	}
 	
 	public String gerarPontuacao()
 	{
-		pontuacaoServico.gerarPontuacao();
+		//Pegar Id do Combo;
+		setIdGrandePremio((long) 1);
+		pontuacaoServico.gerarPontuacao(idGrandePremio);
 		
 		return "manterPontuacao";
 	}
+
+	public Long getIdGrandePremio() {
+		return idGrandePremio;
+	}
+
+	public void setIdGrandePremio(Long idGrandePremio) {
+		this.idGrandePremio = idGrandePremio;
+	}
+	
+	
 
 }
