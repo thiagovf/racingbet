@@ -8,106 +8,131 @@
 	template="../templates/template.xhtml">
 
 	<ui:define name="painelCentral">
-	<h3>Manter Palpite</h3>
-	
-	<h:form>
+		<h:form>
 			<table align="center">
-					<tr>
-						<td align="center"><h:panelGrid columns="3">
+				<tr>
+					<td align="center">
+						<h:panelGrid columns="3">
+							<h:outputLabel for="categoriaResutadoGP"
+								value="#{msg['manterResultadoGrandePremio.label.categoria']}" />
+							<h:selectOneMenu id="categoriaResutadoGP" 
+									value="#{manterPalpiteMB.categoriaId}" required="true"
+									requiredMessage="#{msg['manterResultadoGrandePremio.mensagem.nomeCategoriaObrigatorio']}" >
+								<f:selectItem itemValue="" itemLabel="Selecione..." />
+					   			<f:selectItems value="#{manterPalpiteMB.categorias}" var="cat"
+					   					itemLabel="#{cat.nome}" itemValue="#{cat.id}"/>
+					   			<f:ajax event="change" listener="#{manterPalpiteMB.selecionarCategoria}"  render="nomeGrandePremio repostaPerguntaPole repostaPerguntaPrimeiro"/>
+   							</h:selectOneMenu>
+   							<h:message for="categoriaResutadoGP" class="mensagemDeErro" />
 						
-								<h:outputLabel for="categoria"
-									value="#{msg['manterpalpite.label.categoria']}" />
-								<h:selectOneListbox id="categoria"
-									value="#{manterPalpiteMB.categoria}" required="true"
-									requiredMessage="#{msg['manterPalpite.mensagem.campoObrigatorio']}"
-									size="1">
-										<f:selectItem itemValue="Categoria1" itemLabel="Categoria1" />
-									   	<f:selectItem itemValue="Categoria2" itemLabel="Categoria2" />
-									   	<f:selectItem itemValue="Categoria3" itemLabel="Categoria3" />
-									   	<f:selectItem itemValue="Categoria4" itemLabel="Categoria4" />
-									   	<f:selectItem itemValue="Categoria5" itemLabel="Categoria5" />
-									   	<f:selectItem itemValue="Categoria6" itemLabel="Categoria6" />
-								</h:selectOneListbox>
-								<h:message for="categoria" class="mensagemDeErro" />
-								
-							    <h:outputLabel for="grandePremio"
-									value="#{msg['manterPalpite.label.grandePremio']}" />
-							   <h:selectOneListbox id="grandePremio"
-									value="#{manterPalpiteMB.palpite.grandePremio}" required="true"
-									requiredMessage="#{msg['manterPalpite.mensagem.campoObrigatorio']}"
-									size="1">
-										<f:selectItem itemValue="GrandePremio1" itemLabel="GrandePremio1" />
-									   	<f:selectItem itemValue="GrandePremio2" itemLabel="GrandePremio2" />
-									   	<f:selectItem itemValue="GrandePremio3" itemLabel="GrandePremio3" />
-									   	<f:selectItem itemValue="GrandePremio4" itemLabel="GrandePremio4" />
-									   	<f:selectItem itemValue="GrandePremio5" itemLabel="GrandePremio5" />
-									   	<f:selectItem itemValue="GrandePremio6" itemLabel="GrandePremio6" />
-								</h:selectOneListbox>
-								<h:message for="grandePremio" class="mensagemDeErro" />
-						
-						
-								<h:outputLabel for="respostaPrimeiro"
-									value="#{msg['manterPalpite.label.respostaPrimeiro']}" />
-								<h:inputText id="respostaPrimeiro"
-									value="#{manterPalpiteMB.palpite.respostaPrimeiro}" required="true"
-									requiredMessage="#{msg['manterPalpite.mensagem.respostaPrimeiroObrigatorio']}"
-									size="50" maxlength="100">
-									<f:validateLength minimum="3" maximum="100" />
-								</h:inputText>
-								<h:message for="respostaPrimeiro" class="mensagemDeErro" />
-								
-								<h:outputLabel for="respostaPole"
-									value="#{msg['manterPalpite.label.respostaPole']}" />
-								<h:inputText id="respostaPole"
-									value="#{manterPalpiteMB.palpite.respostaPole}" required="true"
-									requiredMessage="#{msg['manterPalpite.mensagem.respostaPoleObrigatorio']}"
-									size="50" maxlength="100">
-									<f:validateLength minimum="3" maximum="100" />
-								</h:inputText>
-								<h:message for="respostaPole" class="mensagemDeErro" />
-								
-								<h:outputLabel for="autorPergunta"
-									value="#{msg['manterPalpite.label.autorPergunta']}" />
-								<h:inputText id="autorPergunta"
-									value="#{manterPalpiteMB.palpite.autorPergunta}" required="true"
-									requiredMessage="#{msg['manterPalpite.mensagem.autorPerguntaObrigatorio']}"
-									size="50" maxlength="100">
-									<f:validateLength minimum="3" maximum="100" />
-								</h:inputText>
-								<h:message for="respostaPole" class="mensagemDeErro" />
-								
-								<h:outputLabel for="data"
-									value="#{msg['manterPalpite.label.data']}" />
-								<rich:calendar
-									value="#{manterPalpiteMB.palpite.data}"
-									id="data_fundacao" popup="true" datePattern="dd/MM/yyyy"
-									locale="pt_BR" showApplyButton="true" cellWidth="24px"
-									cellHeight="22px" style="width:200px" disabled="false"
-									required="true"
-									requiredMessage="#{msg['manterPalpite.mensagem.dataObrigatoria']}">
-								</rich:calendar>
-								<h:message for="data" class="mensagemDeErro" />
-	                   </h:panelGrid> <br />
-						</td>
-					</tr>
-					<tr>
+							<h:outputLabel for="nomeGrandePremio"
+								value="#{msg['manterResultadoGrandePremio.label.nomeGrandePremio']}" />
+							<h:selectOneListbox id="nomeGrandePremio"
+								value="#{manterPalpiteMB.idGrandePremio}" required="true"
+								requiredMessage="#{msg['manterResultadoGrandePremio.mensagem.nomeGrandePremioObrigatorio']}" size="1">
+								<f:selectItem itemValue="" itemLabel="Selecione..." />
+								<f:selectItems value="#{manterPalpiteMB.grandesPremios}" var="gp"
+					   					itemLabel="#{gp.nome} #{gp.data}" itemValue="#{gp.id}"/>
+							</h:selectOneListbox>
+							<h:message for="nomeGrandePremio" class="mensagemDeErro" />
+							
+							<h:outputLabel for="repostaPerguntaPole"
+								value="#{msg['manterResultadoGrandePremio.label.repostaPerguntaPole']}" />
+							<h:selectOneListbox id="repostaPerguntaPole"
+								value="#{manterPalpiteMB.idPilotoPole}" required="true"
+								requiredMessage="#{msg['manterResultadoGrandePremio.mensagem.repostaPerguntaPoleObrigatorio']}"
+								size="1">
+									<f:selectItem itemValue="" itemLabel="Selecione..." />
+									<f:selectItems value="#{manterPalpiteMB.pilotos}" var="piloto"
+					   					itemLabel="#{piloto.nome}" itemValue="#{piloto.id}"/>
+							</h:selectOneListbox>
+							<h:message for="repostaPerguntaPole" class="mensagemDeErro" />
+							
+							<h:outputLabel for="repostaPerguntaPrimeiro"
+								value="#{msg['manterResultadoGrandePremio.label.repostaPerguntaPrimeiro']}" />
+							<h:selectOneListbox id="repostaPerguntaPrimeiro"
+								value="#{manterPalpiteMB.idPilotoPrimeiro}" required="true"
+								requiredMessage="#{msg['manterResultadoGrandePremio.mensagem.repostaPerguntaPrimeiroObrigatorio']}"
+								size="1">
+									<f:selectItem itemValue="" itemLabel="Selecione..." />
+									<f:selectItems value="#{manterPalpiteMB.pilotos}" var="piloto"
+					   					itemLabel="#{piloto.nome}" itemValue="#{piloto.id}"/>
+							</h:selectOneListbox>
+							<h:message for="repostaPerguntaPrimeiro" class="mensagemDeErro" />
+	                  	</h:panelGrid> <br />
+					</td>
+				</tr>
+				<tr>
 					<td>
 						<table align="center">
 							<tr>
 								<td><h:commandButton value="Salvar"
 										action="#{manterPalpiteMB.salvar}"
 										image="../imagens/salvar.gif" /></td>
-								<td><h:commandButton value="Cancelar" action="manterPalpite"
-										immediate="true" image="../imagens/cancelar.gif" /></td>
-							</tr>
-							
-							<tr>
-								<td><h:messages for="global" style="color:red;margin:8px;" /></td>
+								<td><h:commandButton value="Cancelar"
+									action="#{manterPalpiteMB.cancelar}"
+									image="../imagens/cancelar.gif" /></td>
 							</tr>
 						</table>
 					</td>
 				</tr>
-				</table>
+			</table>
 		</h:form>
-</ui:define>
-</ui:composition>	
+		<p></p>
+		<div style="text-align: center">
+			<h1>#{msg['manterResultadoGrandePremio.label.listaDeResultadosGrandesPremios']}</h1>
+
+			<h:outputText
+				value="#{msg['manterResultadoGrandePremio.mensagem.naoHaResultadosGrandesPremios']}"
+				rendered="#{!manterPalpiteMB.temResultadosGrandesPremios}" />
+		</div>
+		
+		<h:form>
+			<table align="center">
+				<tbody>
+					<ui:repeat var="resultadoGP" value="#{manterPalpiteMB.resultadosGrandesPremios}"
+						varStatus="#{manterPalpiteMB.temResultadosGrandesPremios}">
+						<tr>
+							<td><h:outputLabel
+									value="#{msg['manterResultadoGrandePremio.label.nomeGrandePremio']}" /> <h:outputText
+									value="#{resultadoGP.grandePremio.nome}" />
+							</td>
+						</tr>
+						<tr>
+							<td><h:outputLabel
+									value="#{msg['manterResultadoGrandePremio.label.repostaPerguntaPole']}" /> <h:outputText
+									value="#{resultadoGP.repostaPerguntaPole.nome}" />
+							</td>
+						</tr>
+						<tr>
+							<td><h:outputLabel
+									value="#{msg['manterResultadoGrandePremio.label.repostaPerguntaPrimeiro']}" /> <h:outputText
+									value="#{resultadoGP.repostaPerguntaPrimeiro.nome}" />
+							</td>
+						</tr>
+						
+						<tr>
+							<td align="center"><h:commandButton value="Editar"
+									action="#{manterPalpiteMB.editar}" image="../imagens/editar.gif">
+									<f:setPropertyActionListener
+										target="#{manterPalpiteMB.idResultadoGrandePremio}" value="#{resultadoGP.id}" />
+								</h:commandButton> <h:commandButton value="Excluir"
+									action="#{manterPalpiteMB.excluir}"
+									image="../imagens/excluir.gif">
+									<f:setPropertyActionListener
+										target="#{manterPalpiteMB.idResultadoGrandePremio}" value="#{resultadoGP.id}" />
+								</h:commandButton></td>
+						</tr>
+			
+						<tr>
+							<td><h:outputText value=" " />
+							</td>
+						</tr>
+					</ui:repeat>
+				</tbody>
+			</table>
+		</h:form>
+		
+	</ui:define>
+
+</ui:composition>

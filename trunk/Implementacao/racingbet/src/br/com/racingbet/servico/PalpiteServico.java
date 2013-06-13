@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
 import javax.inject.Inject;
 
 import br.com.racingbet.dao.PalpiteDAO;
@@ -42,5 +44,16 @@ public class PalpiteServico implements Serializable {
 
 	public void salvar(Palpite palpite) {
 		dao.incluir(palpite);
+	}
+	
+	@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
+	public void incluir(Palpite palpite) {
+		
+		dao.incluir(palpite);
+	}
+	
+	@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
+	public void alterar(Palpite palpite) {
+		dao.alterar(palpite);		
 	}
 }
