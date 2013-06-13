@@ -116,14 +116,31 @@ public class ManterPalpiteMB implements Serializable {
 	}
 	
 	private void preencheSelectBox(){
-		String clausula_where = "id_categoria=" + categoriaId;
-		grandesPremios = grandePremioServico.recuperarTodos(clausula_where);
-		List<Equipe> equipes = equipeServico.recuperarTodos(clausula_where);
-		pilotos = new ArrayList<Piloto>();
-		for(Equipe equipe : equipes) {
-			pilotos.addAll(pilotoServico.recuperarPilotos(equipe));
+		if (categoriaId != null) {
+			String clausula_where = "id_categoria=" + categoriaId;
+			grandesPremios = grandePremioServico.recuperarTodos(clausula_where);
+			List<Equipe> equipes = equipeServico.recuperarTodos(clausula_where);
+			pilotos = new ArrayList<Piloto>();
+			for(Equipe equipe : equipes) {
+				List<Piloto> pilotosBD = pilotoServico.recuperarPilotos(equipe);
+				if (pilotosBD != null) {
+					pilotos.addAll(pilotosBD);
+				}
+			}
+		} else {
+			limparResultados();
 		}
 	}
+	
+//	private void preencheSelectBox(){
+//		String clausula_where = "id_categoria=" + categoriaId;
+//		grandesPremios = grandePremioServico.recuperarTodos(clausula_where);
+//		List<Equipe> equipes = equipeServico.recuperarTodos(clausula_where);
+//		pilotos = new ArrayList<Piloto>();
+//		for(Equipe equipe : equipes) {
+//			pilotos.addAll(pilotoServico.recuperarPilotos(equipe));
+//		}
+//	}
 
 	private void limparResultados() {
 		resultadoGrandePremio = new ResultadoGrandePremio();
