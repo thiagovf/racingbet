@@ -26,7 +26,7 @@ public class Piloto implements Serializable {
 	@Column(nullable=true, length=25)
 	private String nacionalidade;
 	
-	@Column(nullable=true, length=2)
+	@Column(nullable=true, length=20)
 	private String numeroDoCarro;
 	
 	@ManyToOne(optional=false)
