@@ -11,75 +11,39 @@
 		<h3>Consultar Grande Prêmio</h3>
 		<br />
 		<h:form>
-			<rich:dataGrid var="consultarGrandePremio"
-				value="#{consultarGrandePremioMB.grandesPremios}">
 
-				<h:outputLabel for="categoria"
-					value="#{msg['manterpalpite.label.categoria']}" />
-				<h:selectOneListbox id="categoria"
-					value="#{manterEquipeMB.codigoCategoriaSelecionada}"
-					required="true"
-					requiredMessage="#{msg['manterEquipe.mensagem.categoriaObrigatoria']}"
-					size="1">
-					<f:selectItem itemValue="" itemLabel="Selecione..." />
-					<f:selectItems value="#{manterEquipeMB.listaCategorias}" />
-					<f:ajax event="change"
-						listener="#{manterEquipeMB.recuperarCategoria}" />
-				</h:selectOneListbox>
-				<h:message for="categoria" class="mensagemDeErro" />
+			<h:outputLabel for="categoria" value="#{msg['manterpalpite.label.categoria']}" />
+			<h:selectOneListbox id="categoria" value="#{consultarGrandePremioMB.categoriaSelecionada}" required="true"
+				requiredMessage="#{msg['consultarGrandePremio.mensagem.categoriaObrigatoria']}" size="1">
+				<f:selectItem itemValue="" itemLabel="Selecione..." />
+				<f:selectItems value="#{consultarGrandePremioMB.listaCategorias}" />
+				<f:ajax event="change"	listener="#{consultarGrandePremioMB.recuperarCategoria()}" />
+			</h:selectOneListbox>
+			
+			<h:outputLabel for="grandesPremios" value="#{msg['manterGrandePremio.label.nome']}" />
+			<h:selectOneMenu id="grandesPremios"  value="#{consultarGrandePremioMB.grandePremioSelecionadoId}" >
+				<f:selectItem itemValue="" itemLabel="Selecione..." />
+               <f:selectItems value="#{consultarGrandePremioMB.grandesPremios}" var="gp" itemLabel="#{gp.nome}" itemValue="#{gp.id}"/>
+               <f:ajax event="change" listener="#{consultarGrandesPremioMB.atualizarGrandesPremios()}" />
+			</h:selectOneMenu>
 
-				<f:facet name="header">
-					<h:outputText
-						value="#{msg['consultarGrandePremio.label.consultarGrandesPremios']}"></h:outputText>
-				</f:facet>
-				<h:selectOneListbox id="nomeCategoria"
-					value="#{manterCategoria.label.categoria}" required="true"
-					requiredMessage="#{msg['manterCategoria.mensagem.nomeCategoriaObrigatorio']}"
-					size="1">
-					<f:selectItem itemValue="A1 Grand Prix‎" itemLabel="A1 Grand Prix‎" />
-					<f:selectItem itemValue="Champ Car" itemLabel="Champ Car" />
-					<f:selectItem itemValue="Fórmula 1‎" itemLabel="Fórmula 1‎" />
-					<f:selectItem itemValue="Fórmula 2 FIA‎" itemLabel="Fórmula 2 FIA‎" />
-					<f:selectItem itemValue="Fórmula 3 Europeia‎"
-						itemLabel="Fórmula 3 Europeia‎" />
-					<f:selectItem itemValue="Fórmula 3 Sul-americana"
-						itemLabel="Fórmula 3 Sul-americana" />
-					<f:selectItem itemValue="Fórmula 3000‎" itemLabel="Fórmula 3000‎" />
-					<f:selectItem itemValue="GP2 Series‎" itemLabel="GP2 Series‎" />
-					<f:selectItem itemValue="GP3 Series‎" itemLabel="GP3 Series‎" />
-					<f:selectItem itemValue="Intercontinental Rally Challenge‎"
-						itemLabel="Intercontinental Rally Challenge‎" />
-					<f:selectItem itemValue="Kart" itemLabel="Kart" />
-					<f:selectItem itemValue="Le Mans Series‎"
-						itemLabel="Le Mans Series‎" />
-					<f:selectItem itemValue="Superleague Fórmula‎"
-						itemLabel="Superleague Fórmula‎" />
-					<f:selectItem itemValue="World Series by Renault"
-						itemLabel="World Series by Renault" />
-				</h:selectOneListbox>
-				<h:panelGrid columns="1">
-					<h:outputText
-						value="#{msg['consultarGrandePremio.label.categoria']}"
-						styleClass="label"></h:outputText>
-					<h:outputText value="#{grandePremio.categoria}" />
-					<h:outputText value="#{msg['consultarGrandePremio.label.nome']}"
-						styleClass="label"></h:outputText>
-					<h:outputText value="#{grandePremio.nome}" />
-					<h:outputText value="#{msg['consultarGrandePremio.label.pais']}"
-						styleClass="label"></h:outputText>
-					<h:outputText value="#{grandePremio.pais}" />
-					<h:outputText value="#{msg['consultarGrandePremio.label.data']}"
-						styleClass="label"></h:outputText>
-					<h:outputText value="#{grandePremio.data}" />
-					<h:outputText value="#{msg['consultarGrandePremio.label.cidade']}"
-						styleClass="label"></h:outputText>
-					<h:outputText value="#{grandePremio.cidade}" />
-					<h:outputText
-						value="#{msg['consultarGrandePremio.label.autodromo']}"
-						styleClass="label"></h:outputText>
-					<h:outputText value="#{grandePremio.autodromo}" />
-				</h:panelGrid>
-			</rich:dataGrid>
+		<rich:dataGrid var="grandePremio" value="#{consultarGrandePremioMB.grandesPremios}">
+			<f:facet name="header">
+				<h:outputText value="#{msg['consultarGrandePremio.label.consultarGrandesPremios']}"></h:outputText>
+			</f:facet>			
+			<h:panelGrid columns="2">		
+				<h:outputText value="#{msg['consultarGrandePremio.label.nome']}" styleClass="label"></h:outputText>
+				<h:outputText value="#{grandePremio.nome}" />
+				<h:outputText value="#{msg['consultarGrandePremio.label.pais']}" styleClass="label"></h:outputText>
+				<h:outputText value="#{grandePremio.pais}" />
+				<h:outputText value="#{msg['consultarGrandePremio.label.data']}" styleClass="label"></h:outputText>
+				<h:outputText value="#{grandePremio.data}" />
+				<h:outputText value="#{msg['consultarGrandePremio.label.cidade']}" styleClass="label"></h:outputText>
+				<h:outputText value="#{grandePremio.cidade}" />
+				<h:outputText value="#{msg['consultarGrandePremio.label.autodromo']}" styleClass="label"></h:outputText>
+				<h:outputText value="#{grandePremio.autodromo}" />
+			</h:panelGrid>
+		  </rich:dataGrid>
 		</h:form>
 	</ui:define>
 </ui:composition>
