@@ -24,19 +24,19 @@ public class Palpite implements Serializable {
 	@Column(name = "id_palpite")
 	private Long id;
 
-    @OneToOne(optional=false)
+	@ManyToOne(optional=false)
     @JoinColumn(name="idPilotoPerguntaPole", nullable=false, insertable=true, updatable=true)
 	private Piloto repostaPerguntaPole;
 	
-    @OneToOne(optional=false)
+	@ManyToOne(optional=false)
     @JoinColumn(name="idPilotoPerguntaPrimeiro", nullable=false, insertable=true, updatable=true)
 	private Piloto repostaPerguntaPrimeiro;
 	
-	@OneToOne(optional=false)
+	@ManyToOne(optional=false)
 	@JoinColumn(name="idGrandePremio",  nullable=false, insertable=true, updatable=true)
 	private GrandePremio grandePremio;
 
-	@ManyToOne
+	@ManyToOne(optional=false)
 	@JoinColumn(name="id_usuario")
 	private Usuario usuario;
 	
