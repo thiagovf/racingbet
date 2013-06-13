@@ -50,6 +50,38 @@
 								<f:validateLength minimum="3" maximum="50" />
 							</h:inputText>
 							<h:message for="nome" class="mensagemDeErro" />
+							
+							<h:outputLabel for="numeroDoCarro"
+								value="#{msg['manterPiloto.label.numeroDoCarro']}" />
+							<h:inputText id="numeroDoCarro" value="#{manterPilotoMB.piloto.numeroDoCarro}"
+								required="true"
+								requiredMessage="#{msg['manterPiloto.mensagem.nomeObrigatorio']}"
+								size="50" maxlength="50">
+								<f:validateLength minimum="1" maximum="2" />
+							</h:inputText>
+							<h:message for="numeroDoCarro" class="mensagemDeErro" />
+							
+							<h:outputLabel for="nacionalidade"
+								value="#{msg['manterEquipe.label.nacionalidade']}" />
+							<h:selectOneListbox id="nacionalidade"
+								value="#{manterPilotoMB.piloto.nacionalidade}" required="true"
+								requiredMessage="#{msg['manterEquipe.mensagem.nacionalidadeObrigatorio']}"
+								size="1">
+								<f:selectItem itemValue="Brasil" itemLabel="Brasil" />
+								<f:selectItem itemValue="Italia" itemLabel="Italia" />
+								<f:selectItem itemValue="ReinoUnido" itemLabel="Reino Unido" />
+								<f:selectItem itemValue="Austria" itemLabel="Austria" />
+								<f:selectItem itemValue="Franca" itemLabel="Franca" />
+								<f:selectItem itemValue="Alemanha" itemLabel="Alemanha" />
+								<f:selectItem itemValue="Japao" itemLabel="Japao" />
+								<f:selectItem itemValue="Canada" itemLabel="Canada" />
+								<f:selectItem itemValue="Suica" itemLabel="Suica" />
+								<f:selectItem itemValue="EstadosUnidos"
+									itemLabel="Estados Unidos" />
+								<f:selectItem itemValue="India" itemLabel="India" />
+							</h:selectOneListbox>
+							<h:message for="nacionalidade" class="mensagemDeErro" />
+							
 						
 
 						</h:panelGrid> <br /></td>
@@ -59,6 +91,9 @@
 					<td>
 						<table align="center">
 							<tr>
+							<td><h:commandButton value="Pesquisar"
+										action="#{manterPilotoMB.pesquisar}"
+										image="../imagens/pesquisar.gif" immediate="true"/></td>
 								<td><h:commandButton value="Salvar"
 										action="#{manterPilotoMB.salvar}"
 										image="../imagens/salvar.gif" /></td>
@@ -95,16 +130,24 @@
 							<td>Categoria</td>	
 							<td>Equipe</td>
 							<td>Nome</td>
+							<td>Numero do Carro</td>
+							<td>Nacionalidade</td>
 
 						</tr>
 
 
 						<ui:repeat var="ppiloto" value="#{manterPilotoMB.pilotos}"
 							varStatus="#{manterPilotoMB.temPiloto}">
-
+							
+							<td><h:outputText value="#{ppiloto.equipe.categoria.nome}" /></td>
+							
 							<td><h:outputText value="#{ppiloto.equipe.nome}" /></td>
 
 							<td><h:outputText value="#{ppiloto.nome}" /></td>
+							
+							<td><h:outputText value="#{ppiloto.numeroDoCarro}" /></td>
+							
+							<td><h:outputText value="#{ppiloto.nacionalidade}" /></td>
 
 							<td align="center"><h:commandButton value="Editar"
 									action="#{manterPilotoMB.editar}" image="../imagens/editar.gif">
