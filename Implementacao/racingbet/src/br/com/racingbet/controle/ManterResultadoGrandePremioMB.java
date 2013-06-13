@@ -97,7 +97,10 @@ public class ManterResultadoGrandePremioMB implements Serializable {
 			List<Equipe> equipes = equipeServico.recuperarTodos(clausula_where);
 			pilotos = new ArrayList<Piloto>();
 			for(Equipe equipe : equipes) {
-				pilotos.addAll(pilotoServico.recuperarPilotos(equipe));
+				List<Piloto> pilotosBD = pilotoServico.recuperarPilotos(equipe);
+				if (pilotosBD != null) {
+					pilotos.addAll(pilotosBD);
+				}
 			}
 		} else {
 			limparResultadoGrandePremio();
