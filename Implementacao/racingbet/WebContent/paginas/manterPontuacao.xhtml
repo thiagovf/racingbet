@@ -11,13 +11,25 @@
 	<h:form>
 	
 	<table align="center">
+						
+							<h:outputLabel for="nomeGrandePremio"
+								value="#{msg['manterResultadoGrandePremio.label.nomeGrandePremio']}" />
+							<h:selectOneListbox id="nomeGrandePremio"
+								value="#{manterResultadoGrandePremioMB.idGrandePremio}" required="true"
+								requiredMessage="#{msg['manterResultadoGrandePremio.mensagem.nomeGrandePremioObrigatorio']}" size="1">
+								<f:selectItem itemValue="" itemLabel="Selecione..." />
+								<f:selectItems value="#{manterGrandePremioMB.grandesPremios}" var="gp"
+					   					itemLabel="#{gp.nome} #{gp.data}" itemValue="#{gp.id}"/>
+			   					<f:ajax event="change" listener="#{manterResultadoGrandePremioMB.fazNada}"/>
+							</h:selectOneListbox>
+							<h:message for="nomeGrandePremio" class="mensagemDeErro" />
 	
-	<h:outputLabel for="lblGerarDadosTeste" value="#{msg['manterPontuacao.label.gerarDadosTeste']}" />
-	<h:commandButton value="GerarDadosTeste"
-									action="#{manterPontuacaoMB.gerarDadosTeste() }" image="../imagens/enviar.gif">
+<!-- 	<h:outputLabel for="lblGerarDadosTeste" value="#{msg['manterPontuacao.label.gerarDadosTeste']}" /> -->
+<!-- 	<h:commandButton> -->
+<!-- 	</h:commandButton> -->
 <!-- 									<f:setPropertyActionListener -->
 <!-- 										target="#{manterPontuacaoMB.idPontuacao}" value="#{pontuacao.id}" /> -->
-								</h:commandButton>
+								
 								<br></br> 
 								<h:outputLabel for="lblGerarPontuacao" value="#{msg['manterPontuacao.label.gerarPontuacao']}" />																
 								<h:commandButton value="gerarPontuacao"
@@ -61,19 +73,16 @@
 <!-- 					</td> -->
 <!-- 				</tr> -->
 				
-				<tr>
-					<td>
-						<table align="center">
-							<tr>
-								<td><h:commandButton value="Salvar"
-										action="#{manterPontuacaoMB.salvar}"
-										image="../imagens/salvar.gif" /></td>
-								<td><h:commandButton value="Cancelar" action="manterPontuacao"
-										immediate="true" image="../imagens/cancelar.gif" /></td>
-							</tr>
-						</table>
-					</td>
-				</tr>
+<!-- 				<tr> -->
+<!-- 					<td> -->
+<!-- 						<table align="center"> -->
+<!-- 							<tr> -->
+<!-- 								<td><h:commandButton/></td> -->
+<!-- 								<td><h:commandButton/></td> -->
+<!-- 							</tr> -->
+<!-- 						</table> -->
+<!-- 					</td> -->
+<!-- 				</tr> -->
 	
 	</table>
 			
