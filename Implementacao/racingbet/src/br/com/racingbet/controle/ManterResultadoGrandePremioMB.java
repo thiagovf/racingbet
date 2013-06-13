@@ -4,10 +4,12 @@ import java.io.Serializable;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.Conversation;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -83,20 +85,22 @@ public class ManterResultadoGrandePremioMB implements Serializable {
 	}
 
 	public String selecionarCategoria() {
-		//ResultadoGrandePremio rgp = (ResultadoGrandePremio) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("country");
-		System.out.println(categoriaId);
 		preencheSelectBox();
 
 		return "manterResultadoGrandePremio";
 	}
 	
 	private void preencheSelectBox(){
-		String clausula_where = "id_categoria=" + categoriaId;
-		grandesPremios = grandePremioServico.recuperarTodos(clausula_where);
-		List<Equipe> equipes = equipeServico.recuperarTodos(clausula_where);
-		pilotos = new ArrayList<Piloto>();
-		for(Equipe equipe : equipes) {
-			pilotos.addAll(pilotoServico.recuperarPilotos(equipe));
+		if (categoriaId != null) {
+			String clausula_where = "id_categoria=" + categoriaId;
+			grandesPremios = grandePremioServico.recuperarTodos(clausula_where);
+			List<Equipe> equipes = equipeServico.recuperarTodos(clausula_where);
+			pilotos = new ArrayList<Piloto>();
+			for(Equipe equipe : equipes) {
+				pilotos.addAll(pilotoServico.recuperarPilotos(equipe));
+			}
+		} else {
+			limparResultadoGrandePremio();
 		}
 	}
 
@@ -170,8 +174,45 @@ public class ManterResultadoGrandePremioMB implements Serializable {
 	public String cancelar() {
 		resultadoGrandePremio.setId(null);
 		limparResultadoGrandePremio();
-		return "principal";
+		return "manterResultadoGrandePremio";
 	}
+	
+	public String pesquisar() {	
+		if(categoriaId != null) {
+			if (idGrandePremio == null && idPilotoPrimeiro == null && idPilotoPole == null){			
+				resultadosGrandesPremios = resultadoGrandePremioServico.recuperaPorCategoria(categoriaId);
+			} else {
+				String clausulaWhere = "";
+				List<String> auxClausulaWhere = new ArrayList<String>();
+				if (idGrandePremio != null) {
+					auxClausulaWhere.add(" idGrandePremio = " + idGrandePremio);
+				}
+				if (idPilotoPrimeiro != null) {
+					auxClausulaWhere.add(" idPilotoPerguntaPrimeiro = " + idPilotoPrimeiro);
+				}
+				if (idPilotoPole != null) {					
+					auxClausulaWhere.add(" idPilotoPerguntaPole = " + idPilotoPole);
+				}
+				for (int i=0; i < auxClausulaWhere.size(); i++) {
+					if (!"".equals(clausulaWhere) && auxClausulaWhere.size() > i+1){
+						clausulaWhere = clausulaWhere + " AND ";
+					}
+					clausulaWhere = clausulaWhere + auxClausulaWhere.get(i);
+				}
+				resultadosGrandesPremios = resultadoGrandePremioServico.recuperarTodos(clausulaWhere);
+			}
+		} else {
+			resultadosGrandesPremios = resultadoGrandePremioServico.recuperarTodos();
+		}
+		limparResultadoGrandePremio();
+
+		return "manterResultadoGrandePremio";
+	}
+	
+	public void fazNada() {
+		System.out.println("Coisas irão acontecer se vc alterar esse código!");
+	}
+
 
 	public Conversation getConversacao() {
 		return conversacao;

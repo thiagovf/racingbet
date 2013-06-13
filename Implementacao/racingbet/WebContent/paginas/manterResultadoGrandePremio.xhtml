@@ -33,6 +33,7 @@
 								<f:selectItem itemValue="" itemLabel="Selecione..." />
 								<f:selectItems value="#{manterResultadoGrandePremioMB.grandesPremios}" var="gp"
 					   					itemLabel="#{gp.nome} #{gp.data}" itemValue="#{gp.id}"/>
+			   					<f:ajax event="change" listener="#{manterResultadoGrandePremioMB.fazNada}"/>
 							</h:selectOneListbox>
 							<h:message for="nomeGrandePremio" class="mensagemDeErro" />
 							
@@ -45,6 +46,7 @@
 									<f:selectItem itemValue="" itemLabel="Selecione..." />
 									<f:selectItems value="#{manterResultadoGrandePremioMB.pilotos}" var="piloto"
 					   					itemLabel="#{piloto.nome}" itemValue="#{piloto.id}"/>
+				   					<f:ajax event="change" listener="#{manterResultadoGrandePremioMB.fazNada}"/>
 							</h:selectOneListbox>
 							<h:message for="repostaPerguntaPole" class="mensagemDeErro" />
 							
@@ -57,6 +59,7 @@
 									<f:selectItem itemValue="" itemLabel="Selecione..." />
 									<f:selectItems value="#{manterResultadoGrandePremioMB.pilotos}" var="piloto"
 					   					itemLabel="#{piloto.nome}" itemValue="#{piloto.id}"/>
+					   				<f:ajax event="change" listener="#{manterResultadoGrandePremioMB.fazNada}"/>
 							</h:selectOneListbox>
 							<h:message for="repostaPerguntaPrimeiro" class="mensagemDeErro" />
 	                  	</h:panelGrid> <br />
@@ -66,12 +69,15 @@
 					<td>
 						<table align="center">
 							<tr>
+								<td><h:commandButton value="Pesquisar"
+										action="#{manterResultadoGrandePremioMB.pesquisar}"
+										image="../imagens/pesquisar.gif" immediate="true"/></td>
 								<td><h:commandButton value="Salvar"
 										action="#{manterResultadoGrandePremioMB.salvar}"
 										image="../imagens/salvar.gif" /></td>
 								<td><h:commandButton value="Cancelar"
 									action="#{manterResultadoGrandePremioMB.cancelar}"
-									image="../imagens/cancelar.gif" /></td>
+									image="../imagens/cancelar.gif" immediate="true"/></td>
 							</tr>
 						</table>
 					</td>
